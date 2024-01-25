@@ -1,12 +1,14 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth } from "@/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const onChange = (event) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
     } = event;
@@ -18,12 +20,14 @@ export default function Login() {
     }
   };
 
-  const login = async (event) => {
+  const login: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
 
     try {
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
-      console.log(userInfo.user.email);
+
+      localStorage.setItem("userID", userInfo.user.uid);
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
