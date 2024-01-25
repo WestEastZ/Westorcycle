@@ -2,10 +2,12 @@ import React, { FormEvent, useState } from "react";
 import { auth, db } from "@/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
+import validatePassword from "@/utils/validatePassword";
+import { ErrorCode } from "@/utils/validatePassword";
 
 // 사용자 타입 정의
 interface User {
-  id: number;
+  id: number; // 스키마에는 int로 되어 있지만 fireStore에 저장 시 String 형태로 저장 되는 중 해결 요망
   email: string;
   isSeller: boolean;
   nickname: string;
@@ -46,6 +48,20 @@ export default function SignUp() {
   // 회원가입
   const signup = async (event: FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
+
+    // 비밀번호 유효성 검사
+    const ERROR_MESSAGES: ErrorCode = {
+      errorLength: "비밀번호는 10자리 이상이어야 합니다.",
+      errorComplexity:
+        "비밀번호는 대문자, 소문자, 숫자, 특수문자 중 최소 2종류 이상 포함해야 합니다.",
+    };
+
+    const errorCode = validatePassword(user.password);
+
+    if (errorCode) {
+      console.log(ERROR_MESSAGES[errorCode]);
+      return;
+    }
 
     // 회원가입 Authentication
     try {
