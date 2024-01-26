@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ConsumerProfile() {
   const navigate = useNavigate();
+
   const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
     localStorage.removeItem("user");
