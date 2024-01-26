@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import validatePassword from "@/utils/validatePassword";
 import { ErrorCode } from "@/utils/validatePassword";
+import { useNavigate } from "react-router-dom";
 
 // 사용자 타입 정의
 interface User {
@@ -20,6 +21,7 @@ interface User {
 }
 
 export default function SignUp() {
+  const navigte = useNavigate();
   // 유저 상태
   const [user, setUser] = useState<User>({
     id: Date.now(),
@@ -87,7 +89,7 @@ export default function SignUp() {
           { merge: true }
         );
       }
-
+      navigte("/login");
       console.log("user created");
     } catch (error) {
       console.log(error);
