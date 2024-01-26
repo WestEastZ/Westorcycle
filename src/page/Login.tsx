@@ -34,8 +34,7 @@ export default function Login() {
 
     try {
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
-
-      localStorage.setItem("userID", userInfo.user.uid);
+      console.log(userInfo);
       navigate("/");
     } catch (error) {
       console.error(error);
