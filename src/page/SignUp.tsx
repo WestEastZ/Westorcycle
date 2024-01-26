@@ -1,9 +1,16 @@
+// React
 import React, { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// firebase
 import { auth, db } from "@/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
+
+// utiles
 import validatePassword, { ERROR_MESSAGES } from "@/utils/validatePassword";
-import { useNavigate } from "react-router-dom";
+
+// ui
 
 // 사용자 타입 정의
 interface User {
