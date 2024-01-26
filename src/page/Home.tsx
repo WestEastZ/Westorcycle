@@ -9,6 +9,7 @@ export default function Home() {
   const userInfo = localStorage.getItem("userID");
   const [sellerFlag, setSellerFlag] = useState<boolean>(false);
 
+  // 사용자 정보 가져오기
   const fetchUserData = async () => {
     if (userInfo) {
       const docRef = doc(db, "user", userInfo);

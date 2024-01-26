@@ -1,5 +1,8 @@
+// React
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// firebase
 import { auth } from "@/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
@@ -8,6 +11,7 @@ export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  // input value 변경
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
@@ -20,6 +24,7 @@ export default function Login() {
     }
   };
 
+  // loign
   const login: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
 
