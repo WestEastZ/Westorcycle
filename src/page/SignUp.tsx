@@ -9,22 +9,9 @@ import { setDoc, doc } from "firebase/firestore";
 
 // utiles
 import validatePassword, { ERROR_MESSAGES } from "@/utils/validatePassword";
+import { User } from "../contexts/userContext";
 
 // ui
-
-// 사용자 타입 정의
-interface User {
-  id: number; // 스키마에는 int로 되어 있지만 fireStore에 저장 시 String 형태로 저장 되는 중 해결 요망
-  email: string;
-  isSeller: boolean;
-  nickname: string;
-  password: string;
-  createdAt: Date;
-  updatedAt: Date;
-  cartItems: number[];
-  favoriteItem: number[];
-  profileImage: string;
-}
 
 export default function SignUp() {
   const navigte = useNavigate();
