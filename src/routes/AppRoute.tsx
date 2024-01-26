@@ -1,16 +1,15 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoutes";
 
 import Home from "@/page/Home";
 import Login from "@/page/Login";
 import SignUp from "@/page/SignUp";
-import { useGetUser } from "@/contexts/userContext";
+import { useUser } from "@/contexts/userContext";
 import SellerProfile from "@/page/SellerProfile";
 import ConsumerProfile from "@/page/ConsumerProfile";
 
 export default function AppRoute() {
-  const user = useGetUser();
+  const user = useUser();
 
   return (
     <BrowserRouter>
