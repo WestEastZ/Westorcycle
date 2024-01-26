@@ -34,7 +34,7 @@ export default function Login() {
 
     try {
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
-      console.log(userInfo);
+      console.log("sdsds", userInfo); // 여기서 데이터 불러 온거 뜨는데
       navigate("/");
     } catch (error) {
       console.error(error);
