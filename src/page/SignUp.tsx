@@ -2,8 +2,7 @@ import React, { FormEvent, useState } from "react";
 import { auth, db } from "@/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
-import validatePassword from "@/utils/validatePassword";
-import { ErrorCode } from "@/utils/validatePassword";
+import validatePassword, { ERROR_MESSAGES } from "@/utils/validatePassword";
 
 // 사용자 타입 정의
 interface User {
@@ -50,13 +49,7 @@ export default function SignUp() {
     event.preventDefault();
 
     // 비밀번호 유효성 검사
-    const ERROR_MESSAGES: ErrorCode = {
-      errorLength: "비밀번호는 10자리 이상이어야 합니다.",
-      errorComplexity:
-        "비밀번호는 대문자, 소문자, 숫자, 특수문자 중 최소 2종류 이상 포함해야 합니다.",
-    };
-
-    const errorCode = validatePassword(user.password);
+    const errorCode = validatePassword(user.password, user.nickname);
 
     if (errorCode) {
       console.log(ERROR_MESSAGES[errorCode]);
