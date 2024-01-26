@@ -1,58 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/firebase";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-
-import SellerProfile from "./SellerProfile";
-import ConsumerProfile from "./ConsumerProfile";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useGetUser } from "@/contexts/userContext";
+import { Button } from "@/components/ui/button";
+import { signOut } from "firebase/auth";
+import { auth } from "@/firebase";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
-  const [loginUser, setLoginUser] = useState(null);
-  const [sellerFlag, setSellerFlag] = useState<boolean>(false);
+  const user = useGetUser();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const auth = getAuth();
-    const checkLoginUser = onAuthStateChanged(auth, (user) => {
-      setLoginUser(user);
-      setLoading(false);
-    });
-
-    return checkLoginUser;
-  }, []);
-
-  // 사용자 정보 가져오기
-  const fetchUserData = async () => {
-    if (loginUser) {
-      const docRef = doc(db, "user", loginUser.uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        console.log(docSnap.data());
-        if (docSnap.get("isSeller") === true) {
-          setSellerFlag(true);
-        }
-      }
-    }
+  const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
+    event.preventDefault();
+    await signOut(auth);
+    navigate("/");
   };
-
-  useEffect(() => {
-    fetchUserData();
-  }, [loginUser]);
 
   return (
     <>
       <h2>Home</h2>
-      {loading ? (
-        <div>Lodig...</div>
-      ) : loginUser ? (
-        sellerFlag ? (
-          <SellerProfile />
-        ) : (
-          <ConsumerProfile />
-        )
+      {user ? (
+        <>
+          <div>hello {user.nickname}</div>
+          <Button onClick={Logout}>로그아웃</Button>
+        </>
       ) : (
         <>
           <Link to="/login">로그인</Link>
