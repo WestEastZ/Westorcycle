@@ -4,6 +4,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useUser } from "@/contexts/userContext";
 
+
 export default function Home() {
   const user = useUser();
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export default function Home() {
 
   return (
     <>
+      <NavBar />
       <h2>Home</h2>
       {user ? (
         <>
