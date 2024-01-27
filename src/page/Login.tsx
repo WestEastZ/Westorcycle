@@ -42,7 +42,7 @@ export default function Login() {
   };
 
   return (
-    <>
+    <div>
       <h1 className="text-3xl">Login</h1>
       <p className="text-sm">Login to your account</p>
       <section>
@@ -74,6 +74,6 @@ export default function Login() {
           </Link>
         </div>
       </section>
-    </>
+    </div>
   );
 }
