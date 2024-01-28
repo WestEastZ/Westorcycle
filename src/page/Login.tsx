@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import NavBar from "@/components/navBar/navBar";
 
 export default function Login() {
+  console.log("Sdsdsds");
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -49,7 +50,7 @@ export default function Login() {
         <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col ">
           {/* 안내 문구 */}
           <section className="mb-20">
-            <h1 className="text-4xl mb-2">Login</h1>
+            <h1 className="text-4xl mb-4">Login</h1>
             <p className="text-s">Login to your account</p>
           </section>
 

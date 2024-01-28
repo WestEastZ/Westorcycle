@@ -1,5 +1,5 @@
 // React
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // firebase
@@ -8,13 +8,22 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 // utiles
-import validatePassword, { ERROR_MESSAGES } from "@/utils/validatePassword";
+import {
+  ERROR_MESSAGES,
+  validateEmail,
+  validatePassword,
+} from "@/utils/validatePassword";
 
 // type
 import { User } from "@/models/type";
+import NavBar from "@/components/navBar/navBar";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function SignUp() {
   const navigte = useNavigate();
+  const [errorEmail, setErrorEmail] = useState<string | null>(null);
+  const [errorPassword, setErrorPassword] = useState<string | null>(null);
   // 유저 상태
   const [user, setUser] = useState<User>({
     id: "",
@@ -43,12 +52,22 @@ export default function SignUp() {
   // 회원가입
   const signup = async (event: FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    setErrorEmail(null);
+    setErrorPassword(null);
+
+    // 이메일 형식 유효성 검사
+    const checkEmail = validateEmail(user.email);
+
+    if (checkEmail) {
+      setErrorEmail(ERROR_MESSAGES[checkEmail]);
+      return;
+    }
 
     // 비밀번호 유효성 검사
-    const errorCode = validatePassword(user.password, user.nickname);
+    const checkPassword = validatePassword(user.password, user.nickname);
 
-    if (errorCode) {
-      console.log(ERROR_MESSAGES[errorCode]);
+    if (checkPassword) {
+      setErrorPassword(ERROR_MESSAGES[checkPassword]);
       return;
     }
 
@@ -77,52 +96,84 @@ export default function SignUp() {
       navigte("/login");
       console.log("user created");
     } catch (error) {
-      console.log(error);
+      // 중복된 이메일 걸러내는 함수
+      if (typeof error === "object" && error !== null && "code" in error)
+        if (error.code === "auth/email-already-in-use") {
+          setErrorEmail("중복된 이메일입니다.");
+        }
     }
   };
 
+  useEffect(() => {}, [errorEmail, errorPassword]);
+
   return (
     <>
-      Sign up
-      <form>
-        <div>
-          <label>이메일 : </label>
-          <input
-            type="email"
-            value={user.email}
-            name="email"
-            onChange={onChange}
-          />
+      <NavBar />
+      <div className="w-full h-screen flex justify-center">
+        <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col">
+          {/* 안내문구 */}
+          <section className="mb-20">
+            <h1 className="text-4xl mb-4">Sign Up</h1>
+            <p className="text-s">Sign Up to your account</p>
+          </section>
+          {/* 입력 */}
+
+          <section>
+            <form className="flex flex-col gap-5 mb-12">
+              <div>
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  value={user.email}
+                  name="email"
+                  onChange={onChange}
+                />
+                {errorEmail === null ? null : (
+                  <div className="text-left mt-1 ml-4 text-red-500">
+                    {errorEmail}
+                  </div>
+                )}
+              </div>
+              <div>
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  value={user.password}
+                  name="password"
+                  onChange={onChange}
+                />
+                {errorPassword === null ? null : (
+                  <div className="text-left mt-1 ml-4 text-red-500">
+                    {errorPassword}
+                  </div>
+                )}
+              </div>
+              <div>
+                <Input
+                  type="text"
+                  placeholder="Nickname"
+                  value={user.nickname}
+                  name="nickname"
+                  onChange={onChange}
+                />
+              </div>
+              <div className="flex justify-center items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="checkSeller"
+                  checked={user.isSeller}
+                  name="isSeller"
+                  onChange={(e) =>
+                    setUser({ ...user, isSeller: e.target.checked })
+                  }
+                />
+                <label htmlFor="checkSeller">Sales Account</label>
+              </div>
+              <Button onClick={signup}>Sign Up</Button>
+            </form>
+          </section>
         </div>
-        <div>
-          <label>비밀번호 : </label>
-          <input
-            type="password"
-            value={user.password}
-            name="password"
-            onChange={onChange}
-          />
-        </div>
-        <div>
-          <label>닉네임 : </label>
-          <input
-            type="text"
-            value={user.nickname}
-            name="nickname"
-            onChange={onChange}
-          />
-        </div>
-        <div>
-          <label>판매자 여부 : </label>
-          <input
-            type="checkbox"
-            checked={user.isSeller}
-            name="isSeller"
-            onChange={(e) => setUser({ ...user, isSeller: e.target.checked })}
-          />
-        </div>
-        <button onClick={signup}>회원가입</button>
-      </form>
+      </div>
     </>
   );
 }

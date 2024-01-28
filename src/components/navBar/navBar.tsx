@@ -1,4 +1,3 @@
-import { CircleUserRound, Heart, Home, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useUser } from "@/contexts/userContext";
 
@@ -6,7 +5,7 @@ export default function NavBar() {
   const user = useUser();
 
   return (
-    <nav className="sticky h-12 px-10 flex justify-between items-center top-0 border-b border-black">
+    <nav className="absolute w-full h-12 px-10 flex justify-between items-center top-0 border-b border-black bg-custom">
       <div>
         <Link to={"/"} className="under-line">
           Home
