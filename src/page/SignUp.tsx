@@ -5,25 +5,25 @@ import { useNavigate } from "react-router-dom";
 // firebase
 import { auth, db } from "@/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 // utiles
 import validatePassword, { ERROR_MESSAGES } from "@/utils/validatePassword";
-import { User } from "../contexts/userContext";
 
-// ui
+// type
+import { User } from "@/models/type";
 
 export default function SignUp() {
   const navigte = useNavigate();
   // 유저 상태
   const [user, setUser] = useState<User>({
-    id: Date.now(),
+    id: "",
     email: "",
     isSeller: false,
     nickname: "",
     password: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
     cartItems: [],
     favoriteItem: [],
     profileImage: "",
@@ -70,8 +70,6 @@ export default function SignUp() {
           {
             ...user,
             id: firebaseUser.uid,
-            createdAt: new Date(),
-            updatedAt: new Date(),
           },
           { merge: true }
         );

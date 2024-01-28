@@ -5,7 +5,7 @@ import Home from "@/page/Home";
 import Login from "@/page/Login";
 import SignUp from "@/page/SignUp";
 import { useUser } from "@/contexts/userContext";
-import SellerProfile from "@/page/SellerProfile";
+import SellerProfile from "@/page/Seller/SellerProfile";
 import ConsumerProfile from "@/page/ConsumerProfile";
 
 export default function AppRoute() {
@@ -38,7 +38,7 @@ export default function AppRoute() {
 
         {/* 로그인 유무 && 판매자 여부 ? 홈 : children  */}
         <Route
-          path="/seller"
+          path="/seller/:nickname"
           element={
             <ProtectedRoute condition={user && user.isSeller}>
               <SellerProfile />

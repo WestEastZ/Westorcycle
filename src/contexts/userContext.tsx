@@ -1,21 +1,8 @@
 import { auth, db } from "@/firebase";
+import { User } from "@/models/type";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
-
-// 사용자 타입 정의
-export interface User {
-  id: number;
-  email: string;
-  isSeller: boolean;
-  nickname: string;
-  password: string;
-  createdAt: Date;
-  updatedAt: Date;
-  cartItems: number[];
-  favoriteItem: number[];
-  profileImage: string;
-}
 
 interface UserProviderProps {
   children: React.ReactNode;
