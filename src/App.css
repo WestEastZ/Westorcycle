@@ -19,10 +19,10 @@
   font-style: normal;
 }
 #root {
-  /* max-width: 1080px; */
+  max-width: 1080px;
   min-height: 100vh;
   height: 100%;
-  /* margin: 0 auto; */
+  margin: 0 auto;
   /* padding: 2rem; */
   text-align: center;
   font-family: "GmarketSansMedium";

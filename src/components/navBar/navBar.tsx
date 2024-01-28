@@ -1,7 +1,11 @@
 import { CircleUserRound, Heart, Home, Menu } from "lucide-react";
 import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
+import { useUser } from "@/contexts/userContext";
 
 export default function NavBar() {
+  const user = useUser();
+
   return (
     <nav className="">
       <Button className="">
@@ -13,9 +17,18 @@ export default function NavBar() {
       <Button className="">
         <Heart />
       </Button>
-      <Button className="">
-        <CircleUserRound />
-      </Button>
+
+      <Link
+        to={
+          user?.isSeller
+            ? `/seller/${user.nickname}`
+            : `/consumer/${user?.nickname}`
+        }
+      >
+        <Button className="">
+          <CircleUserRound />
+        </Button>
+      </Link>
     </nav>
   );
 }
