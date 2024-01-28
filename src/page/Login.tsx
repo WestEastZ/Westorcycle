@@ -9,6 +9,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 // ui
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import NavBar from "@/components/navBar/navBar";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -42,48 +43,51 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center">
-      <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col ">
-        {/* 안내 문구 */}
-        <section className="mb-20">
-          <h1 className="text-4xl mb-2">Login</h1>
-          <p className="text-s">Login to your account</p>
-        </section>
+    <>
+      <NavBar />
+      <div className="w-full h-screen flex justify-center">
+        <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col ">
+          {/* 안내 문구 */}
+          <section className="mb-20">
+            <h1 className="text-4xl mb-2">Login</h1>
+            <p className="text-s">Login to your account</p>
+          </section>
 
-        {/* 입력 */}
-        <section className="">
-          <form className="flex flex-col gap-5 mb-12">
-            <div>
-              <Input
-                type="email"
-                placeholder="Email"
-                value={email}
-                name="email"
-                onChange={onChange}
-              />
-            </div>
-            <div>
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                name="password"
-                onChange={onChange}
-              />
-            </div>
-            <Button onClick={login}>Login</Button>
-          </form>
-        </section>
-        <div className="h-px bg-black mb-12"></div>
-        {/* <section></section> */}
-        {/* 회원가입 이동 */}
-        <section className="">
-          <p className="text-sm">Don't have an account?</p>
-          <Link className="text-sm font-extrabold" to={"/signup"}>
-            Sign Up
-          </Link>
-        </section>
+          {/* 입력 */}
+          <section className="">
+            <form className="flex flex-col gap-5 mb-12">
+              <div>
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  name="email"
+                  onChange={onChange}
+                />
+              </div>
+              <div>
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  name="password"
+                  onChange={onChange}
+                />
+              </div>
+              <Button onClick={login}>Login</Button>
+            </form>
+          </section>
+          <div className="h-px bg-black mb-12"></div>
+          {/* <section></section> */}
+          {/* 회원가입 이동 */}
+          <section className="">
+            <p className="text-sm">Don't have an account?</p>
+            <Link className="text-sm font-extrabold" to={"/signup"}>
+              Sign Up
+            </Link>
+          </section>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
