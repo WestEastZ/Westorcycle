@@ -74,3 +74,25 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .link-center {
+    @apply flex items-center justify-center h-full;
+  }
+  .under-line {
+    color: #000;
+    display: inline-block;
+    margin: 0;
+  }
+  .under-line:hover::after {
+    transform: scaleX(1);
+  }
+  .under-line::after {
+    display: block;
+    content: "";
+    border-bottom: 2px solid currentColor;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+    transform-origin: 0% 50%;
+  }
+}
