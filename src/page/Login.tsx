@@ -28,7 +28,7 @@ export default function Login() {
     }
   };
 
-  // loign
+  // 로그인
   const login: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
 
@@ -42,38 +42,48 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl">Login</h1>
-      <p className="text-sm">Login to your account</p>
-      <section>
-        <form className="flex flex-col gap-3">
-          <div>
-            <Input
-              type="email"
-              placeholder="Email"
-              value={email}
-              name="email"
-              onChange={onChange}
-            />
-          </div>
-          <div>
-            <Input
-              type="password"
-              placeholder="Password"
-              value={password}
-              name="password"
-              onChange={onChange}
-            />
-          </div>
-          <Button onClick={login}>Login</Button>
-        </form>
-        <div className="flex gap-3 justify-center">
+    <div className="w-full h-screen flex justify-center">
+      <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col ">
+        {/* 안내 문구 */}
+        <section className="mb-20">
+          <h1 className="text-4xl mb-2">Login</h1>
+          <p className="text-s">Login to your account</p>
+        </section>
+
+        {/* 입력 */}
+        <section className="">
+          <form className="flex flex-col gap-5 mb-12">
+            <div>
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                name="email"
+                onChange={onChange}
+              />
+            </div>
+            <div>
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                name="password"
+                onChange={onChange}
+              />
+            </div>
+            <Button onClick={login}>Login</Button>
+          </form>
+        </section>
+        <div className="h-px bg-black mb-12"></div>
+        {/* <section></section> */}
+        {/* 회원가입 이동 */}
+        <section className="">
           <p className="text-sm">Don't have an account?</p>
           <Link className="text-sm font-extrabold" to={"/signup"}>
             Sign Up
           </Link>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
