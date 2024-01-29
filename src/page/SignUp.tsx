@@ -12,7 +12,7 @@ import {
   ERROR_MESSAGES,
   validateEmail,
   validatePassword,
-} from "@/utils/validatePassword";
+} from "@/utils/ validation";
 
 // type
 import { User } from "@/models/type";
@@ -109,7 +109,7 @@ export default function SignUp() {
   return (
     <>
       <NavBar />
-      <div className="w-full h-screen flex justify-center">
+      <div className="w-full flex justify-center border-2 pt-10">
         <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col">
           {/* 안내문구 */}
           <section className="mb-20">

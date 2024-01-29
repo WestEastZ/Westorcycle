@@ -71,7 +71,8 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground bg-custom;
+    background-color: #f9f9f9;
   }
 }
 
@@ -98,5 +99,9 @@
 
   .bg-custom {
     background-color: #f9f9f9;
+  }
+
+  .shadow-custom {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
 }

@@ -1,12 +1,14 @@
 import { useUser } from "@/contexts/userContext";
 import { db } from "@/firebase";
 import { Product } from "@/models/type";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+import ProductCard from "./ProductCard";
 
 export default function ProductList() {
   const user = useUser();
-  const [productList, setProductList] = useState<Product[]>([]);
+  const [productList, setProductList] = useState<Product[] | []>([]);
 
   // 상품 조회
   useEffect(() => {
@@ -16,7 +18,8 @@ export default function ProductList() {
           const products: Product[] = [];
           const q = query(
             collection(db, "product"),
-            where("sellerId", "==", user.id)
+            where("sellerId", "==", user.id),
+            orderBy("updatedAt", "desc")
           );
           const querySnapshot = await getDocs(q);
           querySnapshot.forEach((doc) => {
@@ -34,9 +37,9 @@ export default function ProductList() {
 
   console.log(productList);
   return (
-    <div>
+    <div className="w-full flex flex-col items-center gap-20">
       {productList.map((product) => (
-        <div key={product.id}>{product.productName}</div>
+        <ProductCard product={product} />
       ))}
     </div>
   );
