@@ -46,8 +46,8 @@ export default function Login() {
   return (
     <>
       <NavBar />
-      <div className="w-full h-screen flex justify-center">
-        <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col ">
+      <div className="w-full h-full flex justify-center border-2 pt-10">
+        <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col border-2">
           {/* 안내 문구 */}
           <section className="mb-20">
             <h1 className="text-4xl mb-4">Login</h1>

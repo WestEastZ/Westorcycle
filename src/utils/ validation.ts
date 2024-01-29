@@ -1,3 +1,5 @@
+import { Product } from "@/models/type";
+
 // 에러메세지 타입
 export type ErrorCode = {
   [key: string]: string;
@@ -9,6 +11,12 @@ export const ERROR_MESSAGES: ErrorCode = {
     "비밀번호는 대문자, 소문자, 숫자, 특수문자 중 최소 2종류 이상 포함해야 합니다.",
   errorPasswordInclude: "비밀번호는 아이디를 포함할 수 없습니다. ",
   errorEmailConstruct: "이메일 형식이 맞지 않습니다.",
+  errorProductName: "상품의 이름은 입력해주세요.",
+  errorProdcutPrice: "상품의 가격을 입력해주세요.",
+  errorProdcutQuantity: "상품의 수량을 입력해주세요.",
+  errorProductDescription: "상품의 설명을 입력해주세요.",
+  errorProductCategory: "상품의 카테고리를 입력해주세요",
+  errorProductImage: "상품의 이미지를 첨부해주세요.",
 };
 
 // 비밀번호 유효성 검사
@@ -41,6 +49,18 @@ export function validateEmail(email: string): string | null {
 
   // 중복 이메일
   if (!emailRegEx.test(email)) return "errorEmailConstruct";
+
+  return null;
+}
+
+// 상품 등록 유효성 검사
+export function validateProduct(product: Product): string | null {
+  if (product.productName === "") return "errorProductName";
+  if (product.productPrice === 0) return "errorProdcutPrice";
+  if (product.productQuantity === 0) return "errorProdcutQuantity";
+  if (product.productDescription === "") return "errorProductDescription";
+  if (product.productCategory === "") return "errorProductCategory";
+  if (product.productImage.length < 1) return "errorProductImage";
 
   return null;
 }

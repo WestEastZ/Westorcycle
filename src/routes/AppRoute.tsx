@@ -7,6 +7,7 @@ import SignUp from "@/page/SignUp";
 import { useUser } from "@/contexts/userContext";
 import SellerProfile from "@/page/Seller/SellerProfile";
 import ConsumerProfile from "@/page/ConsumerProfile";
+import AddProduct from "@/page/Seller/AddProduct";
 
 export default function AppRoute() {
   const user = useUser();
@@ -53,6 +54,8 @@ export default function AppRoute() {
             </ProtectedRoute>
           }
         />
+
+        <Route path="/seller/:nickname/add-product" element={<AddProduct />} />
       </Routes>
     </BrowserRouter>
   );
