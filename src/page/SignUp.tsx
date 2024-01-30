@@ -12,7 +12,7 @@ import {
   ERROR_MESSAGES,
   validateEmail,
   validatePassword,
-} from "@/utils/ validation";
+} from "@/utils/validation";
 
 // type
 import { User } from "@/models/type";

@@ -8,7 +8,6 @@ import NavBar from "@/components/navBar/navBar";
 export default function Home() {
   const user = useUser();
   const navigate = useNavigate();
-  console.log(user);
 
   const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();

@@ -7,7 +7,7 @@ import NavBar from "@/components/navBar/navBar";
 import { useUser } from "@/contexts/userContext";
 import { db, storage } from "@/firebase";
 import { Product } from "@/models/type";
-import { validateProduct } from "@/utils/ validation";
+import { validateProduct } from "@/utils/validation";
 import { serverTimestamp, collection, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useEffect, useState } from "react";

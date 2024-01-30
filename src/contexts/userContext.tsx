@@ -18,7 +18,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    return onAuthStateChanged(auth, async (firebaseUser) => {
+    onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
         const docRef = doc(db, "user", firebaseUser.uid);
         const docSnap = await getDoc(docRef);
@@ -43,6 +43,7 @@ export function UserProvider({ children }: UserProviderProps) {
       setLoading(false);
     });
   }, []);
+
   // 로딩처리
   if (loading) return <div>...</div>;
   //

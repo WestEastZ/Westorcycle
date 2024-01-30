@@ -3,16 +3,17 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // firebase
-import { auth } from "@/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db, signInWithGoogle } from "@/firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 // ui
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/navBar/navBar";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { User } from "@/models/type";
 
 export default function Login() {
-  console.log("Sdsdsds");
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -40,6 +41,38 @@ export default function Login() {
       navigate("/");
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  // google
+  const googleLoginhandler = async () => {
+    try {
+      const { user: firebaseUser } = await signInWithGoogle();
+      const docRef = doc(db, "user", firebaseUser.uid);
+      const docSnap = await getDoc(docRef);
+
+      // 회원 계정이 아니면 회원 가입
+      if (!docSnap.exists()) {
+        if (firebaseUser) {
+          const user: User = {
+            id: firebaseUser.uid,
+            email: firebaseUser.email as string,
+            isSeller: false,
+            nickname: firebaseUser.displayName as string,
+            password: "",
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp(),
+            cartItems: [],
+            favoriteItem: [],
+            profileImage: "",
+          };
+          await setDoc(docRef, user);
+        }
+      }
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -79,7 +112,9 @@ export default function Login() {
             </form>
           </section>
           <div className="h-px bg-black mb-12"></div>
-          {/* <section></section> */}
+          <section>
+            <button onClick={googleLoginhandler}>구글 로그인</button>
+          </section>
           {/* 회원가입 이동 */}
           <section className="">
             <p className="text-sm">Don't have an account?</p>

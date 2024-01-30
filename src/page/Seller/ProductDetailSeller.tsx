@@ -8,7 +8,7 @@ import NavBar from "@/components/navBar/navBar";
 import { useUser } from "@/contexts/userContext";
 import { db, storage } from "@/firebase";
 import { Product } from "@/models/type";
-import { validateProduct } from "@/utils/ validation";
+import { validateProduct } from "@/utils/validation";
 import {
   deleteDoc,
   doc,

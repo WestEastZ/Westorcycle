@@ -12,7 +12,7 @@ import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { Product } from "@/models/type";
 import { useParams } from "react-router-dom";
-import { ERROR_MESSAGES } from "@/utils/ validation";
+import { ERROR_MESSAGES } from "@/utils/validation";
 
 interface FormProductProps {
   onChangeInput: (
