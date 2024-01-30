@@ -1,3 +1,4 @@
+import AddImageButton from "@/components/button/AddImageButton";
 import CaroselImage from "@/components/carosel/CaroselImage";
 import FormProduct from "@/components/form/FormProduct";
 import PageHeader from "@/components/header/PageHeader";
@@ -174,14 +175,15 @@ export default function ProductDetail() {
       <NavBar />
       <div className="w-full flex flex-col justify-center items-center pt-10">
         <PageHeader title={"Product Deatail"} description={"description"} />
+
+        {/* 사진 첨부 */}
         <section className="w-1/2 h-96 relative mb-10">
-          {product ? (
-            product.productImage.length == 0 ? (
-              <div className="w-full h-96 border-2"></div>
-            ) : (
-              <CaroselImage product={product} />
-            )
-          ) : null}
+          {product.productImage.length == 0 ? (
+            <div className="w-full h-96 border-2"></div>
+          ) : (
+            <CaroselImage product={product} />
+          )}
+          <AddImageButton />
         </section>
 
         <FormProduct
