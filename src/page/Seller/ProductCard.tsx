@@ -29,9 +29,12 @@ export default function ProductCard({ product, doc }: ProductProps) {
         <div className="text-left text-sm text-gray-600 review">
           {product.productDescription}
         </div>
-        <div className="text-left text-sm">가격 : {product.productPrice}원</div>
-        <div className="text-left text-sm">
-          남은 수량 : {product.productQuantity}개
+        <div className="flex justify-between text-left text-sm">
+          <p>가격 : {product.productPrice}원</p>
+          <p>
+            남은 수량 :{" "}
+            <span className="text-red-500">{product.productQuantity}개</span>
+          </p>
         </div>
       </section>
     </Link>
