@@ -39,10 +39,8 @@ export default function ProductList() {
       console.log(error);
     }
   }, [user]);
-
-  console.log(productList);
   return (
-    <div className="grid grid-cols-3 gap-5">
+    <div className="grid grid-cols-3 gap-5 px-10">
       {productList.map((product, index) => (
         <ProductCard key={product.id} product={product} doc={docId[index]} />
       ))}

@@ -11,23 +11,27 @@ export default function ProductCard({ product, doc }: ProductProps) {
   return (
     <Link
       to={`/seller/product-detail/${doc}`}
-      className="h-96 flex flex-col justify-center items-center border-2 p-14 rounded-3xl shadow-custom hover:scale-105 transition duration-300"
+      className="h-96 flex flex-col border-2 rounded-3xl shadow-custom hover:scale-105 transition duration-300"
     >
-      <section key={`${doc}`} className="flex flex-col items-center">
-        <div className="">
-          <img
-            src={product.productImage[0]}
-            alt={product.productName}
-            loading="lazy"
-            className="w-full h-full object-cover aspect-video"
-          />
-        </div>
+      <section className="w-full h-full">
+        <img
+          src={product.productImage[0]}
+          alt={product.productName}
+          loading="lazy"
+          className="w-full h-full object-cover rounded-t-3xl aspect-video"
+        />
+      </section>
 
-        <div>
-          <p>{product.productName}</p>
-          <p>{product.productPrice}</p>
-          <p>{product.productDescription}</p>
-          <p>{product.productQuantity}</p>
+      <section className="w-full p-3">
+        <div className="text-left text-lg font-bold review">
+          {product.productName}
+        </div>
+        <div className="text-left text-sm text-gray-600 review">
+          {product.productDescription}
+        </div>
+        <div className="text-left text-sm">가격 : {product.productPrice}원</div>
+        <div className="text-left text-sm">
+          남은 수량 : {product.productQuantity}개
         </div>
       </section>
     </Link>
