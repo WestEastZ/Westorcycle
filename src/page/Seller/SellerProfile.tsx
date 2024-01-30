@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 
 import ProductList from "./ProductList";
 import NavBar from "@/components/navBar/navBar";
+import PageHeader from "@/components/header/PageHeader";
+import { PlusCircle } from "lucide-react";
 
 export default function SellerProfile() {
   const user = useUser();
@@ -24,12 +26,24 @@ export default function SellerProfile() {
   return (
     <>
       <NavBar />
-      <Link to={`/seller/${user?.nickname}/add-product`}>
-        상품등록 하러가기
+      <PageHeader
+        title={`${user?.nickname}`}
+        description={`Take care of your products`}
+      />
+
+      <div className="w-full h-px bg-slate-300 mb-20"></div>
+
+      <Link
+        to={`/seller/${user?.nickname}/add-product`}
+        className="flex justify-center mb-10 gap-3 focus-custom "
+      >
+        <p>Add Proudct</p>
+        <PlusCircle />
       </Link>
-      <div>구매자 전용입니다.{user?.nickname}</div>
-      <Button onClick={Logout}>로그아웃</Button>
+
       <ProductList />
+
+      <Button onClick={Logout}>로그아웃</Button>
     </>
   );
 }

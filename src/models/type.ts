@@ -16,7 +16,7 @@ export interface User {
 
 // 상품 타입 정의
 export interface Product {
-  id: number;
+  id?: number;
   sellerId: string;
   productName: string;
   productPrice: number;
