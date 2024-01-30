@@ -33,7 +33,7 @@ export default function SellerProfile() {
       <div className="w-full h-px bg-slate-300 mb-20"></div>
       <Link
         to={`/seller/${user?.nickname}/add-product`}
-        className="flex justify-center mb-10 gap-3 focus-custom "
+        className="w-fit m-auto border flex justify-center items-center mb-10 gap-3 focus-custom "
       >
         <p>Add Proudct</p>
         <PlusCircle />
