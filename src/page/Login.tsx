@@ -10,9 +10,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/navBar/navBar";
+import SocialLogin from "@/utils/socialLogin";
 
 export default function Login() {
-  console.log("Sdsdsds");
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -46,8 +46,8 @@ export default function Login() {
   return (
     <>
       <NavBar />
-      <div className="w-full h-full flex justify-center border-2 pt-10">
-        <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col border-2">
+      <div className="w-full h-full flex justify-center">
+        <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col">
           {/* 안내 문구 */}
           <section className="mb-20">
             <h1 className="text-4xl mb-4">Login</h1>
@@ -56,7 +56,7 @@ export default function Login() {
 
           {/* 입력 */}
           <section className="">
-            <form className="flex flex-col gap-5 mb-12">
+            <form className="flex flex-col gap-5 mb-8">
               <div>
                 <Input
                   type="email"
@@ -78,8 +78,10 @@ export default function Login() {
               <Button onClick={login}>Login</Button>
             </form>
           </section>
-          <div className="h-px bg-black mb-12"></div>
-          {/* <section></section> */}
+          <div className="h-px bg-black mb-8"></div>
+          <section>
+            <SocialLogin />
+          </section>
           {/* 회원가입 이동 */}
           <section className="">
             <p className="text-sm">Don't have an account?</p>

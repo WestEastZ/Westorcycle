@@ -65,7 +65,7 @@ export default function AppRoute() {
         />
         {/* 구매자 전용 */}
         <Route
-          path="/consumer"
+          path="/consumer/:nickname"
           element={
             <ProtectedRoute condition={user && !user.isSeller}>
               <ConsumerProfile />
