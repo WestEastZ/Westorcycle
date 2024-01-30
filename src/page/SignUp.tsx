@@ -15,7 +15,7 @@ import {
 } from "@/utils/validation";
 
 // type
-import { User } from "@/models/type";
+import { UserType } from "@/models/type";
 import NavBar from "@/components/navBar/navBar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -25,7 +25,7 @@ export default function SignUp() {
   const [errorEmail, setErrorEmail] = useState<string | null>(null);
   const [errorPassword, setErrorPassword] = useState<string | null>(null);
   // 유저 상태
-  const [user, setUser] = useState<User>({
+  const [user, setUser] = useState<UserType>({
     id: "",
     email: "",
     isSeller: false,
@@ -109,7 +109,7 @@ export default function SignUp() {
   return (
     <>
       <NavBar />
-      <div className="w-full flex justify-center border-2 pt-10">
+      <div className="w-full flex justify-center">
         <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col">
           {/* 안내문구 */}
           <section className="mb-20">

@@ -3,15 +3,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // firebase
-import { auth, db, signInWithGoogle } from "@/firebase";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth } from "@/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 // ui
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/navBar/navBar";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
-import { User } from "@/models/type";
+import SocialLogin from "@/utils/socialLogin";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -44,43 +43,11 @@ export default function Login() {
     }
   };
 
-  // google
-  const googleLoginhandler = async () => {
-    try {
-      const { user: firebaseUser } = await signInWithGoogle();
-      const docRef = doc(db, "user", firebaseUser.uid);
-      const docSnap = await getDoc(docRef);
-
-      // 회원 계정이 아니면 회원 가입
-      if (!docSnap.exists()) {
-        if (firebaseUser) {
-          const user: User = {
-            id: firebaseUser.uid,
-            email: firebaseUser.email as string,
-            isSeller: false,
-            nickname: firebaseUser.displayName as string,
-            password: "",
-            createdAt: serverTimestamp(),
-            updatedAt: serverTimestamp(),
-            cartItems: [],
-            favoriteItem: [],
-            profileImage: "",
-          };
-          await setDoc(docRef, user);
-        }
-      }
-
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <>
       <NavBar />
-      <div className="w-full h-full flex justify-center border-2 pt-10">
-        <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col border-2">
+      <div className="w-full h-full flex justify-center">
+        <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col">
           {/* 안내 문구 */}
           <section className="mb-20">
             <h1 className="text-4xl mb-4">Login</h1>
@@ -89,7 +56,7 @@ export default function Login() {
 
           {/* 입력 */}
           <section className="">
-            <form className="flex flex-col gap-5 mb-12">
+            <form className="flex flex-col gap-5 mb-8">
               <div>
                 <Input
                   type="email"
@@ -111,9 +78,9 @@ export default function Login() {
               <Button onClick={login}>Login</Button>
             </form>
           </section>
-          <div className="h-px bg-black mb-12"></div>
+          <div className="h-px bg-black mb-8"></div>
           <section>
-            <button onClick={googleLoginhandler}>구글 로그인</button>
+            <SocialLogin />
           </section>
           {/* 회원가입 이동 */}
           <section className="">

@@ -19,7 +19,7 @@ export default function ProductCard({ product, doc }: ProductProps) {
             src={product.productImage[0]}
             alt={product.productName}
             loading="lazy"
-            className="w-full object-cover aspect-video"
+            className="w-full h-full object-cover aspect-video"
           />
         </div>
 

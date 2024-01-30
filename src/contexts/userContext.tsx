@@ -1,5 +1,5 @@
 import { auth, db } from "@/firebase";
-import { User } from "@/models/type";
+import { UserType } from "@/models/type";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -9,12 +9,12 @@ interface UserProviderProps {
 }
 
 // 유저 정보가 필요한 거니까 로딩 합쳐놓은 거 뺌
-export const UserContext = createContext<User | null>(null);
+export const UserContext = createContext<UserType | null>(null);
 // useContext로 유저 정보를 가져올 수 있는 훅 함수 생성함
 export const useUser = () => useContext(UserContext);
 
 export function UserProvider({ children }: UserProviderProps) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export function UserProvider({ children }: UserProviderProps) {
 
         if (docSnap.exists()) {
           const data = docSnap.data();
-          const user: User = {
+          const user: UserType = {
             id: data.id,
             email: data.email,
             isSeller: data.isSeller,

@@ -108,7 +108,7 @@ export default function AddProduct() {
   return (
     <>
       <NavBar />
-      <div className="w-full flex flex-col justify-center items-center pt-10">
+      <div className="w-full flex flex-col justify-center items-center">
         {/* 안내문구 */}
         <PageHeader
           title={"Add Product"}
@@ -118,7 +118,7 @@ export default function AddProduct() {
         {/* 사진 첨부 */}
         <section className="w-1/2 h-96 relative mb-10">
           {product.productImage.length == 0 ? (
-            <div className="w-full h-96 border-2"></div>
+            <div className="w-full h-96 border bg-white"></div>
           ) : (
             <CaroselImage product={product} />
           )}
