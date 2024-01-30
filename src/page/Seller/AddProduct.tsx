@@ -12,7 +12,7 @@ import {
 import { useUser } from "@/contexts/userContext";
 import { db, storage } from "@/firebase";
 import { Product } from "@/models/type";
-import { ERROR_MESSAGES, validateProduct } from "@/utils/ validation";
+import { validateProduct } from "@/utils/ validation";
 import { serverTimestamp, collection, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ImagePlus } from "lucide-react";
@@ -23,7 +23,7 @@ export default function AddProduct() {
   const user = useUser();
   const navigate = useNavigate();
   const [selectImage, setSelectImage] = useState<string[]>([]);
-  const [errorProduct, setErrorProduct] = useState<string | null>(null);
+  const [errorProduct, setErrorProduct] = useState<string>("");
 
   // 상품 상태
   const [product, setProduct] = useState<Product>({
@@ -96,8 +96,8 @@ export default function AddProduct() {
     const checkProduct = validateProduct(product);
 
     if (checkProduct) {
-      setErrorProduct(ERROR_MESSAGES[checkProduct]);
-      console.log(errorProduct);
+      setErrorProduct(checkProduct);
+      console.log(checkProduct);
       return;
     }
 
@@ -159,6 +159,7 @@ export default function AddProduct() {
           product={product}
           setProduct={setProduct}
           addProductHandler={addProductHandler}
+          errorCode={errorProduct}
         />
       </div>
     </>
