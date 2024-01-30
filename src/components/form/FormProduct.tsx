@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { Product } from "@/models/type";
 import { useParams } from "react-router-dom";
+import { ERROR_MESSAGES } from "@/utils/ validation";
 
 interface FormProductProps {
   onChangeInput: (
@@ -25,6 +26,7 @@ interface FormProductProps {
   addProductHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   deleteProductHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   editProductHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  errorCode: string;
 }
 
 export default function FormProduct({
@@ -35,10 +37,9 @@ export default function FormProduct({
   addProductHandler,
   deleteProductHandler,
   editProductHandler,
+  errorCode,
 }: FormProductProps) {
   const params = useParams();
-  console.log(params.nickname);
-  console.log(product);
   return (
     <form className="w-1/2">
       <input
@@ -53,44 +54,72 @@ export default function FormProduct({
       />
 
       <section className="flex flex-col gap-5 ">
-        <Input
-          type="text"
-          placeholder="상품 이름"
-          value={product.productName}
-          name="productName"
-          className=""
-          onChange={onChangeInput}
-          required
-        />
+        <div>
+          <Input
+            type="text"
+            placeholder="상품 이름"
+            value={product.productName}
+            name="productName"
+            className=""
+            onChange={onChangeInput}
+            required
+          />
+          {errorCode == "errorProductName" ? (
+            <div className="text-left mt-1 ml-4 text-red-500">
+              {ERROR_MESSAGES[errorCode]}
+            </div>
+          ) : null}
+        </div>
 
-        <Input
-          type="number"
-          placeholder="상품 가격"
-          value={product.productPrice}
-          name="productPrice"
-          className=""
-          onChange={onChangeInput}
-          required
-        />
+        <div>
+          <Input
+            type="number"
+            placeholder="상품 가격"
+            value={product.productPrice}
+            name="productPrice"
+            className=""
+            onChange={onChangeInput}
+            required
+          />
+          {errorCode == "errorProdcutPrice" ? (
+            <div className="text-left mt-1 ml-4 text-red-500">
+              {ERROR_MESSAGES[errorCode]}
+            </div>
+          ) : null}
+        </div>
 
-        <Input
-          type="number"
-          placeholder="상품 수량"
-          value={product.productQuantity}
-          name="productQuantity"
-          className=""
-          onChange={onChangeInput}
-          required
-        />
+        <div>
+          <Input
+            type="number"
+            placeholder="상품 수량"
+            value={product.productQuantity}
+            name="productQuantity"
+            className=""
+            onChange={onChangeInput}
+            required
+          />
+          {errorCode == "errorProdcutQuantity" ? (
+            <div className="text-left mt-1 ml-4 text-red-500">
+              {ERROR_MESSAGES[errorCode]}
+            </div>
+          ) : null}
+        </div>
 
-        <Textarea
-          placeholder="상품 설명"
-          name="productDescription"
-          value={product.productDescription}
-          className=""
-          onChange={onChangeInput}
-          required
-        ></Textarea>
+        <div>
+          <Textarea
+            placeholder="상품 설명"
+            name="productDescription"
+            value={product.productDescription}
+            className=""
+            onChange={onChangeInput}
+            required
+          ></Textarea>
+          {errorCode == "errorProductDescription" ? (
+            <div className="text-left mt-1 ml-4 text-red-500">
+              {ERROR_MESSAGES[errorCode]}
+            </div>
+          ) : null}
+        </div>
 
         <Select
           value={product.productCategory}
@@ -112,6 +141,12 @@ export default function FormProduct({
             </SelectGroup>
           </SelectContent>
         </Select>
+        {errorCode == "errorProductCategory" ? (
+          <div className="text-left mt-1 ml-4 text-red-500">
+            {ERROR_MESSAGES[errorCode]}
+          </div>
+        ) : null}
+
         {params.nickname ? (
           <Button onClick={addProductHandler} className="w-full">
             상품 등록

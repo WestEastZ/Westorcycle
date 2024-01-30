@@ -7,6 +7,7 @@ import NavBar from "@/components/navBar/navBar";
 import { useUser } from "@/contexts/userContext";
 import { db, storage } from "@/firebase";
 import { Product } from "@/models/type";
+import { validateProduct } from "@/utils/ validation";
 import {
   deleteDoc,
   doc,
@@ -29,6 +30,7 @@ export default function ProductDetail() {
   const user = useUser();
   const params = useParams();
   const navigate = useNavigate();
+  const [errorProduct, setErrorProduct] = useState<string>("");
 
   const [product, setProduct] = useState<Product>({
     id: Date.now(),
@@ -147,6 +149,15 @@ export default function ProductDetail() {
   ) => {
     event.preventDefault();
 
+    // 상품등록 유효성 검사
+    const checkProduct = validateProduct(product);
+
+    if (checkProduct) {
+      setErrorProduct(checkProduct);
+      console.log(checkProduct);
+      return;
+    }
+
     try {
       if (params && params.productId) {
         const productRef = doc(db, "product", params.productId);
@@ -180,6 +191,7 @@ export default function ProductDetail() {
           setProduct={setProduct}
           deleteProductHandler={deleteProductHandler}
           editProductHandler={editProductHandler}
+          errorCode={errorProduct}
         />
       </div>
     </>
