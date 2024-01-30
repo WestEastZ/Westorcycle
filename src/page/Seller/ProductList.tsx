@@ -9,6 +9,7 @@ import ProductCard from "./ProductCard";
 export default function ProductList() {
   const user = useUser();
   const [productList, setProductList] = useState<Product[] | []>([]);
+  const [docId, setDocId] = useState<string[]>([]);
 
   // 상품 조회
   useEffect(() => {
@@ -16,6 +17,7 @@ export default function ProductList() {
       const fetchProduct = async () => {
         if (user) {
           const products: Product[] = [];
+          const Docs: string[] = [];
           const q = query(
             collection(db, "product"),
             where("sellerId", "==", user.id),
@@ -24,9 +26,12 @@ export default function ProductList() {
           const querySnapshot = await getDocs(q);
           querySnapshot.forEach((doc) => {
             const data = doc.data() as Product;
+            const curDoc = doc.id;
             products.push(data);
+            Docs.push(curDoc);
           });
           setProductList(products);
+          setDocId(Docs);
         }
       };
       fetchProduct();
@@ -37,9 +42,9 @@ export default function ProductList() {
 
   console.log(productList);
   return (
-    <div className="w-full flex flex-col items-center gap-20">
-      {productList.map((product) => (
-        <ProductCard product={product} />
+    <div className="grid grid-cols-3 gap-5">
+      {productList.map((product, index) => (
+        <ProductCard key={product.id} product={product} doc={docId[index]} />
       ))}
     </div>
   );

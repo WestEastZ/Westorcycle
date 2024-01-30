@@ -5,7 +5,7 @@ export default function NavBar() {
   const user = useUser();
 
   return (
-    <nav className="sticky w-full h-12 px-10 flex justify-between items-center top-0 ">
+    <nav className="sticky w-full h-12 px-10 flex justify-between items-center top-0 z-50">
       <div>
         <Link to={"/"} className="under-line">
           Home
