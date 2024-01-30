@@ -1,13 +1,8 @@
+import AddImageButton from "@/components/button/AddImageButton";
+import CaroselImage from "@/components/carosel/CaroselImage";
 import FormProduct from "@/components/form/FormProduct";
 import PageHeader from "@/components/header/PageHeader";
 import NavBar from "@/components/navBar/navBar";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 
 import { useUser } from "@/contexts/userContext";
 import { db, storage } from "@/firebase";
@@ -15,7 +10,6 @@ import { Product } from "@/models/type";
 import { validateProduct } from "@/utils/ validation";
 import { serverTimestamp, collection, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { ImagePlus } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -126,30 +120,9 @@ export default function AddProduct() {
           {product.productImage.length == 0 ? (
             <div className="w-full h-96 border-2"></div>
           ) : (
-            <Carousel className="w-full h-96">
-              <CarouselContent>
-                {product.productImage.map((url) => (
-                  <CarouselItem key={url}>
-                    <div className="">
-                      <img
-                        src={url}
-                        alt={product.productName}
-                        className="w-full h-96 object-contain"
-                      />
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
+            <CaroselImage product={product} />
           )}
-
-          <div className="w-[60px] h-[60px] absolute bottom-10 right-10 flex justify-center items-center hover:cursor-pointer rounded-full bg-gray-600">
-            <label htmlFor="inputFile" className="hover:cursor-pointer">
-              <ImagePlus size={48} color="white" strokeWidth={2} />
-            </label>
-          </div>
+          <AddImageButton />
         </section>
 
         {/* 입력 */}

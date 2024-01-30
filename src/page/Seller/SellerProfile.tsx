@@ -30,9 +30,7 @@ export default function SellerProfile() {
         title={`${user?.nickname}`}
         description={`Take care of your products`}
       />
-
       <div className="w-full h-px bg-slate-300 mb-20"></div>
-
       <Link
         to={`/seller/${user?.nickname}/add-product`}
         className="flex justify-center mb-10 gap-3 focus-custom "
@@ -40,9 +38,7 @@ export default function SellerProfile() {
         <p>Add Proudct</p>
         <PlusCircle />
       </Link>
-
       <ProductList />
-
       <Button onClick={Logout}>로그아웃</Button>
     </>
   );
