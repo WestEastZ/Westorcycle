@@ -27,3 +27,6 @@ export interface Product {
   createdAt: FieldValue | Timestamp;
   updatedAt: FieldValue | Timestamp;
 }
+export interface ProductWithId extends Product {
+  docId: string;
+}
