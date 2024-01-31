@@ -1,16 +1,16 @@
-import { Product } from "@/models/type";
+import { Product, ProductWithId } from "@/models/type";
+import { DocumentData } from "firebase/firestore";
 import { Link } from "react-router-dom";
 
-type ProductProps = {
-  product: Product;
-  doc: string;
-};
+interface ProductCardProps {
+  product: ProductWithId;
+}
 
-export default function ProductCard({ product, doc }: ProductProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   console.log(product);
   return (
     <Link
-      to={`/seller/product-detail/${doc}`}
+      to={`/seller/product-detail/${product.docId}`}
       className="h-96 flex flex-col border-2 rounded-3xl shadow-custom hover:scale-105 transition duration-300"
     >
       <section className="w-full h-full">

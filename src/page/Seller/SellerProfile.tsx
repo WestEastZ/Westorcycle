@@ -39,7 +39,7 @@ export default function SellerProfile() {
         <PlusCircle />
       </Link>
       <ProductList />
-      <Button onClick={Logout}>로그아웃</Button>
+      {/* <Button onClick={Logout}>로그아웃</Button> */}
     </>
   );
 }
