@@ -4,10 +4,16 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useUser } from "@/contexts/userContext";
 import NavBar from "@/components/navBar/navBar";
+import useFetchProductsByCategory from "@/hook/useFetchProducts";
 
 export default function Home() {
   const user = useUser();
   const navigate = useNavigate();
+
+  const categoryA = useFetchProductsByCategory("CategoryA");
+  const categoryB = useFetchProductsByCategory("CategoryB");
+  const categoryC = useFetchProductsByCategory("CategoryC");
+  const categoryD = useFetchProductsByCategory("CategoryD");
 
   const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
@@ -18,18 +24,43 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <h2>Home</h2>
+      <section className="w-full h-[50vh] bg-purple-300">
+        이미지 들어갈 곳입니다.
+      </section>
       {user ? (
         <>
           <div>hello {user?.nickname}</div>
           <Button onClick={Logout}>로그아웃</Button>
         </>
-      ) : (
-        <>
-          <Link to="/login">로그인</Link>
-          <Link to="/signup">회원가입</Link>
-        </>
-      )}
+      ) : null}
+      <div>카테고리 A</div>
+      {categoryA.productsByCategory.map((data) => (
+        <div key={data.docId} className="bg-slate-400">
+          <div>{data.productName}</div>
+          <div>{data.productPrice}</div>
+        </div>
+      ))}
+      <div>카테고리 B</div>
+      {categoryB.productsByCategory.map((data) => (
+        <div key={data.docId} className="bg-red-400">
+          <div>{data.productName}</div>
+          <div>{data.productPrice}</div>
+        </div>
+      ))}
+      <div>카테고리 C</div>
+      {categoryC.productsByCategory.map((data) => (
+        <div key={data.docId} className="bg-yellow-600">
+          <div>{data.productName}</div>
+          <div>{data.productPrice}</div>
+        </div>
+      ))}
+      <div>카테고리 D</div>
+      {categoryD.productsByCategory.map((data) => (
+        <div key={data.docId} className="bg-blue-300">
+          <div>{data.productName}</div>
+          <div>{data.productPrice}</div>
+        </div>
+      ))}
     </>
   );
 }
