@@ -1,28 +1,47 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "@/firebase";
-import { signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { useUser } from "@/contexts/userContext";
-import { Button } from "@/components/ui/button";
-
-import ProductList from "./ProductList";
-import NavBar from "@/components/navBar/navBar";
+import NavBar from "@/components/navBar/NavBar";
 import PageHeader from "@/components/header/PageHeader";
 import { PlusCircle } from "lucide-react";
+import { useInfiniteQuery } from "react-query";
+import fetchInfinityProduct from "@/firebase/fetch/fetchInfinityProduct";
+import { useInView } from "react-intersection-observer";
+import { ProductWithId } from "@/models/type";
+import ProductCard from "../../components/card/ProductCard";
 
 export default function SellerProfile() {
   const user = useUser();
-  const navigate = useNavigate();
+  const params = useParams();
+  const { ref, inView } = useInView();
+
+  const [category, setCategory] = useState<string>("");
+  const [option, setOption] = useState<string>("");
 
   // 로그아웃
-  const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
-    event.preventDefault();
+  // const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
+  //   event.preventDefault();
 
-    await signOut(auth);
-    navigate("/");
-  };
+  //   await signOut(auth);
+  //   navigate("/");
+  // };
 
-  // 등록 상품 조회
+  // react-query
+  const { data, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery(
+    ["product", user, params.id, category, option],
+    ({ pageParam, queryKey }) => fetchInfinityProduct({ pageParam, queryKey }),
+    {
+      getNextPageParam: (lastPage) => lastPage?.lastVisible,
+    }
+  );
+
+  // observer
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetching) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetching, fetchNextPage]);
+
   return (
     <>
       <NavBar />
@@ -32,14 +51,24 @@ export default function SellerProfile() {
       />
       <div className="w-full h-px bg-slate-300 mb-20"></div>
       <Link
-        to={`/seller/${user?.nickname}/add-product`}
+        to={`/seller/${user?.id}/add-product`}
         className="w-fit m-auto flex justify-center items-center mb-10 gap-3 focus-custom "
       >
         <p>Add Proudct</p>
         <PlusCircle />
       </Link>
-      <ProductList />
-      {/* <Button onClick={Logout}>로그아웃</Button> */}
+      <div className="grid grid-cols-3 gap-5 py-20 px-44 mb-30">
+        {data?.pages
+          .flatMap((page) => page?.data)
+          .filter(
+            (productWithId): productWithId is ProductWithId =>
+              productWithId !== undefined
+          )
+          .map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+      </div>
+      <div ref={ref}></div>
     </>
   );
 }

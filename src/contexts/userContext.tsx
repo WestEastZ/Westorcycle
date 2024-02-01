@@ -26,7 +26,7 @@ export function UserProvider({ children }: UserProviderProps) {
         if (docSnap.exists()) {
           const data = docSnap.data();
           const user: UserType = {
-            id: data.id,
+            id: firebaseUser.uid,
             email: data.email,
             isSeller: data.isSeller,
             nickname: data.nickname,

@@ -1,5 +1,5 @@
-import { Product, ProductWithId } from "@/models/type";
-import { DocumentData } from "firebase/firestore";
+import { useUser } from "@/contexts/userContext";
+import { ProductWithId } from "@/models/type";
 import { Link } from "react-router-dom";
 
 interface ProductCardProps {
@@ -7,11 +7,11 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  console.log(product);
+  const user = useUser();
   return (
     <Link
-      to={`/seller/product-detail/${product.docId}`}
-      className="h-96 flex flex-col border-2 rounded-3xl shadow-custom hover:scale-105 transition duration-300"
+      to={`/seller/${user?.id}/product-detail/${product.docId}`}
+      className="h-96 min-w-60 flex flex-col border-2 rounded-3xl shadow-custom hover:scale-105 transition duration-300"
     >
       <section className="w-full h-full">
         <img

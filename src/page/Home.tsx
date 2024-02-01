@@ -1,19 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useUser } from "@/contexts/userContext";
-import NavBar from "@/components/navBar/navBar";
-import useFetchProductsByCategory from "@/hook/useFetchProducts";
+import { useQuery } from "react-query";
+import fetchProducts from "@/firebase/fetch/fetchProducts";
+import NavBar from "@/components/navBar/NavBar";
 
 export default function Home() {
   const user = useUser();
   const navigate = useNavigate();
 
-  const categoryA = useFetchProductsByCategory("CategoryA");
-  const categoryB = useFetchProductsByCategory("CategoryB");
-  const categoryC = useFetchProductsByCategory("CategoryC");
-  const categoryD = useFetchProductsByCategory("CategoryD");
+  const categoryA = useQuery(["product", "CategoryA"], fetchProducts);
+  const categoryB = useQuery(["product", "CategoryB"], fetchProducts);
+  const categoryC = useQuery(["product", "CategoryC"], fetchProducts);
+  const categoryD = useQuery(["product", "CategoryD"], fetchProducts);
 
   const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
@@ -27,14 +27,14 @@ export default function Home() {
       <section className="w-full h-[50vh] bg-purple-300">
         이미지 들어갈 곳입니다.
       </section>
-      {user ? (
+      {/* {user ? (
         <>
           <div>hello {user?.nickname}</div>
           <Button onClick={Logout}>로그아웃</Button>
         </>
       ) : null}
       <div>카테고리 A</div>
-      {categoryA.productsByCategory.map((data) => (
+      {categoryA.map((data) => (
         <div key={data.docId} className="bg-slate-400">
           <div>{data.productName}</div>
           <div>{data.productPrice}</div>
@@ -59,8 +59,8 @@ export default function Home() {
         <div key={data.docId} className="bg-blue-300">
           <div>{data.productName}</div>
           <div>{data.productPrice}</div>
-        </div>
-      ))}
+        </div> */}
+      {/* ))} */}
     </>
   );
 }
