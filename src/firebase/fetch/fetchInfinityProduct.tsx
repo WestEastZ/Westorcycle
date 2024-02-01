@@ -22,19 +22,21 @@ export default async function fetchInfinityProduct({
   // queryKey 변수 선언
   const [_key, user, params, category, option] = queryKey as [
     string,
-    UserType,
+    string,
     string,
     string,
     string
   ];
+
+  console.log(user, params);
 
   // 실행
   try {
     let q = query(collection(db, _key), limit(4));
 
     // 판매자 본인 확인
-    if (user.id == params) {
-      q = query(q, where("sellerId", "==", user.id));
+    if (user == params) {
+      q = query(q, where("sellerId", "==", user));
     }
     // 카테고리
     if (category) {

@@ -5,10 +5,10 @@ import Home from "@/page/Home";
 import Login from "@/page/Login";
 import SignUp from "@/page/SignUp";
 import { useUser } from "@/contexts/userContext";
-import SellerProfile from "@/page/Seller/SellerProfile";
-import ConsumerProfile from "@/page/ConsumerProfile";
-import AddProduct from "@/page/Seller/AddProduct";
-import ProductDetail from "@/page/Seller/ProductDetailSeller";
+import SellerProfile from "@/page/seller/SellerProfile";
+import ConsumerProfile from "@/page/consumer/ConsumerProfile";
+import AddProduct from "@/page/seller/AddProduct";
+import ManageProduct from "@/page/seller/ManageProduct";
 
 export default function AppRoute() {
   const user = useUser();
@@ -18,6 +18,7 @@ export default function AppRoute() {
       <Routes>
         {/* 모든 사용자 방문 가능 */}
         <Route path="/" element={<Home />} />
+        <Route path="/product/:id" />
 
         {/* 로그인 유무 */}
         <Route
@@ -56,13 +57,14 @@ export default function AppRoute() {
           }
         />
         <Route
-          path="/seller/:id/product-detail/:productId"
+          path="/seller/:id/manage-product/:productId"
           element={
             <ProtectedRoute condition={user && user.isSeller}>
-              <ProductDetail />
+              <ManageProduct />
             </ProtectedRoute>
           }
         />
+
         {/* 구매자 전용 */}
         <Route
           path="/consumer/:nickname"
@@ -72,6 +74,9 @@ export default function AppRoute() {
             </ProtectedRoute>
           }
         />
+
+        {/* 접근 불가 */}
+        <Route path="/*" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

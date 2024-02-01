@@ -46,7 +46,7 @@ export default function FormProduct({
         type="file"
         id="inputFile"
         name="productImage"
-        accept=".jpg, .jpeg, .png"
+        // accept=".jpg, .jpeg, .png"
         multiple
         onChange={addImageHandler}
         className="hidden"
@@ -147,16 +147,19 @@ export default function FormProduct({
           </div>
         ) : null}
 
-        {params.nickname ? (
+        {!params.productId ? (
           <Button onClick={addProductHandler} className="w-full">
             상품 등록
           </Button>
         ) : (
-          <div className="flex justify-around">
-            <Button onClick={editProductHandler} className="w-1/3">
+          <div className="flex w-full justify-around gap-5">
+            <Button onClick={editProductHandler} className="w-full">
               수정
             </Button>
-            <Button onClick={deleteProductHandler} className="w-1/3 bg-red-600">
+            <Button
+              onClick={deleteProductHandler}
+              className="w-full bg-red-600"
+            >
               삭제
             </Button>
           </div>

@@ -31,7 +31,7 @@ export default function useAddProduct(
       const productRef = doc(collection(db, "product"));
       await setDoc(productRef, product);
 
-      navigate(`/seller/${user?.nickname}`);
+      navigate(`/seller/${user?.id}`);
     } catch (error) {
       console.log(error);
     }
