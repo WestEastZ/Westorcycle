@@ -40,7 +40,7 @@ export default function AppRoute() {
 
         {/* 판매자 전용  */}
         <Route
-          path="/seller/:nickname"
+          path="/seller/:id"
           element={
             <ProtectedRoute condition={user && user.isSeller}>
               <SellerProfile />
@@ -48,7 +48,7 @@ export default function AppRoute() {
           }
         />
         <Route
-          path="/seller/:nickname/add-product"
+          path="/seller/:id/add-product"
           element={
             <ProtectedRoute condition={user && user.isSeller}>
               <AddProduct />
@@ -56,7 +56,7 @@ export default function AppRoute() {
           }
         />
         <Route
-          path="/seller/product-detail/:productId"
+          path="/seller/:id/product-detail/:productId"
           element={
             <ProtectedRoute condition={user && user.isSeller}>
               <ProductDetail />

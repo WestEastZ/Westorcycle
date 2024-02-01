@@ -16,7 +16,7 @@ import {
 
 // type
 import { UserType } from "@/models/type";
-import NavBar from "@/components/navBar/navBar";
+import NavBar from "@/components/navBar/NavBar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 

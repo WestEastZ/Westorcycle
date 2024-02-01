@@ -24,9 +24,7 @@ export default function NavBar() {
             </Link>
             <Link
               to={
-                user?.isSeller
-                  ? `/seller/${user.nickname}`
-                  : `/consumer/${user?.nickname}`
+                user?.isSeller ? `/seller/${user.id}` : `/consumer/${user?.id}`
               }
               className="under-line"
             >

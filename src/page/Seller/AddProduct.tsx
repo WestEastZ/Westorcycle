@@ -2,21 +2,18 @@ import AddImageButton from "@/components/button/AddImageButton";
 import CaroselImage from "@/components/carosel/CaroselImage";
 import FormProduct from "@/components/form/FormProduct";
 import PageHeader from "@/components/header/PageHeader";
-import NavBar from "@/components/navBar/navBar";
+import NavBar from "@/components/navBar/NavBar";
 
 import { useUser } from "@/contexts/userContext";
-import { db, storage } from "@/firebase";
-import { Product } from "@/models/type";
-import { validateProduct } from "@/utils/validation";
-import { serverTimestamp, collection, doc, setDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import useAddProduct from "@/hook/useAddProduct";
+import useChangeInput from "@/hook/useChangeInput";
+import useImageUpload from "@/hook/useImageUpload";
+import { Product, UserType } from "@/models/type";
+import { serverTimestamp } from "firebase/firestore";
+import React, { useState } from "react";
 
 export default function AddProduct() {
-  const user = useUser();
-  const navigate = useNavigate();
-  const [selectImage, setSelectImage] = useState<string[]>([]);
+  const user = useUser() as UserType;
   const [errorProduct, setErrorProduct] = useState<string>("");
 
   // 상품 상태
@@ -34,76 +31,13 @@ export default function AddProduct() {
   });
 
   // 상품 상태 변경
-  const onChangeInput = (
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const {
-      target: { name, value },
-    } = event;
-
-    if (user) {
-      setProduct({ ...product, sellerId: user?.id, [name]: value });
-    }
-  };
+  const { onChangeInput } = useChangeInput(user, product, setProduct);
 
   // 이미지 파일 선택
-  const addImageHandler = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    try {
-      const selectImgList = event.target.files; // 선택된 파일 리스트
-      if (selectImgList) {
-        const promises = [];
-
-        for (let i = 0; i < selectImgList.length; i++) {
-          const selectImgFile = selectImgList[i];
-          const imgRef = ref(storage, `${user?.id}/${selectImgFile.name}`);
-          const uploadPromise = await uploadBytes(imgRef, selectImgFile).then(
-            () => getDownloadURL(imgRef)
-          );
-          promises.push(uploadPromise);
-        }
-        const downloadImgURL = await Promise.all(promises);
-        setSelectImage(downloadImgURL);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      productImage: selectImage,
-    }));
-  }, [selectImage]);
+  const { addImageHandler } = useImageUpload(user, product, setProduct);
 
   // 상품 등록
-  const addProductHandler = async (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-
-    // 상품등록 유효성 검사
-    const checkProduct = validateProduct(product);
-
-    if (checkProduct) {
-      setErrorProduct(checkProduct);
-      console.log(checkProduct);
-      return;
-    }
-
-    try {
-      const productRef = doc(collection(db, "product"));
-      await setDoc(productRef, product);
-
-      navigate(`/seller/${user?.nickname}`);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { addProductHandler } = useAddProduct(user, product, setErrorProduct);
 
   return (
     <>
