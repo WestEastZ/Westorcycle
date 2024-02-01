@@ -10,7 +10,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const user = useUser();
   return (
     <Link
-      to={`/seller/${user?.id}/product-detail/${product.docId}`}
+      to={`/seller/${user?.id}/manage-product/${product.docId}`}
       className="h-96 min-w-60 flex flex-col border-2 rounded-3xl shadow-custom hover:scale-105 transition duration-300"
     >
       <section className="w-full h-full">

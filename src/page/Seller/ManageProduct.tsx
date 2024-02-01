@@ -2,7 +2,7 @@ import AddImageButton from "@/components/button/AddImageButton";
 import CaroselImage from "@/components/carosel/CaroselImage";
 import FormProduct from "@/components/form/FormProduct";
 import PageHeader from "@/components/header/PageHeader";
-import NavBar from "@/components/navBar/NavBar";
+import NavBar from "@/components/nav/NavBar";
 
 // import { Input } from "@/components/ui/input";
 import { useUser } from "@/contexts/userContext";
@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function ProductDetail() {
+export default function ManageProduct() {
   const user = useUser() as UserType;
   const params = useParams();
   const navigate = useNavigate();

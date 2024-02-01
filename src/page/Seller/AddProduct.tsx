@@ -2,7 +2,7 @@ import AddImageButton from "@/components/button/AddImageButton";
 import CaroselImage from "@/components/carosel/CaroselImage";
 import FormProduct from "@/components/form/FormProduct";
 import PageHeader from "@/components/header/PageHeader";
-import NavBar from "@/components/navBar/NavBar";
+import NavBar from "@/components/nav/NavBar";
 
 import { useUser } from "@/contexts/userContext";
 import useAddProduct from "@/hook/useAddProduct";

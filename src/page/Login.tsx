@@ -9,7 +9,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 // ui
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import NavBar from "@/components/navBar/NavBar";
+import NavBar from "@/components/nav/NavBar";
 import SocialLogin from "@/utils/SocialLogin";
 
 export default function Login() {

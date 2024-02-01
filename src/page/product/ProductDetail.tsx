@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function HomeCategoryContainer() {
+export default function ProductDetail() {
   return <div></div>;
 }

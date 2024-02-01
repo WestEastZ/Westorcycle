@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUser } from "@/contexts/userContext";
-import NavBar from "@/components/navBar/NavBar";
+import NavBar from "@/components/nav/NavBar";
 import PageHeader from "@/components/header/PageHeader";
 import { PlusCircle } from "lucide-react";
 import { useInfiniteQuery } from "react-query";
@@ -18,17 +18,9 @@ export default function SellerProfile() {
   const [category, setCategory] = useState<string>("");
   const [option, setOption] = useState<string>("");
 
-  // 로그아웃
-  // const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
-  //   event.preventDefault();
-
-  //   await signOut(auth);
-  //   navigate("/");
-  // };
-
   // react-query
   const { data, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery(
-    ["product", user, params.id, category, option],
+    ["product", user?.id, params.id, category, option],
     ({ pageParam, queryKey }) => fetchInfinityProduct({ pageParam, queryKey }),
     {
       getNextPageParam: (lastPage) => lastPage?.lastVisible,
