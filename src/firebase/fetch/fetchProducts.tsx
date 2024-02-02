@@ -14,12 +14,12 @@ export default async function fetchProducts({
 }: {
   queryKey: string[];
 }) {
-  const [_key, vlaue] = queryKey;
+  const [_key, field_key, vlaue] = queryKey;
 
   try {
     let q = query(
       collection(db, _key),
-      where("productCategory", "==", vlaue),
+      where(field_key, "==", vlaue),
       orderBy("updatedAt", "desc"),
       limit(4)
     );

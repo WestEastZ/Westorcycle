@@ -8,7 +8,7 @@ export default function ProductCardHome({
   product: ProductWithId;
 }) {
   return (
-    <Link to={`/`} className="w-full h-full">
+    <Link to={`/product/${product.docId}`} className="w-full h-full">
       <div className="w-full h-full">
         <div className="rounded-3xl overflow-hidden bg-white">
           <img
@@ -22,6 +22,7 @@ export default function ProductCardHome({
           <div className="text-left text-sm font-bold review">
             {product.productName}
           </div>
+
           <div className="flex justify-between text-left text-xs text-gray-400 ">
             <p>KRW {product.productPrice}</p>
           </div>

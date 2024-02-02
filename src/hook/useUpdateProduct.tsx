@@ -35,7 +35,7 @@ export default function useUpdateProduct(
           ...initialProduct,
           updatedAt: serverTimestamp(),
         });
-        navigate(`/seller/${user?.nickname}`);
+        navigate(`/seller/${user?.id}`);
       }
     } catch (error) {
       console.log(error);
