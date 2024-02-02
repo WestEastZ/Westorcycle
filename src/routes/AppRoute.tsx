@@ -9,6 +9,7 @@ import SellerProfile from "@/page/seller/SellerProfile";
 import ConsumerProfile from "@/page/consumer/ConsumerProfile";
 import AddProduct from "@/page/seller/AddProduct";
 import ManageProduct from "@/page/seller/ManageProduct";
+import ProductDetail from "@/page/product/ProductDetail";
 
 export default function AppRoute() {
   const user = useUser();
@@ -18,7 +19,7 @@ export default function AppRoute() {
       <Routes>
         {/* 모든 사용자 방문 가능 */}
         <Route path="/" element={<Home />} />
-        <Route path="/product/:id" />
+        <Route path="/product/:productId" element={<ProductDetail />} />
 
         {/* 로그인 유무 */}
         <Route

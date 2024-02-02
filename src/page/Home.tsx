@@ -10,10 +10,22 @@ export default function Home() {
   const user = useUser();
   const navigate = useNavigate();
 
-  const categoryA = useQuery(["product", "CategoryA"], fetchProducts);
-  const categoryB = useQuery(["product", "CategoryB"], fetchProducts);
-  const categoryC = useQuery(["product", "CategoryC"], fetchProducts);
-  const categoryD = useQuery(["product", "CategoryD"], fetchProducts);
+  const categoryA = useQuery(
+    ["product", "productCategory", "CategoryA"],
+    fetchProducts
+  );
+  const categoryC = useQuery(
+    ["product", "productCategory", "CategoryC"],
+    fetchProducts
+  );
+  const categoryD = useQuery(
+    ["product", "productCategory", "CategoryD"],
+    fetchProducts
+  );
+  const categoryB = useQuery(
+    ["product", "productCategory", "CategoryB"],
+    fetchProducts
+  );
 
   return (
     <>
