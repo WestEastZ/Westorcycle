@@ -39,7 +39,6 @@ export default function SellerProfile() {
 
   return (
     <>
-      <NavBar />
       <PageHeader
         title={`${user?.nickname}`}
         description={`Take care of your products`}
