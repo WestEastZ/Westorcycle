@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { db, signInWithGithub, signInWithGoogle } from "@/firebase";
 import { UserType } from "@/models/type";
 import { User } from "firebase/auth";
@@ -59,18 +60,12 @@ export default function SocialLogin() {
 
   return (
     <section className="flex flex-col gap-2 mb-4">
-      <button
-        onClick={googleLoginhandler}
-        className=" border rounded-full border-black px-4 py-2"
-      >
+      <Button onClick={googleLoginhandler} className="">
         Google
-      </button>
-      <button
-        onClick={githubLoginhandler}
-        className=" border rounded-full border-black py-2"
-      >
+      </Button>
+      <Button onClick={githubLoginhandler} className="">
         Github
-      </button>
+      </Button>
     </section>
   );
 }
