@@ -18,7 +18,6 @@ export default function ProductDetail() {
 
   return (
     <>
-      <NavBar />
       <div className="flex">
         <CaroselImage product={product} />
         <div>

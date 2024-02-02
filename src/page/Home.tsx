@@ -29,8 +29,6 @@ export default function Home() {
 
   return (
     <>
-      <NavBar />
-
       <section className="w-full h-[50vh] bg-purple-300 mb-12">
         이미지 들어갈 곳입니다.
       </section>

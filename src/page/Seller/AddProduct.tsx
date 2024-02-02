@@ -41,7 +41,6 @@ export default function AddProduct() {
 
   return (
     <>
-      <NavBar />
       <div className="w-full flex flex-col justify-center items-center">
         {/* 안내문구 */}
         <PageHeader

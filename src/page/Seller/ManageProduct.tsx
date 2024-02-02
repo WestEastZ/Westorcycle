@@ -51,7 +51,6 @@ export default function ManageProduct() {
 
   return (
     <>
-      <NavBar />
       <div className="w-full flex flex-col justify-center items-center pt-10">
         <PageHeader title={"Product Deatail"} description={"description"} />
 

@@ -108,7 +108,6 @@ export default function SignUp() {
 
   return (
     <>
-      <NavBar />
       <div className="w-full flex justify-center">
         <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col">
           {/* 안내문구 */}
