@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -64,24 +64,33 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
-}
+} */
 
 @layer base {
   * {
     @apply border-border;
   }
+  html,
   body {
-    @apply bg-background text-foreground bg-custom;
-    background-color: #f1f1f1;
+    /* @apply text-foreground bg-custom; */
+    background-color: #141414;
+    height: 100%;
   }
 }
 
 @layer components {
+  .bg-main {
+    background-color: #141414;
+  }
+
+  .line-main {
+    background-color: #dfdfdf;
+  }
+
   .link-center {
     @apply flex items-center justify-center h-full;
   }
   .under-line {
-    color: #000;
     display: inline-block;
     margin: 0;
   }
@@ -99,6 +108,10 @@
 
   .bg-custom {
     background-color: #f9f9f9;
+  }
+
+  .text-custom {
+    color: #dfdfdf;
   }
 
   .shadow-custom {

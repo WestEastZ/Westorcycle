@@ -16,21 +16,19 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className="sticky w-full h-12 px-10 flex justify-between items-center top-0 z-50">
-        <div>
-          <Link to={"/"} className="under-line">
-            Home
+      <nav className="sticky w-full h-12 flex items-center top-0 z-50 text-custom p-8 bg-main">
+        <div className="flex items-center gap-12">
+          <Link to={"/"} className="under-line text-custom text-3xl">
+            WESTSHOP
           </Link>
-        </div>
 
-        <div className="flex gap-12">
-          <Link to={"/category"} className="under-line">
+          <Link to={"/category"} className="under-line text-custom text-sm">
             Cartegory
           </Link>
 
           {user ? (
             <>
-              <Link to={"/"} className="under-line">
+              <Link to={"/"} className="under-line text-custom text-sm">
                 Favorite
               </Link>
               <Link
@@ -39,18 +37,23 @@ export default function NavBar() {
                     ? `/seller/${user.id}`
                     : `/consumer/${user?.id}`
                 }
-                className="under-line"
+                className="under-line text-custom text-sm"
               >
                 Profile
               </Link>
-              <button onClick={Logout}>Logout</button>
+              <button
+                onClick={Logout}
+                className="under-line text-custom text-sm"
+              >
+                Logout
+              </button>
             </>
           ) : (
             <>
-              <Link to={"/login"} className="under-line">
+              <Link to={"/login"} className="under-line text-custom text-sm">
                 Login
               </Link>
-              <Link to={"/signup"} className="under-line">
+              <Link to={"/signup"} className="under-line text-custom text-sm">
                 Sign Up
               </Link>
             </>

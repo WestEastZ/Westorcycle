@@ -108,70 +108,72 @@ export default function SignUp() {
 
   return (
     <>
-      <NavBar />
-      <div className="w-full flex justify-center">
-        <div className="w-1/2 min-w-96 m-auto p-20 flex flex-col">
-          {/* 안내문구 */}
-          <section className="mb-20">
-            <h1 className="text-4xl mb-4">Sign Up</h1>
-            <p className="text-s">Sign Up to your account</p>
-          </section>
-          {/* 입력 */}
+      <div className="relative w-1/2 mt-20 m-auto bg-[url('./assets/image/signup.jpeg')] bg-cover bg-center bg-no-repeat">
+        <div className="inset-0 w-full h-full z-20 bg-black bg-opacity-50"></div>
+        <div className="w-full h-full m-auto flex justify-center z-30">
+          <div className="w-full h-fit p-20 flex flex-col bg-black bg-opacity-80">
+            {/* 안내문구 */}
+            <section className="mb-20">
+              <h1 className="text-5xl mb-4">Sign Up</h1>
+              <p className="text-sm">Are you ready to be a real man?</p>
+            </section>
+            {/* 입력 */}
 
-          <section>
-            <form className="flex flex-col gap-5 mb-12">
-              <div>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={user.email}
-                  name="email"
-                  onChange={onChange}
-                />
-                {errorEmail === null ? null : (
-                  <div className="text-left mt-1 ml-4 text-red-500">
-                    {errorEmail}
-                  </div>
-                )}
-              </div>
-              <div>
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={user.password}
-                  name="password"
-                  onChange={onChange}
-                />
-                {errorPassword === null ? null : (
-                  <div className="text-left mt-1 ml-4 text-red-500">
-                    {errorPassword}
-                  </div>
-                )}
-              </div>
-              <div>
-                <Input
-                  type="text"
-                  placeholder="Nickname"
-                  value={user.nickname}
-                  name="nickname"
-                  onChange={onChange}
-                />
-              </div>
-              <div className="flex justify-center items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="checkSeller"
-                  checked={user.isSeller}
-                  name="isSeller"
-                  onChange={(e) =>
-                    setUser({ ...user, isSeller: e.target.checked })
-                  }
-                />
-                <label htmlFor="checkSeller">Sales Account</label>
-              </div>
-              <Button onClick={signup}>Sign Up</Button>
-            </form>
-          </section>
+            <section>
+              <form className="flex flex-col gap-5 mb-12">
+                <div>
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    value={user.email}
+                    name="email"
+                    onChange={onChange}
+                  />
+                  {errorEmail === null ? null : (
+                    <div className="text-left mt-1 ml-4 text-red-500">
+                      {errorEmail}
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    value={user.password}
+                    name="password"
+                    onChange={onChange}
+                  />
+                  {errorPassword === null ? null : (
+                    <div className="text-left mt-1 ml-4 text-red-500">
+                      {errorPassword}
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Nickname"
+                    value={user.nickname}
+                    name="nickname"
+                    onChange={onChange}
+                  />
+                </div>
+                <div className="flex justify-center items-center gap-2">
+                  <input
+                    type="checkbox"
+                    id="checkSeller"
+                    checked={user.isSeller}
+                    name="isSeller"
+                    onChange={(e) =>
+                      setUser({ ...user, isSeller: e.target.checked })
+                    }
+                  />
+                  <label htmlFor="checkSeller">Sales Account</label>
+                </div>
+                <Button onClick={signup}>Sign Up</Button>
+              </form>
+            </section>
+          </div>
         </div>
       </div>
     </>
