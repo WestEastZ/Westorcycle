@@ -8,90 +8,29 @@ import NavBar from "@/components/nav/NavBar";
 import { useUser } from "@/contexts/userContext";
 import { db } from "@/firebase";
 import useChangeInput from "@/hook/useChangeInput";
+import useDeleteProduct from "@/hook/useDeleteProduct";
+import useFetchProduct from "@/hook/useFetchProduct";
 import useImageUpload from "@/hook/useImageUpload";
 import useUpdateProduct from "@/hook/useUpdateProduct";
-import { Product, UserType } from "@/models/type";
-import { deleteDoc, doc, getDoc, serverTimestamp } from "firebase/firestore";
+import { UserType } from "@/models/type";
+import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, getStorage, ref } from "firebase/storage";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
+export type ParamsType = {
+  productId?: string;
+};
+
 export default function ManageProduct() {
   const user = useUser() as UserType;
-  const params = useParams();
-  const navigate = useNavigate();
+  const params = useParams<ParamsType>();
+
   const [errorProduct, setErrorProduct] = useState<string>("");
 
-  const [product, setProduct] = useState<Product>({
-    id: Date.now(),
-    sellerId: "",
-    productName: "",
-    productPrice: 0,
-    productQuantity: 0,
-    productDescription: "",
-    productCategory: "",
-    productImage: [],
-    createdAt: serverTimestamp(),
-    updatedAt: serverTimestamp(),
-  });
-
   // 상품 조회
-  useEffect(() => {
-    try {
-      const fetchProduct = async () => {
-        if (params && params.productId) {
-          const docRef = doc(db, "product", params.productId);
-          const docSnap = await getDoc(docRef);
-
-          if (docSnap.exists()) {
-            const data = docSnap.data();
-            const product: Product = {
-              id: data.id,
-              sellerId: data.sellerId,
-              productName: data.productName,
-              productPrice: data.productPrice,
-              productQuantity: data.productQuantity,
-              productDescription: data.productDescription,
-              productCategory: data.productCategory,
-              productImage: data.productImage,
-              createdAt: data.createdAt,
-              updatedAt: data.updatedAt,
-            };
-            setProduct(product);
-          }
-        }
-      };
-      fetchProduct();
-    } catch (error) {
-      console.log(error);
-    }
-  }, [params]);
-
-  // 상품 삭제
-  const deleteProductHandler = async (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-    try {
-      const storage = getStorage();
-
-      if (params && params.productId) {
-        const docRef = doc(db, "product", params.productId);
-        const imageRef = ref(storage, product?.productImage[0]);
-
-        // 삭제
-        await deleteDoc(docRef);
-        await deleteObject(imageRef);
-
-        navigate(`/seller/${user?.nickname}`);
-      } else {
-        return;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { product, setProduct } = useFetchProduct();
 
   // 상품 상태 변경
   const { onChangeInput } = useChangeInput(user, product, setProduct);
@@ -106,6 +45,9 @@ export default function ManageProduct() {
     product,
     setErrorProduct
   );
+
+  // 상품 삭제
+  const { deleteProductHandler } = useDeleteProduct(user, params, product);
 
   return (
     <>

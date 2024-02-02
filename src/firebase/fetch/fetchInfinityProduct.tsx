@@ -28,8 +28,6 @@ export default async function fetchInfinityProduct({
     string
   ];
 
-  console.log(user, params);
-
   // 실행
   try {
     let q = query(collection(db, _key), limit(4));
