@@ -5,6 +5,8 @@ import fetchProducts from "@/firebase/fetch/fetchProducts";
 import NavBar from "@/components/nav/NavBar";
 import { ChevronRight } from "lucide-react";
 import ProductContanierHome from "@/components/container/ProductContanierHome";
+import mainBg from "@/assets/image/main.jpeg";
+import CaroselMain from "@/components/carosel/CaroselMain";
 
 export default function Home() {
   const user = useUser();
@@ -29,8 +31,14 @@ export default function Home() {
 
   return (
     <>
-      <section className="w-full h-[50vh] bg-purple-300 mb-12">
-        이미지 들어갈 곳입니다.
+      <section className="relative w-full h-[50vh] mb-12">
+        <div className="absolute flex flex-col gap-5 text-left w-1/2 h-1/4 top-32 left-20 text-4xl z-10">
+          <div>Men will fight</div>
+          <div>long and hard for</div>
+          <div>a bit of colored ribbon.</div>
+        </div>
+
+        <CaroselMain />
       </section>
 
       <section className="flex flex-col gap-10">
