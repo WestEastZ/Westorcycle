@@ -1,21 +1,20 @@
 @font-face {
-  font-family: "GmarketSansLight";
-  src: url("./assets/fonts/GmarketSansLight.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
+  font-family: "SpoqaHanSansNeo-Bold";
+  src: url("./assets/fonts/SpoqaHanSansNeo-Bold.otf") format("opentype");
+  font-weight: 600;
 }
 
 @font-face {
-  font-family: "GmarketSansMedium";
-  src: url("./assets/fonts/GmarketSansMedium.otf") format("opentype");
+  font-family: "SpoqaHanSansNeo-Medium";
+  src: url("./assets/fonts/SpoqaHanSansNeo-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "GmarketSansBold";
-  src: url("./assets/fonts/GmarketSansBold.otf") format("opentype");
-  font-weight: 700;
+  font-family: "SpoqaHanSansNeo-Light";
+  src: url("./assets/fonts/SpoqaHanSansNeo-Light.otf") format("opentype");
+  font-weight: 400;
   font-style: normal;
 }
 #root {
@@ -23,10 +22,10 @@
 
   max-width: 1080px;
   height: 100%;
-  min-height: 100%;
 
   margin: 0 auto;
 
   text-align: center;
-  font-family: "GmarketSansMedium";
+  color: #dfdfdf;
+  font-family: "SpoqaHanSansNeo-Medium";
 }

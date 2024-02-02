@@ -12,12 +12,14 @@ import ManageProduct from "@/page/seller/ManageProduct";
 import ProductDetail from "@/page/product/ProductDetail";
 import Category from "@/page/product/Category";
 import Product from "@/page/product/Product";
+import NavBar from "@/components/nav/NavBar";
 
 export default function AppRoute() {
   const user = useUser();
 
   return (
     <BrowserRouter>
+      <NavBar />
       <Routes>
         {/* 모든 사용자 방문 가능 */}
         <Route path="/" element={<Home />} />
