@@ -24,7 +24,7 @@ export default function NavBar() {
         </div>
 
         <div className="flex gap-12">
-          <Link to={"/"} className="under-line">
+          <Link to={"/category"} className="under-line">
             Cartegory
           </Link>
 

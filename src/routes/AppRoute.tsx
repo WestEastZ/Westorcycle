@@ -10,6 +10,8 @@ import ConsumerProfile from "@/page/consumer/ConsumerProfile";
 import AddProduct from "@/page/seller/AddProduct";
 import ManageProduct from "@/page/seller/ManageProduct";
 import ProductDetail from "@/page/product/ProductDetail";
+import Category from "@/page/product/Category";
+import Product from "@/page/product/Product";
 
 export default function AppRoute() {
   const user = useUser();
@@ -20,6 +22,8 @@ export default function AppRoute() {
         {/* 모든 사용자 방문 가능 */}
         <Route path="/" element={<Home />} />
         <Route path="/product/:productId" element={<ProductDetail />} />
+        <Route path="/category" element={<Category />} />
+        <Route path="/category/:category" element={<Product />} />
 
         {/* 로그인 유무 */}
         <Route
