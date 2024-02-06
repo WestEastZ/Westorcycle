@@ -1,13 +1,13 @@
 import { db } from "@/firebase";
-import { Product } from "@/models/type";
+import { Product, ProductWithId } from "@/models/type";
 import { doc, getDoc, serverTimestamp } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-export default function useFetchProduct() {
-  const params = useParams();
-  const [product, setProduct] = useState<Product>({
-    id: Date.now(),
+export default function useFetchProduct(productId: string) {
+  const [product, setProduct] = useState<ProductWithId>({
+    docId: "",
+    id: "",
     sellerId: "",
     productName: "",
     productPrice: 0,
@@ -22,13 +22,14 @@ export default function useFetchProduct() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        if (params && params.productId) {
-          const docRef = doc(db, "product", params.productId);
+        if (productId) {
+          const docRef = doc(db, "product", productId);
           const docSnapshot = await getDoc(docRef);
 
           if (docSnapshot.exists()) {
             const data = docSnapshot.data();
-            const product: Product = {
+            const product: ProductWithId = {
+              docId: docSnapshot.id,
               id: data.id,
               sellerId: data.sellerId,
               productName: data.productName,
@@ -49,7 +50,7 @@ export default function useFetchProduct() {
     };
 
     fetchProduct();
-  }, [params]);
+  }, [productId]);
 
   return { product, setProduct };
 }

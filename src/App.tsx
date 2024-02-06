@@ -2,7 +2,7 @@ import AppRoute from "./routes/AppRoute";
 import { UserProvider } from "./contexts/userContext";
 import "./App.css";
 import { QueryClientProvider, QueryClient } from "react-query";
-import { Reset } from "styled-reset";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 function App() {
   const queryClient = new QueryClient();
@@ -12,6 +12,7 @@ function App() {
         <Reset />
         <AppRoute />
       </UserProvider>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }

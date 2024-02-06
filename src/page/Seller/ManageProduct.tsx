@@ -6,18 +6,15 @@ import NavBar from "@/components/nav/NavBar";
 
 // import { Input } from "@/components/ui/input";
 import { useUser } from "@/contexts/userContext";
-import { db } from "@/firebase";
 import useChangeInput from "@/hook/useChangeInput";
-import useDeleteProduct from "@/hook/useDeleteProduct";
-import useFetchProduct from "@/hook/useFetchProduct";
+import useDeleteProduct from "@/hook/product/useDeleteProduct";
+import useFetchProduct from "@/hook/product/useFetchProduct";
 import useImageUpload from "@/hook/useImageUpload";
-import useUpdateProduct from "@/hook/useUpdateProduct";
+import useUpdateProduct from "@/hook/product/useUpdateProduct";
 import { UserType } from "@/models/type";
-import { deleteDoc, doc } from "firebase/firestore";
-import { deleteObject, getStorage, ref } from "firebase/storage";
 import { useState } from "react";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export type ParamsType = {
   productId?: string;

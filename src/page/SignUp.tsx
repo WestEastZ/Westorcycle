@@ -16,7 +16,6 @@ import {
 
 // type
 import { UserType } from "@/models/type";
-import NavBar from "@/components/nav/NavBar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -33,8 +32,6 @@ export default function SignUp() {
     password: "",
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-    cartItems: [],
-    favoriteItem: [],
     profileImage: "",
   });
 

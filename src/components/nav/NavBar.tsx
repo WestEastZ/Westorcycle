@@ -31,6 +31,7 @@ export default function NavBar() {
               <Link to={"/"} className="under-line text-custom text-sm">
                 Favorite
               </Link>
+              <button className="under-line text-custom text-sm">Cart</button>
               <Link
                 to={
                   user?.isSeller

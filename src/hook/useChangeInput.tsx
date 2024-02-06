@@ -1,10 +1,10 @@
-import { Product, UserType } from "@/models/type";
+import { Product, ProductWithId, UserType } from "@/models/type";
 import React from "react";
 
 export default function useChangeInput(
   user: UserType,
-  product: Product,
-  setProduct: (value: Product) => void
+  product: ProductWithId,
+  setProduct: (value: ProductWithId) => void
 ) {
   // 상품 상태 변경
   const onChangeInput = (

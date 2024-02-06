@@ -12,17 +12,25 @@ import {
 export default async function fetchProducts({
   queryKey,
 }: {
-  queryKey: string[];
+  queryKey: unknown[];
 }) {
-  const [_key, field_key, vlaue] = queryKey;
+  const [_key, field_key, vlaue, count] = queryKey as [
+    string,
+    string,
+    string,
+    number
+  ];
 
   try {
     let q = query(
       collection(db, _key),
       where(field_key, "==", vlaue),
-      orderBy("updatedAt", "desc"),
-      limit(4)
+      orderBy("updatedAt", "desc")
     );
+
+    if (count) {
+      q = query(q, limit(count));
+    }
 
     const qSnapshot = await getDocs(q);
 

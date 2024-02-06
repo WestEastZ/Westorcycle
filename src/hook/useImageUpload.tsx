@@ -1,15 +1,13 @@
 import { storage } from "@/firebase";
-import { Product, UserType } from "@/models/type";
+import { ProductWithId, UserType } from "@/models/type";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import React, { useState } from "react";
+import React from "react";
 
 export default function useImageUpload(
   user: UserType,
-  initialProduct: Product,
-  setProduct: (value: Product) => void
+  initialProduct: ProductWithId,
+  setProduct: (value: ProductWithId) => void
 ) {
-  // const [product, setProduct] = useState<Product>(initialProduct);
-
   // 이미지 파일 선택
   const addImageHandler = async (
     event: React.ChangeEvent<HTMLInputElement>
