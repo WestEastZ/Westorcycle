@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import SocialLogin from "@/utils/SocialLogin";
 
+import loginBg from "@/assets/image/login.jpeg";
+
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
