@@ -33,8 +33,6 @@ export function UserProvider({ children }: UserProviderProps) {
             password: data.password,
             createdAt: data.createdAt,
             updatedAt: data.updatedAt,
-            cartItems: data.cartItems,
-            favoriteItem: data.favoriteItem,
             profileImage: data.profileImage,
           };
           setUser(user);

@@ -9,14 +9,12 @@ export interface UserType {
   password: string;
   createdAt: FieldValue | Timestamp;
   updatedAt: FieldValue | Timestamp;
-  cartItems: number[];
-  favoriteItem: number[];
   profileImage: string;
 }
 
 // 상품 타입 정의
 export interface Product {
-  id?: number;
+  id?: string;
   sellerId: string;
   productName: string;
   productPrice: number;
@@ -29,4 +27,20 @@ export interface Product {
 }
 export interface ProductWithId extends Product {
   docId: string;
+}
+
+// export interface Item {
+//   productId: string;
+//   productName: string;
+//   productPrice: number;
+//   quantity: number;
+//   totalPrice: number;
+// }
+
+// 장바구니 타입
+export interface CartType {
+  userId: string;
+  productId: string;
+  productQuantity: number;
+  productPrice: number;
 }

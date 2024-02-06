@@ -13,6 +13,8 @@ import ProductDetail from "@/page/product/ProductDetail";
 import Category from "@/page/product/Category";
 import Product from "@/page/product/Product";
 import NavBar from "@/components/nav/NavBar";
+import Cart from "@/page/consumer/Cart";
+import OpenCartButton from "@/components/button/OpenCartButton";
 
 export default function AppRoute() {
   const user = useUser();
@@ -27,6 +29,7 @@ export default function AppRoute() {
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="/category" element={<Category />} />
           <Route path="/category/:category" element={<Product />} />
+          <Route path="/cart/:id" element={<Cart />} />
 
           {/* 로그인 유무 */}
           <Route
@@ -75,7 +78,7 @@ export default function AppRoute() {
 
           {/* 구매자 전용 */}
           <Route
-            path="/consumer/:nickname"
+            path="/consumer/:id"
             element={
               <ProtectedRoute condition={user && !user.isSeller}>
                 <ConsumerProfile />
@@ -87,6 +90,9 @@ export default function AppRoute() {
           <Route path="/*" element={<Home />} />
         </Routes>
       </BrowserRouter>
+
+      {/* 장바구니 */}
+      <OpenCartButton />
     </>
   );
 }

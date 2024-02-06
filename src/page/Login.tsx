@@ -9,10 +9,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 // ui
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import NavBar from "@/components/nav/NavBar";
 import SocialLogin from "@/utils/SocialLogin";
-
-import loginBg from "@/assets/image/login.jpeg";
 
 export default function Login() {
   const navigate = useNavigate();

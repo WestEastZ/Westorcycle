@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUser } from "@/contexts/userContext";
-import NavBar from "@/components/nav/NavBar";
 import PageHeader from "@/components/header/PageHeader";
 import { PlusCircle } from "lucide-react";
 import { useInfiniteQuery } from "react-query";
-import fetchInfinityProduct from "@/firebase/fetch/fetchInfinityProduct";
+import fetchInfinityProduct from "@/firebase/fetchQuery/fetchInfinityProduct";
 import { useInView } from "react-intersection-observer";
 import { ProductWithId } from "@/models/type";
 import ProductCard from "../../components/card/ProductCard";
