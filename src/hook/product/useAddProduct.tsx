@@ -1,5 +1,5 @@
 import { db } from "@/firebase";
-import { Product, UserType } from "@/models/type";
+import { ProductWithId, UserType } from "@/models/type";
 import { validateProduct } from "@/utils/validation";
 import { collection, doc, setDoc } from "firebase/firestore";
 import React from "react";
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function useAddProduct(
   user: UserType,
-  product: Product,
+  product: ProductWithId,
   setErrorProduct: (value: string) => void
 ) {
   const navigate = useNavigate();
@@ -29,6 +29,8 @@ export default function useAddProduct(
 
     try {
       const productRef = doc(collection(db, "product"));
+      product.docId = productRef.id;
+      product.id = productRef.id;
       await setDoc(productRef, product);
 
       navigate(`/seller/${user?.id}`);

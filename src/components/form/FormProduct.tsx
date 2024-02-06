@@ -10,7 +10,7 @@ import {
 } from "../ui/select";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
-import { Product } from "@/models/type";
+import { Product, ProductWithId } from "@/models/type";
 import { useParams } from "react-router-dom";
 import { ERROR_MESSAGES } from "@/utils/validation";
 
@@ -20,9 +20,11 @@ interface FormProductProps {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
-  product: Product;
+  product: ProductWithId;
   addImageHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  setProduct: (value: Product | ((prevState: Product) => Product)) => void;
+  setProduct: (
+    value: ProductWithId | ((prevState: ProductWithId) => ProductWithId)
+  ) => void;
   addProductHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   deleteProductHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   editProductHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -134,10 +136,10 @@ export default function FormProduct({
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Category</SelectLabel>
-              <SelectItem value="CategoryA">CategoryA</SelectItem>
-              <SelectItem value="CategoryB">CategoryB</SelectItem>
-              <SelectItem value="CategoryC">CategoryC</SelectItem>
-              <SelectItem value="CategoryD">CategoryD</SelectItem>
+              <SelectItem value="Motorcycle">Motorcycle</SelectItem>
+              <SelectItem value="Helmet">Helmet</SelectItem>
+              <SelectItem value="Clothes">Clothes</SelectItem>
+              <SelectItem value="Gloves">Gloves</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>

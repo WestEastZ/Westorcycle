@@ -2,23 +2,23 @@ import AddImageButton from "@/components/button/AddImageButton";
 import CaroselImage from "@/components/carosel/CaroselImage";
 import FormProduct from "@/components/form/FormProduct";
 import PageHeader from "@/components/header/PageHeader";
-import NavBar from "@/components/nav/NavBar";
 
 import { useUser } from "@/contexts/userContext";
-import useAddProduct from "@/hook/useAddProduct";
+import useAddProduct from "@/hook/product/useAddProduct";
 import useChangeInput from "@/hook/useChangeInput";
 import useImageUpload from "@/hook/useImageUpload";
-import { Product, UserType } from "@/models/type";
+import { ProductWithId, UserType } from "@/models/type";
 import { serverTimestamp } from "firebase/firestore";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function AddProduct() {
   const user = useUser() as UserType;
   const [errorProduct, setErrorProduct] = useState<string>("");
 
   // 상품 상태
-  const [product, setProduct] = useState<Product>({
-    id: Date.now(),
+  const [product, setProduct] = useState<ProductWithId>({
+    docId: "",
+    id: "",
     sellerId: "",
     productName: "",
     productPrice: 0,

@@ -25,8 +25,6 @@ export default function SocialLogin() {
             password: "",
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp(),
-            cartItems: [],
-            favoriteItem: [],
             profileImage: "",
           };
           await setDoc(docRef, user);
