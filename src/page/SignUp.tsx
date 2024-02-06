@@ -127,7 +127,7 @@ export default function SignUp() {
                     onChange={onChange}
                   />
                   {errorEmail === null ? null : (
-                    <div className="text-left mt-1 ml-4 text-red-500">
+                    <div className="text-left mt-1 ml-2 text-xs text-red-500">
                       {errorEmail}
                     </div>
                   )}
@@ -141,7 +141,7 @@ export default function SignUp() {
                     onChange={onChange}
                   />
                   {errorPassword === null ? null : (
-                    <div className="text-left mt-1 ml-4 text-red-500">
+                    <div className="text-left mt-1 ml-2 text-xs text-red-500">
                       {errorPassword}
                     </div>
                   )}

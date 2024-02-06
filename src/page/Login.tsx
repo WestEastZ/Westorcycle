@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // firebase
-import { auth } from "@/firebase";
+import { auth, db } from "@/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 // ui
@@ -11,10 +11,18 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import SocialLogin from "@/utils/SocialLogin";
 
+<<<<<<< HEAD
+=======
+import loginBg from "@/assets/image/login.jpeg";
+import { ERROR_MESSAGES, validateLoginEmail } from "@/utils/validation";
+import { collection, getDocs, query, where } from "firebase/firestore";
+
+>>>>>>> 7f441f4 (✨ 로그인 유효성 검사)
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [errorEmail, setErrorEmail] = useState<string | null>(null);
 
   // input value 변경
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,9 +41,27 @@ export default function Login() {
   const login: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
 
+    setErrorEmail(null);
+
+    // 로그인 아이디 유효성 검사
+    let q = query(
+      collection(db, "user"),
+      where("email", "==", email),
+      where("password", "==", password)
+    );
+    const qSnapshot = await getDocs(q);
+
+    const checkLogin = validateLoginEmail(qSnapshot.docs);
+    if (checkLogin) {
+      setErrorEmail(ERROR_MESSAGES[checkLogin]);
+      console.log(errorEmail);
+      return;
+    }
+
+    // 로그인 비밀번호 유효성 검사
+
     try {
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
-      console.log("sdsds", userInfo); // 여기서 데이터 불러 온거 뜨는데
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -74,7 +100,13 @@ export default function Login() {
                     name="password"
                     onChange={onChange}
                   />
+                  {errorEmail === null ? null : (
+                    <div className="text-left mt-1 ml-2 text-xs text-red-500">
+                      {errorEmail}
+                    </div>
+                  )}
                 </div>
+
                 <Button onClick={login}>Login</Button>
               </form>
             </section>

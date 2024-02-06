@@ -22,12 +22,13 @@ export type ParamsType = {
 
 export default function ManageProduct() {
   const user = useUser() as UserType;
-  const params = useParams<ParamsType>();
+  const params = useParams();
+  const { productId } = params;
 
   const [errorProduct, setErrorProduct] = useState<string>("");
 
   // 상품 조회
-  const { product, setProduct } = useFetchProduct();
+  const { product, setProduct } = useFetchProduct(productId as string);
 
   // 상품 상태 변경
   const { onChangeInput } = useChangeInput(user, product, setProduct);

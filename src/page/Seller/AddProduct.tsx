@@ -8,6 +8,7 @@ import useAddProduct from "@/hook/product/useAddProduct";
 import useChangeInput from "@/hook/useChangeInput";
 import useImageUpload from "@/hook/useImageUpload";
 import { ProductWithId, UserType } from "@/models/type";
+import { ERROR_MESSAGES } from "@/utils/validation";
 import { serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 
@@ -51,11 +52,16 @@ export default function AddProduct() {
         {/* 사진 첨부 */}
         <section className="w-1/2 h-96 relative mb-10">
           {product.productImage.length == 0 ? (
-            <div className="w-full h-96 border bg-white"></div>
+            <div className="w-full h-96  bg-zinc-600"></div>
           ) : (
             <CaroselImage product={product} />
           )}
           <AddImageButton />
+          {errorProduct == "errorProductImage" ? (
+            <div className="text-left mt-1 ml-2 text-xs text-red-500">
+              {ERROR_MESSAGES[errorProduct]}
+            </div>
+          ) : null}
         </section>
 
         {/* 입력 */}
