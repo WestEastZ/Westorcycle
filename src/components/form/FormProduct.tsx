@@ -44,16 +44,18 @@ export default function FormProduct({
   const params = useParams();
   return (
     <form className="w-1/2">
-      <input
-        type="file"
-        id="inputFile"
-        name="productImage"
-        // accept=".jpg, .jpeg, .png"
-        multiple
-        onChange={addImageHandler}
-        className="hidden"
-        required
-      />
+      <div>
+        <input
+          type="file"
+          id="inputFile"
+          name="productImage"
+          // accept=".jpg, .jpeg, .png"
+          multiple
+          onChange={addImageHandler}
+          className="hidden"
+          required
+        />
+      </div>
 
       <section className="flex flex-col gap-5 ">
         <div>
@@ -67,7 +69,7 @@ export default function FormProduct({
             required
           />
           {errorCode == "errorProductName" ? (
-            <div className="text-left mt-1 ml-4 text-red-500">
+            <div className="text-left mt-1 ml-2 text-xs text-red-500">
               {ERROR_MESSAGES[errorCode]}
             </div>
           ) : null}
@@ -84,7 +86,7 @@ export default function FormProduct({
             required
           />
           {errorCode == "errorProdcutPrice" ? (
-            <div className="text-left mt-1 ml-4 text-red-500">
+            <div className="text-left mt-1 ml-2 text-xs text-red-500">
               {ERROR_MESSAGES[errorCode]}
             </div>
           ) : null}
@@ -101,7 +103,7 @@ export default function FormProduct({
             required
           />
           {errorCode == "errorProdcutQuantity" ? (
-            <div className="text-left mt-1 ml-4 text-red-500">
+            <div className="text-left mt-1 ml-2 text-xs text-red-500">
               {ERROR_MESSAGES[errorCode]}
             </div>
           ) : null}
@@ -117,7 +119,7 @@ export default function FormProduct({
             required
           ></Textarea>
           {errorCode == "errorProductDescription" ? (
-            <div className="text-left mt-1 ml-4 text-red-500">
+            <div className="text-left mt-1 ml-2 text-xs text-red-500">
               {ERROR_MESSAGES[errorCode]}
             </div>
           ) : null}
@@ -144,7 +146,7 @@ export default function FormProduct({
           </SelectContent>
         </Select>
         {errorCode == "errorProductCategory" ? (
-          <div className="text-left mt-1 ml-4 text-red-500">
+          <div className="text-left mt-1 ml-2 text-xs text-red-500">
             {ERROR_MESSAGES[errorCode]}
           </div>
         ) : null}

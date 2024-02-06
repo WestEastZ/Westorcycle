@@ -1,4 +1,13 @@
+import { db } from "@/firebase";
 import { Product } from "@/models/type";
+import {
+  DocumentData,
+  QueryDocumentSnapshot,
+  collection,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 
 // 에러메세지 타입
 export type ErrorCode = {
@@ -17,9 +26,23 @@ export const ERROR_MESSAGES: ErrorCode = {
   errorProductDescription: "상품의 설명을 입력해주세요.",
   errorProductCategory: "상품의 카테고리를 입력해주세요",
   errorProductImage: "상품의 이미지를 첨부해주세요.",
+  errorLogin: "이메일과 비밀번호를 확인해주세요.",
 };
 
-// 비밀번호 유효성 검사
+// 회원가입 이메일 유효성 검사
+export function validateEmail(email: string): string | null {
+  const emailRegEx =
+    /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+
+  // 이메일 형식
+  if (!emailRegEx.test(email)) return "errorEmailConstruct";
+
+  // 중복 이메일
+
+  return null;
+}
+
+// 회원가입 비밀번호 유효성 검사
 export function validatePassword(
   password: string,
   nickname: string
@@ -42,25 +65,24 @@ export function validatePassword(
   return null;
 }
 
-// 이메일 유효성 검사
-export function validateEmail(email: string): string | null {
-  const emailRegEx =
-    /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-
-  // 중복 이메일
-  if (!emailRegEx.test(email)) return "errorEmailConstruct";
+// 로그인 유효성 검사
+export function validateLoginEmail(
+  docs: QueryDocumentSnapshot<DocumentData, DocumentData>[]
+) {
+  // 이메일 유무
+  if (docs.length === 0) return "errorLogin";
 
   return null;
 }
 
 // 상품 등록 유효성 검사
 export function validateProduct(product: Product): string | null {
+  if (product.productImage.length < 1) return "errorProductImage";
   if (product.productName === "") return "errorProductName";
   if (product.productPrice === 0) return "errorProdcutPrice";
   if (product.productQuantity === 0) return "errorProdcutQuantity";
   if (product.productDescription === "") return "errorProductDescription";
   if (product.productCategory === "") return "errorProductCategory";
-  if (product.productImage.length < 1) return "errorProductImage";
 
   return null;
 }
