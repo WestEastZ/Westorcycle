@@ -19,7 +19,7 @@ export default function NavBar() {
       <nav className="sticky w-full h-12 flex items-center top-0 z-50 text-custom p-8 bg-main">
         <div className="flex items-center gap-12">
           <Link to={"/"} className="under-line text-custom text-3xl">
-            WESTSHOP
+            WESTORCYCLE
           </Link>
 
           <Link to={"/category"} className="under-line text-custom text-sm">

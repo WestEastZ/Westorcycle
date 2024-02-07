@@ -153,18 +153,18 @@ export default function FormProduct({
 
         {!params.productId ? (
           <Button onClick={addProductHandler} className="w-full">
-            상품 등록
+            Add
           </Button>
         ) : (
           <div className="flex w-full justify-around gap-5">
             <Button onClick={editProductHandler} className="w-full">
-              수정
+              Edit
             </Button>
             <Button
               onClick={deleteProductHandler}
-              className="w-full bg-red-600"
+              className="w-full bg-red-600 hover:bg-red-900"
             >
-              삭제
+              Delete
             </Button>
           </div>
         )}

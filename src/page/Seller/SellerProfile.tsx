@@ -38,11 +38,15 @@ export default function SellerProfile() {
 
   return (
     <>
+      {/* 헤더  */}
       <PageHeader
         title={`${user?.nickname}`}
         description={`Take care of your products`}
       />
-      <div className="w-full h-px bg-slate-300 mb-20"></div>
+
+      <div className="w-full h-px bg-slate-300 mb-8"></div>
+
+      {/* 상품 등록 */}
       <Link
         to={`/seller/${user?.id}/add-product`}
         className="w-fit m-auto flex justify-center items-center mb-10 gap-3 focus-custom "
@@ -50,7 +54,9 @@ export default function SellerProfile() {
         <p>Add Proudct</p>
         <PlusCircle />
       </Link>
-      <div className="grid grid-cols-3 gap-5 py-20 px-44 mb-30">
+
+      {/* 상품 리스트 */}
+      <div className="grid grid-cols-2 gap-5 py-16 px-10 mb-30">
         {data?.pages
           .flatMap((page) => page?.data)
           .filter(
