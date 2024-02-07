@@ -8,32 +8,35 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const user = useUser();
+  console.log();
   return (
     <Link
       to={`/seller/${user?.id}/manage-product/${product.docId}`}
-      className="h-96 min-w-60 flex flex-col border-2 rounded-3xl shadow-custom hover:scale-105 transition duration-300"
+      className="h-44 w-full min-w-60 flex border rounded-2xl hover:scale-105 transition duration-300"
     >
-      <section className="w-full h-full">
+      <section className="w-1/3 h-full">
         <img
           src={product.productImage[0]}
           alt={product.productName}
           loading="lazy"
-          className="w-full h-full object-cover rounded-t-3xl aspect-video"
+          className="w-full h-full object-cover rounded-l-2xl"
         />
       </section>
 
-      <section className="w-full p-3">
-        <div className="text-left text-lg font-bold review">
-          {product.productName}
+      <section className="w-2/3 h-full flex justify-between  flex-col p-3">
+        <div>
+          <div className="text-left text-lg font-bold review">
+            {product.productName}
+          </div>
+          <div className="text-left text-sm text-gray-600 review">
+            {product.productDescription}
+          </div>
         </div>
-        <div className="text-left text-sm text-gray-600 review">
-          {product.productDescription}
-        </div>
-        <div className="flex justify-between text-left text-sm">
-          <p>가격 : {product.productPrice}원</p>
+
+        <div className="flex justify-between text-left text-xs">
+          <p>KRW {product.productPrice}</p>
           <p>
-            남은 수량 :{" "}
-            <span className="text-red-500">{product.productQuantity}개</span>
+            Quantity : <span>{product.productQuantity}</span>
           </p>
         </div>
       </section>
