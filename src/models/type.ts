@@ -22,8 +22,8 @@ export interface Product {
   productDescription: string;
   productCategory: string;
   productImage: string[];
-  createdAt: FieldValue | Timestamp;
-  updatedAt: FieldValue | Timestamp;
+  createdAt: FieldValue;
+  updatedAt: FieldValue;
 }
 export interface ProductWithId extends Product {
   docId: string;

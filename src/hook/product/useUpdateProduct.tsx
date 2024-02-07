@@ -1,22 +1,49 @@
-import { db } from "@/firebase";
-import { Product, UserType } from "@/models/type";
+import { db, storage } from "@/firebase";
+import { Product, ProductWithId, UserType } from "@/models/type";
 import { validateProduct } from "@/utils/validation";
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
 import React from "react";
+import { useMutation } from "react-query";
 import { Params, useNavigate } from "react-router-dom";
 
 export default function useUpdateProduct(
   user: UserType,
   params: Readonly<Params<string>>,
-  initialProduct: Product,
+  initialProduct: ProductWithId,
+  imagesToDelete: string[],
   setErrorProduct: (value: string) => void
 ) {
   const navigate = useNavigate();
 
   // 상품 수정
-  const editProductHandler = async (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
+  const editProductMutation = useMutation(
+    async () => {
+      const promises = imagesToDelete.map((imageUrl) => {
+        const imageRef = ref(storage, imageUrl);
+        return deleteObject(imageRef);
+      });
+      await Promise.all(promises);
+
+      if (params && params.productId) {
+        const productRef = doc(db, "product", params.productId);
+        await updateDoc(productRef, {
+          ...initialProduct,
+          updateAt: serverTimestamp(),
+        });
+      }
+    },
+    {
+      onSuccess: () => {
+        navigate(`/seller/${user?.id}`);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  );
+
+  const editProductHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     // 상품등록 유효성 검사
@@ -28,18 +55,8 @@ export default function useUpdateProduct(
       return;
     }
 
-    try {
-      if (params && params.productId) {
-        const productRef = doc(db, "product", params.productId);
-        await updateDoc(productRef, {
-          ...initialProduct,
-          updatedAt: serverTimestamp(),
-        });
-        navigate(`/seller/${user?.id}`);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    editProductMutation.mutate();
   };
+
   return { editProductHandler };
 }
