@@ -89,10 +89,10 @@ export default function AppRoute() {
           {/* 접근 불가 */}
           <Route path="/*" element={<Home />} />
         </Routes>
-      </BrowserRouter>
 
-      {/* 장바구니 */}
-      <OpenCartButton />
+        {/* 장바구니 */}
+        <OpenCartButton />
+      </BrowserRouter>
     </>
   );
 }

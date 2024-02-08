@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "@/contexts/userContext";
 import { useQuery } from "react-query";
-import fetchProducts from "@/firebase/fetchQuery/fetchProducts";
+import fetchProducts from "@/query/product/fetchProducts";
 import { ChevronRight } from "lucide-react";
 import ProductContanierHome from "@/components/container/ProductContanierHome";
 import CaroselMain from "@/components/carosel/CaroselMain";

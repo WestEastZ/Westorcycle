@@ -4,7 +4,7 @@ import { useUser } from "@/contexts/userContext";
 import PageHeader from "@/components/header/PageHeader";
 import { PlusCircle } from "lucide-react";
 import { useInfiniteQuery } from "react-query";
-import fetchInfinityProduct from "@/firebase/fetchQuery/fetchInfinityProduct";
+import fetchInfinityProduct from "@/query/product/fetchInfinityProduct";
 import { useInView } from "react-intersection-observer";
 import { ProductWithId } from "@/models/type";
 import ProductCard from "../../components/card/ProductCard";
