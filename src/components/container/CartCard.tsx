@@ -10,7 +10,14 @@ export default function CartCard({ item }: { item: CartType }) {
   // 상품 조회
   const { data: product, isLoading } = useQuery(
     ["product", item.productId],
-    fetchProduct
+    fetchProduct,
+    {
+      onSuccess: (data) => {
+        if (!data) {
+          deleteCartMutation.mutate(item.productId);
+        }
+      },
+    }
   );
   const [quantity, setQuantity] = useState<number>(item.productQuantity);
 
