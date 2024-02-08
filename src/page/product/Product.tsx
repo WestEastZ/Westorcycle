@@ -1,6 +1,6 @@
 import ProductCard from "@/components/card/ProductCard";
 import { useUser } from "@/contexts/userContext";
-import fetchInfinityProduct from "@/firebase/fetchQuery/fetchInfinityProduct";
+import fetchInfinityProduct from "@/query/product/fetchInfinityProduct";
 import { ProductWithId } from "@/models/type";
 import { OrderByDirection } from "firebase/firestore";
 import React, { useCallback, useEffect, useState } from "react";

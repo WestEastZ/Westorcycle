@@ -7,11 +7,11 @@ import {
   CarouselPrevious,
 } from "../ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { Product } from "@/models/type";
+import { Product, ProductWithId } from "@/models/type";
 import { Card, CardContent } from "../ui/card";
 
 interface CaroselImageProps {
-  product: Product;
+  product: ProductWithId;
 }
 
 export default function CaroselImage({ product }: CaroselImageProps) {
@@ -26,12 +26,12 @@ export default function CaroselImage({ product }: CaroselImageProps) {
       className="w-2/3 h-full"
     >
       <CarouselContent>
-        {product.productImage.map((url) => (
+        {product?.productImage.map((url) => (
           <CarouselItem key={url}>
             <div className="w-full h-full">
               <img
                 src={url}
-                alt={product.productName}
+                alt={product?.productName}
                 className="w-full h-full object-cover rounded-l-3xl aspect-square"
               />
             </div>

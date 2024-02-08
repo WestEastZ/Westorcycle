@@ -44,7 +44,7 @@ export default function useUpdateCart() {
 
   const updateCartMutation = useMutation(updateQuantityHandler, {
     onSuccess: () => {
-      queryClient.invalidateQueries([]);
+      queryClient.invalidateQueries(["cart", user?.id]);
     },
   });
   return { updateCartMutation };

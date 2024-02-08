@@ -1,7 +1,5 @@
-import React from "react";
 import ProductCardHome from "../card/ProductCardHome";
 import { ProductWithId } from "@/models/type";
-import { UseQueryResult } from "react-query";
 
 interface ProductContanierProps {
   products: ProductWithId[] | undefined;
