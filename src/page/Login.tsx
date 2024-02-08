@@ -14,7 +14,7 @@ import SocialLogin from "@/utils/SocialLogin";
 import loginBg from "@/assets/image/login.jpeg";
 import { ERROR_MESSAGES, validateLoginEmail } from "@/utils/validation";
 import { collection, getDocs, query, where } from "firebase/firestore";
-
+  
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
