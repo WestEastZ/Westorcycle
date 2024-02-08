@@ -11,13 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import SocialLogin from "@/utils/SocialLogin";
 
-<<<<<<< HEAD
-=======
 import loginBg from "@/assets/image/login.jpeg";
 import { ERROR_MESSAGES, validateLoginEmail } from "@/utils/validation";
 import { collection, getDocs, query, where } from "firebase/firestore";
-
->>>>>>> 7f441f4 (✨ 로그인 유효성 검사)
+  
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
