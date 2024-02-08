@@ -11,10 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import SocialLogin from "@/utils/SocialLogin";
 
-import loginBg from "@/assets/image/login.jpeg";
+// import loginBg from "@/assets/image/login.webp";
 import { ERROR_MESSAGES, validateLoginEmail } from "@/utils/validation";
 import { collection, getDocs, query, where } from "firebase/firestore";
-  
+
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
@@ -67,7 +67,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="relative w-1/2 mt-20 m-auto bg-[url('./assets/image/login.jpeg')] bg-cover bg-center bg-no-repeat">
+      <div className="relative w-1/2 mt-20 m-auto bg-[url('./assets/image/login.webp')] bg-cover bg-center bg-no-repeat">
         <div className="inset-0 w-full h-full z-20 bg-black bg-opacity-50"></div>
         <div className="w-full h-full m-auto flex justify-center z-30">
           <div className="w-full h-fit p-20 flex flex-col bg-black bg-opacity-80">

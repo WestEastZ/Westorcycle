@@ -9,7 +9,7 @@ export default function ProductCardHome({
 }) {
   return (
     <Link to={`/product/${product.docId}`} className="w-full h-full">
-      <div className="w-full h-full">
+      <div className="w-full h-full p-2 hover:scale-105 transition duration-300">
         <div className="rounded-3xl overflow-hidden bg-white">
           <img
             src={product.productImage[0]}

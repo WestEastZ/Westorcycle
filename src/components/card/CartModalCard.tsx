@@ -8,7 +8,17 @@ import fetchProduct from "@/query/product/fetchProduct";
 
 export default function CartModalCard({ item }: { item: CartType }) {
   // 상품 정보 조회
-  const { data: product } = useQuery(["product", item.productId], fetchProduct);
+  const { data: product } = useQuery(
+    ["product", item.productId],
+    fetchProduct,
+    {
+      onSuccess: (data) => {
+        if (!data) {
+          deleteCartMutation.mutate(item.productId);
+        }
+      },
+    }
+  );
 
   // 장바구니 삭제
   const { deleteCartMutation } = useDeleteCart();
