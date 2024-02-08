@@ -1,18 +1,38 @@
-import CartItemContainer from "@/components/container/CartItemContainer";
+import CartCard from "@/components/container/CartCard";
+import CartContainer from "@/components/container/CartCard";
+import PageHeader from "@/components/header/PageHeader";
+import { Button } from "@/components/ui/button";
 import { useUser } from "@/contexts/userContext";
-import fetchCart from "@/firebase/fetchQuery/fetchCart";
+import fetchCart from "@/query/cart/fetchCart";
+import React from "react";
 import { useQuery } from "react-query";
 
 export default function Cart() {
   const user = useUser();
 
-  // react-query
-  const cartItems = useQuery(["cart", user?.id], fetchCart);
+  // 장바구니 조회
+  const { data: cartItems, isLoading } = useQuery(
+    ["cart", user?.id],
+    fetchCart
+  );
+
+  if (isLoading) {
+    <div>...Loading</div>;
+  }
 
   return (
-    <div className="fixed bottom-24 right-10 w-60 h-96 flex-col z-50 bg-white overflow-scroll">
-      <CartItemContainer cartItems={cartItems.data} />
-      {cartItems.data?.length}개
-    </div>
+    <>
+      <PageHeader title="Cart" description="Take care of your cart" />
+
+      <div className="w-full h-px bg-slate-300 mb-8"></div>
+
+      <Button className="w-1/2 text-lg">Buy</Button>
+
+      <div className="grid grid-cols-2 gap-5 py-10 px-10 mb-30">
+        {cartItems?.map((item) => (
+          <CartCard key={item.productId} item={item} />
+        ))}
+      </div>
+    </>
   );
 }

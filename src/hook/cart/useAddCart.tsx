@@ -13,9 +13,9 @@ import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 
 export default function useAddCart(
-  product: ProductWithId,
-  quantity: number,
-  setIsAdded: (value: boolean) => void
+  product: ProductWithId | undefined,
+  quantity: number
+  // setIsAdded: (value: boolean) => void
 ) {
   const user = useUser() as UserType;
   const queryClient = useQueryClient();
@@ -25,7 +25,7 @@ export default function useAddCart(
     try {
       let q = query(
         collection(db, "cart"),
-        where("productId", "==", product.id),
+        where("productId", "==", product?.id),
         where("userId", "==", user.id)
       );
 
@@ -38,9 +38,9 @@ export default function useAddCart(
         const cartRef = doc(collection(db, "cart"));
         await setDoc(cartRef, {
           userId: user.id,
-          productId: product.id,
+          productId: product?.id,
           productQuantity: quantity,
-          productPrice: product.productPrice,
+          productPrice: product?.productPrice,
         });
       }
     } catch (error) {
@@ -50,7 +50,7 @@ export default function useAddCart(
 
   const addCartMutation = useMutation(addCartHandler, {
     onSuccess: () => {
-      setIsAdded(true);
+      // setIsAdded(true);
       queryClient.invalidateQueries();
     },
   });

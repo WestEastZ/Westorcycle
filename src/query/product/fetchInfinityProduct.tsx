@@ -1,5 +1,5 @@
 import { db } from "@/firebase";
-import { Product, ProductWithId, UserType } from "@/models/type";
+import { Product, ProductWithId } from "@/models/type";
 import {
   DocumentSnapshot,
   OrderByDirection,
@@ -26,7 +26,7 @@ export default async function fetchInfinityProduct({
 
   // 실행
   try {
-    let q = query(collection(db, _key), limit(2));
+    let q = query(collection(db, _key), limit(6));
 
     // 판매자 본인 확인
     if (user == params) {

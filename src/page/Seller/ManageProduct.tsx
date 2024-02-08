@@ -1,14 +1,11 @@
 import AddImageButton from "@/components/button/AddImageButton";
-import CaroselImage from "@/components/carosel/CaroselImage";
 import FormProduct from "@/components/form/FormProduct";
 import PageHeader from "@/components/header/PageHeader";
-import NavBar from "@/components/nav/NavBar";
 
 // import { Input } from "@/components/ui/input";
 import { useUser } from "@/contexts/userContext";
 import useChangeInput from "@/hook/useChangeInput";
 import useDeleteProduct from "@/hook/product/useDeleteProduct";
-import useFetchProduct from "@/hook/product/useFetchProduct";
 import useUploadImage from "@/hook/image/useUploadImage";
 import useUpdateProduct from "@/hook/product/useUpdateProduct";
 import { UserType } from "@/models/type";
@@ -18,6 +15,7 @@ import { useParams } from "react-router-dom";
 import useDeleteImage from "@/hook/image/useDeleteImage";
 import { X } from "lucide-react";
 import { ERROR_MESSAGES } from "@/utils/validation";
+import useFetchProduct from "@/hook/product/useFetchProduct";
 
 export type ParamsType = {
   productId?: string;

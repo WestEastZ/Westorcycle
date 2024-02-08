@@ -28,10 +28,12 @@ export default function NavBar() {
 
           {user ? (
             <>
-              <Link to={"/"} className="under-line text-custom text-sm">
-                Favorite
+              <Link
+                to={`/cart/${user.id}`}
+                className="under-line text-custom text-sm"
+              >
+                Cart
               </Link>
-              <button className="under-line text-custom text-sm">Cart</button>
               <Link
                 to={
                   user?.isSeller
