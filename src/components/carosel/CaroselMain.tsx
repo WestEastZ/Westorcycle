@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 
-import main1 from "@/assets/image/main.jpeg";
+import main1 from "@/assets/image/main.webp";
 
 export default function CaroselMain() {
   const imgArr = [main1];

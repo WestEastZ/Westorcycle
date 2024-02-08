@@ -11,25 +11,27 @@ export default function Home() {
   const navigate = useNavigate();
 
   const Motorcycle = useQuery(
-    ["product", "productCategory", "Motorcycle", 4],
+    ["product", "productCategory", "Motorcycle", 8],
     fetchProducts
   );
   const Helmet = useQuery(
-    ["product", "productCategory", "Helmet", 4],
+    ["product", "productCategory", "Helmet", 8],
     fetchProducts
   );
   const Clothes = useQuery(
-    ["product", "productCategory", "Clothes", 4],
+    ["product", "productCategory", "Clothes", 8],
     fetchProducts
   );
   const Gloves = useQuery(
-    ["product", "productCategory", "Gloves", 4],
+    ["product", "productCategory", "Gloves", 8],
     fetchProducts
   );
 
+  console.log(Motorcycle.data);
+
   return (
     <>
-      <section className="relative w-full h-[50vh] mb-12">
+      <section className="relative w-full h-96 mb-40">
         <div className="absolute flex flex-col gap-5 text-left w-1/2 h-1/4 top-32 left-20 text-4xl z-10">
           <div>Men will fight</div>
           <div>long and hard for</div>
@@ -41,7 +43,10 @@ export default function Home() {
 
       <section className="flex flex-col gap-10">
         <section>
-          <Link to={"/"} className="w-fit flex text-left mb-2 ml-2">
+          <Link
+            to={"/category/Motorcycle"}
+            className="w-fit flex text-left mb-2 ml-2"
+          >
             <div>Motorcycle</div>
             <ChevronRight />
           </Link>
@@ -50,7 +55,10 @@ export default function Home() {
         </section>
 
         <section>
-          <Link to={"/"} className="w-fit flex text-left mb-2 ml-2">
+          <Link
+            to={"/category/Helmet"}
+            className="w-fit flex text-left mb-2 ml-2"
+          >
             <div>Helmet</div>
             <ChevronRight />
           </Link>
@@ -58,7 +66,10 @@ export default function Home() {
           <ProductContanierHome products={Helmet.data} />
         </section>
         <section>
-          <Link to={"/"} className="w-fit flex text-left mb-2 ml-2">
+          <Link
+            to={"/category/Clothes"}
+            className="w-fit flex text-left mb-2 ml-2"
+          >
             <div>Clothes</div>
             <ChevronRight />
           </Link>
@@ -67,7 +78,10 @@ export default function Home() {
         </section>
 
         <section>
-          <Link to={"/"} className="w-fit flex text-left mb-2 ml-2">
+          <Link
+            to={"/category/Gloves"}
+            className="w-fit flex text-left mb-2 ml-2"
+          >
             <div>Gloves</div>
             <ChevronRight />
           </Link>

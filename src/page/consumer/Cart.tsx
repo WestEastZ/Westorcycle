@@ -1,5 +1,4 @@
-import CartCard from "@/components/container/CartCard";
-import CartContainer from "@/components/container/CartCard";
+import CartCard from "@/components/card/CartCard";
 import PageHeader from "@/components/header/PageHeader";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/contexts/userContext";
@@ -28,7 +27,7 @@ export default function Cart() {
 
       <Button className="w-1/2 text-lg">Buy</Button>
 
-      <div className="grid grid-cols-2 gap-5 py-10 px-10 mb-30">
+      <div className="grid grid-cols-2 gap-5 py-10 px-10 mb-30 ">
         {cartItems?.map((item) => (
           <CartCard key={item.productId} item={item} />
         ))}
