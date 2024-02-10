@@ -62,10 +62,16 @@ export default function CartCard({ item }: { item: CartType }) {
           <div>KRW {item.productPrice * item.productQuantity}</div>
           <div className="flex justify-center items-center gap-2">
             <div>Quantity : {item.productQuantity}</div>
-            <button onClick={() => setQuantity(quantity + 1)}>
+            <button
+              onClick={() =>
+                product &&
+                product.productQuantity > quantity &&
+                setQuantity(quantity + 1)
+              }
+            >
               <ChevronUpCircle size={20} />
             </button>
-            <button onClick={() => quantity > 0 && setQuantity(quantity - 1)}>
+            <button onClick={() => quantity > 1 && setQuantity(quantity - 1)}>
               <ChevronDownCircle size={20} />
             </button>
           </div>
