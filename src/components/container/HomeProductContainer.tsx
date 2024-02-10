@@ -1,4 +1,3 @@
-import ProductCardHome from "../card/ProductCardHome";
 import { ProductWithId } from "@/models/type";
 import {
   Carousel,
@@ -7,15 +6,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import { Card, CardContent } from "../ui/card";
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
+import HomeProductCard from "../card/HomeProductCard";
 
-interface ProductContanierProps {
+export interface ProductContanierProps {
   products: ProductWithId[] | undefined;
 }
 
-export default function ProductContanierHome({
+export default function HomeProductContainer({
   products,
 }: ProductContanierProps) {
   const plugin = React.useRef(
@@ -39,7 +38,7 @@ export default function ProductContanierHome({
               key={product.id}
               className="md:basis-1/4 lg:basis-1/4"
             >
-              <ProductCardHome product={product} />
+              <HomeProductCard product={product} />
             </CarouselItem>
           ))}
       </CarouselContent>

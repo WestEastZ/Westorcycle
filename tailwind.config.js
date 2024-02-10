@@ -71,6 +71,18 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      transitionProperty: {
+        transform: "transform",
+        opacity: "opacity",
+      },
+      transitionDuration: {
+        500: "500ms",
+      },
+      transitionTimingFunction: {
+        "in-out": "ease-in-out",
+      },
+      transform: ["responsive"],
+      opacity: ["responsive", "hover", "focus", "active", "group-hover"],
     },
   },
   plugins: [require("tailwindcss-animate")],

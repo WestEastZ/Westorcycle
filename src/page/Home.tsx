@@ -3,8 +3,11 @@ import { useUser } from "@/contexts/userContext";
 import { useQuery } from "react-query";
 import fetchProducts from "@/query/product/fetchProducts";
 import { ChevronRight } from "lucide-react";
-import ProductContanierHome from "@/components/container/ProductContanierHome";
-import CaroselMain from "@/components/carosel/CaroselMain";
+import ProductContanierHome from "@/components/container/HomeProductContainer";
+import CaroselMain from "@/components/container/MainImageContainer";
+import MainImageContainer from "@/components/container/MainImageContainer";
+import HomeProductContanier from "@/components/container/HomeProductContainer";
+import HomeProductContainer from "@/components/container/HomeProductContainer";
 
 export default function Home() {
   const user = useUser();
@@ -38,7 +41,7 @@ export default function Home() {
           <div>a bit of colored ribbon.</div>
         </div>
 
-        <CaroselMain />
+        <MainImageContainer />
       </section>
 
       <section className="flex flex-col gap-10">
@@ -51,7 +54,7 @@ export default function Home() {
             <ChevronRight />
           </Link>
 
-          <ProductContanierHome products={Motorcycle.data} />
+          <HomeProductContainer products={Motorcycle.data} />
         </section>
 
         <section>
@@ -63,7 +66,7 @@ export default function Home() {
             <ChevronRight />
           </Link>
 
-          <ProductContanierHome products={Helmet.data} />
+          <HomeProductContainer products={Helmet.data} />
         </section>
         <section>
           <Link
@@ -74,7 +77,7 @@ export default function Home() {
             <ChevronRight />
           </Link>
 
-          <ProductContanierHome products={Clothes.data} />
+          <HomeProductContainer products={Clothes.data} />
         </section>
 
         <section>
@@ -86,7 +89,7 @@ export default function Home() {
             <ChevronRight />
           </Link>
 
-          <ProductContanierHome products={Gloves.data} />
+          <HomeProductContainer products={Gloves.data} />
         </section>
       </section>
     </>

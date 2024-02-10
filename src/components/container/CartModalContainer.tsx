@@ -11,11 +11,13 @@ export default function CartModalContainer({
   cartItems,
 }: CartItemContainerProps) {
   return (
-    <div className="grid grid-cols-1 gap-2">
-      {cartItems &&
-        cartItems.map((item) => (
-          <CartModalCard key={item.productId} item={item} />
-        ))}
-    </div>
+    <>
+      <div className="grid grid-cols-1 gap-4">
+        {cartItems &&
+          cartItems.map((item) => (
+            <CartModalCard key={item.productId} item={item} />
+          ))}
+      </div>
+    </>
   );
 }

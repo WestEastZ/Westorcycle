@@ -14,7 +14,7 @@ export default async function fetchProducts({
 }: {
   queryKey: unknown[];
 }) {
-  const [_key, field_key, vlaue, count] = queryKey as [
+  const [_key, field_key, value, count] = queryKey as [
     string,
     string,
     string,
@@ -22,11 +22,18 @@ export default async function fetchProducts({
   ];
 
   try {
-    let q = query(
-      collection(db, _key),
-      where(field_key, "==", vlaue),
-      orderBy("updatedAt", "desc")
-    );
+    let collectionRef = collection(db, _key);
+    let q;
+
+    if (value !== undefined) {
+      q = query(
+        collectionRef,
+        where(field_key, "==", value),
+        orderBy("updatedAt", "desc")
+      );
+    } else {
+      q = query(collectionRef, orderBy("updatedAt", "desc"));
+    }
 
     if (count) {
       q = query(q, limit(count));

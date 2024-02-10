@@ -18,7 +18,7 @@
   font-style: normal;
 }
 #root {
-  position: relative;
+  /* position: relative; */
 
   max-width: 1080px;
   height: 100%;
