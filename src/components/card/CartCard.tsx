@@ -19,13 +19,14 @@ export default function CartCard({ item }: { item: CartType }) {
       },
     }
   );
-  const [quantity, setQuantity] = useState<number>(item.productQuantity);
 
   // 장바구니 삭제
   const { deleteCartMutation } = useDeleteCart();
   // 장바구니 수정
   const { updateCartMutation } = useUpdateCart();
 
+  // 장바구니 수량 수정
+  const [quantity, setQuantity] = useState<number>(item.productQuantity);
   useEffect(() => {
     updateCartMutation.mutate({
       productId: item.productId,

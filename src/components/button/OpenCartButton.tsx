@@ -7,25 +7,26 @@ import { useLocation } from "react-router-dom";
 export default function OpenCartButton() {
   const location = useLocation();
   const [openCart, setOpenCart] = useState<boolean>(false);
+
+  const openModal = () => {
+    setOpenCart(!openCart);
+  };
   return (
     <>
-      {location.pathname.startsWith("/cart") ? null : openCart ? (
+      {location.pathname.startsWith("/cart") ? null : (
         <>
-          <CartModal />
+          <CartModal openCart={openCart} />
           <button
-            onClick={() => setOpenCart(false)}
-            className="fixed flex justify-center items-center bottom-8 right-8 w-12 h-12 z-50 rounded-full  bg-zinc-800"
+            onClick={openModal}
+            className="fixed flex justify-center items-center bottom-8 right-8 w-12 h-12 z-50 rounded-full bg-zinc-800"
           >
-            <X color={"#ffffff"} size={32} />
+            {openCart ? (
+              <X color={"#ffffff"} size={32} />
+            ) : (
+              <ShoppingBag color={"#ffffff"} size={28} />
+            )}
           </button>
         </>
-      ) : (
-        <button
-          onClick={() => setOpenCart(true)}
-          className="fixed flex justify-center items-center bottom-8 right-8 w-12 h-12 z-50 rounded-full  bg-zinc-800"
-        >
-          <ShoppingBag color={"#ffffff"} size={28} />
-        </button>
       )}
     </>
   );

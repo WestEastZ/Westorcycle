@@ -8,7 +8,7 @@ import fetchProduct from "@/query/product/fetchProduct";
 
 export default function CartModalCard({ item }: { item: CartType }) {
   // 상품 정보 조회
-  const { data: product } = useQuery(
+  const { data: product, isLoading } = useQuery(
     ["product", item.productId],
     fetchProduct,
     {
@@ -22,10 +22,11 @@ export default function CartModalCard({ item }: { item: CartType }) {
 
   // 장바구니 삭제
   const { deleteCartMutation } = useDeleteCart();
+  // 장바구니 수정
   const { updateCartMutation } = useUpdateCart();
-  const [quantity, setQuantity] = useState<number>(item.productQuantity);
 
   // 장바구니 수량 수정
+  const [quantity, setQuantity] = useState<number>(item.productQuantity);
   useEffect(() => {
     updateCartMutation.mutate({
       productId: item.productId,
@@ -33,7 +34,7 @@ export default function CartModalCard({ item }: { item: CartType }) {
     });
   }, [quantity]);
 
-  if (!product) {
+  if (isLoading) {
     <div>Loading...</div>;
   }
 
@@ -53,8 +54,16 @@ export default function CartModalCard({ item }: { item: CartType }) {
           <div className="flex justify-center gap-3">
             <div className="text-xs">{quantity}</div>
             <div className="text-xs">
-              <button onClick={() => setQuantity(quantity + 1)}>증가</button>
-              <button onClick={() => quantity > 0 && setQuantity(quantity - 1)}>
+              <button
+                onClick={() =>
+                  product &&
+                  product.productQuantity > quantity &&
+                  setQuantity(quantity + 1)
+                }
+              >
+                증가
+              </button>
+              <button onClick={() => quantity > 1 && setQuantity(quantity - 1)}>
                 감소
               </button>
             </div>

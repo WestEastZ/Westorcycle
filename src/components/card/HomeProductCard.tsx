@@ -2,7 +2,7 @@ import { ProductWithId } from "@/models/type";
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function ProductCardHome({
+export default function HomeProductCard({
   product,
 }: {
   product: ProductWithId;

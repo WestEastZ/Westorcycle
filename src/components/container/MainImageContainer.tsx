@@ -3,7 +3,7 @@ import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 
 import main1 from "@/assets/image/main.webp";
 
-export default function CaroselMain() {
+export default function MainImageContainer() {
   const imgArr = [main1];
   return (
     <Carousel className="w-full h-full">

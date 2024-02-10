@@ -1,4 +1,3 @@
-import CaroselImage from "@/components/carosel/CaroselImage";
 import { useUser } from "@/contexts/userContext";
 import fetchProducts from "@/query/product/fetchProducts";
 import useAddCart from "@/hook/cart/useAddCart";
@@ -7,11 +6,19 @@ import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import fetchProduct from "@/query/product/fetchProduct";
 import fetchCart from "@/query/cart/fetchCart";
+import { Button } from "@/components/ui/button";
+import { ChevronDownCircle, ChevronUpCircle } from "lucide-react";
+import DetailImageContainer from "@/components/container/DetailImageContainer";
+import RecommendContainer from "@/components/container/RecommendContainer";
 
 export default function ProductDetail() {
   const user = useUser();
   const params = useParams();
   const { productId } = params;
+
+  console.log(user);
+
+  // 디테일 페이지에서 장바구니 등록되면 수량 업다운 지우기
 
   const [quantity, setQuantity] = useState<number>(1);
   // const [isAdded, setIsAdded] = useState<boolean>(false);
@@ -34,67 +41,67 @@ export default function ProductDetail() {
     fetchProducts
   );
 
-  if (!product || !cartItems) {
+  if (!product) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center">
-      <div className="flex w-full">
+    <div className="w-full h-full flex flex-col justify-center items-center gap-20">
+      <div className="flex w-full justify-center gap-20">
         <section className="h-full">
-          <CaroselImage product={product} />
+          <DetailImageContainer product={product} />
         </section>
 
-        <section className="h-full flex flex-col justify-between border">
+        <section className="h-full flex flex-col justify-between items-start">
           {/* 상품 정보 */}
-          <section className="flex flex-col items-center gap-8">
+          <section className="flex flex-col text-left gap-5">
             <div className="text-4xl">{product.productName}</div>
-            <div className="">{product.productDescription}</div>
-            <div className="text-sm">KRW : {product.productPrice}</div>
+            <div className="text-base">{product.productDescription}</div>
+            <div>Price : KRW {product.productPrice}</div>
             <div>Remain Quantity : {product.productQuantity}</div>
             <div>Category : {product.productCategory}</div>
-          </section>
-
-          {/* 수량  */}
-          <section className="flex justify-center gap-10">
-            <div>Quantitiy : {quantity}</div>
-            <div className="flex gap-5">
-              <button
-                onClick={() => setQuantity(quantity + 1)}
-                disabled={isInCart}
-              >
-                up
-              </button>
-              <button
-                onClick={() => quantity > 1 && setQuantity(quantity - 1)}
-                disabled={isInCart}
-              >
-                down
-              </button>
-            </div>
+            {/* 수량  */}
+            {isInCart ? null : (
+              <section className="flex gap-10">
+                <div>Quantitiy : {quantity}</div>
+                <div className="flex gap-4">
+                  <button
+                    onClick={() =>
+                      product.productQuantity > quantity &&
+                      setQuantity(quantity + 1)
+                    }
+                    disabled={isInCart}
+                  >
+                    <ChevronUpCircle size={20} />
+                  </button>
+                  <button
+                    onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+                    disabled={isInCart}
+                  >
+                    <ChevronDownCircle size={20} />
+                  </button>
+                </div>
+              </section>
+            )}
           </section>
 
           {/* 장바구니 */}
-          <section className="flex justify-center border">
+          <section className="flex w-full justify-center ">
             {isInCart ? (
-              <Link to={`/cart/${user?.id}`}>See the Cart</Link>
+              <Link to={`/cart/${user?.id}`} className="w-full">
+                <Button>See the Cart</Button>
+              </Link>
             ) : (
-              <button
-                onClick={addCartMutation.mutate}
-                className="bg-purple-500 block"
-              >
-                Add to Cart
-              </button>
+              <Button onClick={addCartMutation.mutate}>Add to Cart</Button>
             )}
           </section>
         </section>
       </div>
 
       {/* 추천 상품 */}
-      <div>추천 상품</div>
-      {recommend.data &&
-        recommend.data.map((data) => (
-          <section key={data.id}>{data.productName}</section>
-        ))}
+      <section>
+        <div className="text-left text-xl ml-3">Recommend</div>
+        <RecommendContainer products={recommend} />
+      </section>
     </div>
   );
 }
