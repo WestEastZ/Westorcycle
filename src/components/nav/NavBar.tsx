@@ -16,7 +16,7 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className="sticky w-full h-12 flex items-center top-0 z-50 text-custom p-8 bg-main">
+      <nav className="sticky w-full h-12 flex items-center top-0 z-30 text-custom p-8 bg-main">
         <div className="flex items-center gap-12">
           <Link to={"/"} className="under-line text-custom text-3xl">
             WESTORCYCLE
@@ -28,12 +28,12 @@ export default function NavBar() {
 
           {user ? (
             <>
-              <Link
+              {/* <Link
                 to={`/cart/${user.id}`}
                 className="under-line text-custom text-sm"
               >
                 Cart
-              </Link>
+              </Link> */}
               <Link
                 to={
                   user?.isSeller

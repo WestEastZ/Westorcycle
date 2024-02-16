@@ -1,5 +1,4 @@
 import AddImageButton from "@/components/button/AddImageButton";
-import CaroselImage from "@/components/container/DetailImage";
 import FormProduct from "@/components/form/FormProduct";
 import PageHeader from "@/components/header/PageHeader";
 

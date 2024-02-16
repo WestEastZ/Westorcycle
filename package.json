@@ -21,6 +21,7 @@
     "embla-carousel-autoplay": "^8.0.0-rc22",
     "embla-carousel-react": "^8.0.0-rc21",
     "firebase": "^10.7.2",
+    "iamport": "^0.3.4",
     "lucide-react": "^0.314.0",
     "react": "^18.2.0",
     "react-bottom-scroll-listener": "^5.1.0",

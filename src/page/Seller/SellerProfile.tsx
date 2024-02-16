@@ -9,6 +9,7 @@ import { useInView } from "react-intersection-observer";
 import { ProductWithId } from "@/models/type";
 import ProductCard from "../../components/card/ProductCard";
 import { OrderByDirection } from "firebase/firestore";
+import { Button } from "@/components/ui/button";
 
 export default function SellerProfile() {
   const user = useUser();
@@ -46,17 +47,26 @@ export default function SellerProfile() {
 
       <div className="w-full h-px bg-slate-300 mb-8"></div>
 
-      {/* 상품 등록 */}
-      <Link
-        to={`/seller/${user?.id}/add-product`}
-        className="w-fit m-auto flex justify-center items-center mb-10 gap-3 focus-custom "
-      >
-        <p>Add Proudct</p>
-        <PlusCircle />
-      </Link>
+      {/* 링크 */}
+      <section className="flex justify-around items-center mb-10">
+        {/* 상품 등록 */}
+        <Link to={`/seller/${user?.id}/add-product`} className="w-1/4">
+          <Button>
+            Add Proudct
+            {/* <PlusCircle /> */}
+          </Button>
+        </Link>
+
+        {/* 주문 관리 */}
+        <Link to={`/seller/order/${user?.id}`} className="w-1/4">
+          <Button>Order</Button>
+        </Link>
+      </section>
 
       {/* 상품 리스트 */}
-      <div className="grid grid-cols-2 gap-5 py-16 px-10 mb-30">
+
+      <div className="text-left text-2xl px-10">Product List</div>
+      <div className="grid grid-cols-2 gap-5 py-8 px-10 mb-30">
         {data?.pages
           .flatMap((page) => page?.data)
           .filter(

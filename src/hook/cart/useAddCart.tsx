@@ -51,7 +51,7 @@ export default function useAddCart(
   const addCartMutation = useMutation(addCartHandler, {
     onSuccess: () => {
       // setIsAdded(true);
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries(["cart", user?.id]);
     },
   });
   return { addCartMutation };
