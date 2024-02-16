@@ -1,10 +1,11 @@
+import { useUser } from "@/contexts/userContext";
 import { db, storage } from "@/firebase";
 import { Product, ProductWithId, UserType } from "@/models/type";
 import { validateProduct } from "@/utils/validation";
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import React from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Params, useNavigate } from "react-router-dom";
 
 export default function useUpdateProduct(
@@ -14,7 +15,9 @@ export default function useUpdateProduct(
   imagesToDelete: string[],
   setErrorProduct: (value: string) => void
 ) {
+  const userContext = useUser();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   // 상품 수정
   const editProductMutation = useMutation(
@@ -35,6 +38,9 @@ export default function useUpdateProduct(
     },
     {
       onSuccess: () => {
+        queryClient.invalidateQueries(["cart", userContext?.id]);
+        queryClient.invalidateQueries(["product", initialProduct.id]);
+        console.log("Sds");
         navigate(`/seller/${user?.id}`);
       },
       onError: (error) => {

@@ -5,8 +5,21 @@ import fetchProduct from "@/query/product/fetchProduct";
 import { ChevronDownCircle, ChevronUpCircle, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { useLocation, useParams } from "react-router-dom";
 
-export default function CartCard({ item }: { item: CartType }) {
+export default function CartCard({
+  item,
+  selectHandler,
+  handleQuantityChange,
+  isSelected,
+}: {
+  item: CartType;
+  selectHandler: (item: CartType) => void;
+  handleQuantityChange: (productId: string, quantity: number) => void;
+  isSelected: boolean;
+}) {
+  const location = useLocation();
+
   // 상품 조회
   const { data: product, isLoading } = useQuery(
     ["product", item.productId],
@@ -27,6 +40,7 @@ export default function CartCard({ item }: { item: CartType }) {
 
   // 장바구니 수량 수정
   const [quantity, setQuantity] = useState<number>(item.productQuantity);
+
   useEffect(() => {
     updateCartMutation.mutate({
       productId: item.productId,
@@ -38,7 +52,12 @@ export default function CartCard({ item }: { item: CartType }) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="relative h-44 w-full min-w-60 flex border rounded-2xl">
+    <div
+      className={`relative h-44 w-full min-w-60 flex rounded-2xl transform transition-all duration-200  border ${
+        isSelected ? "scale-105 border-blue-800 border-2" : "border-gray-200"
+      }`}
+      onClick={() => selectHandler(item)}
+    >
       <section className="w-1/3 h-full">
         <img
           src={product?.productImage[0]}
@@ -48,43 +67,64 @@ export default function CartCard({ item }: { item: CartType }) {
         />
       </section>
 
-      <section className="w-2/3 h-full flex justify-between  flex-col p-3">
+      <section className="w-2/3 h-full flex justify-between flex-col p-3">
         <div>
           <div className="text-left text-lg font-bold review">
             {product?.productName}
           </div>
-          <div className="text-left text-gray-600 review">
+          <div className="text-left text-sm text-gray-600 review">
             {product?.productDescription}
           </div>
         </div>
 
-        <div className="flex justify-between items-center text-left">
-          <div>KRW {item.productPrice * item.productQuantity}</div>
+        <div className="flex justify-between items-center text-left text-xs">
+          <div>
+            KRW {product ? product?.productPrice * item.productQuantity : null}
+          </div>
           <div className="flex justify-center items-center gap-2">
             <div>Quantity : {item.productQuantity}</div>
-            <button
-              onClick={() =>
-                product &&
-                product.productQuantity > quantity &&
-                setQuantity(quantity + 1)
-              }
-            >
-              <ChevronUpCircle size={20} />
-            </button>
-            <button onClick={() => quantity > 1 && setQuantity(quantity - 1)}>
-              <ChevronDownCircle size={20} />
-            </button>
+            {/* 수량 증감 장바구니 페이지에서만 가능 */}
+            {location.pathname.includes("payment") ? null : (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (product && product.productQuantity > quantity) {
+                      setQuantity(quantity + 1);
+                      handleQuantityChange(item.productId, quantity + 1);
+                    }
+                  }}
+                >
+                  <ChevronUpCircle size={18} />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (quantity > 1) {
+                      setQuantity(quantity - 1);
+                      handleQuantityChange(item.productId, quantity - 1);
+                    }
+                  }}
+                >
+                  <ChevronDownCircle size={18} />
+                </button>
+              </>
+            )}
           </div>
         </div>
       </section>
 
-      <button
-        onClick={() => deleteCartMutation.mutate(item.productId)}
-        className="absolute -top-2 -right-3 rounded-full bg-red-500"
-      >
-        <X size={24} />
-      </button>
-      {/* <button onClick={}>삭제</button> */}
+      {location.pathname.includes("payment") ? null : (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            deleteCartMutation.mutate(item.productId);
+          }}
+          className="absolute -top-2 -right-3 rounded-full bg-red-500"
+        >
+          <X size={24} />
+        </button>
+      )}
     </div>
   );
 }

@@ -133,7 +133,7 @@ export default function FormProduct({
           )}
         >
           <SelectTrigger className="">
-            <SelectValue placeholder="카테고리" className="text-" />
+            <SelectValue placeholder="카테고리" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>

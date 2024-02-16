@@ -49,7 +49,9 @@ export default function CartModalCard({ item }: { item: CartType }) {
           />
         </div>
         <div>{product?.productName}</div>
-        <div className="text-xs">KRW {item.productPrice * quantity}</div>
+        <div className="text-xs">
+          KRW {product ? product?.productPrice * item.productQuantity : null}
+        </div>
         <div>
           <div className="flex justify-center gap-3">
             <div className="text-xs">{quantity}</div>
