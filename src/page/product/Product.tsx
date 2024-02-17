@@ -3,7 +3,7 @@ import { useUser } from "@/contexts/userContext";
 import fetchInfinityProduct from "@/query/product/fetchInfinityProduct";
 import { ProductWithId } from "@/models/type";
 import { OrderByDirection } from "firebase/firestore";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";

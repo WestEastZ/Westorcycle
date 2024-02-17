@@ -1,9 +1,7 @@
 import CartModalContainer from "@/components/container/CartModalContainer";
-import CartItemContainer from "@/components/container/CartModalContainer";
 import { useUser } from "@/contexts/userContext";
 import fetchCart from "@/query/cart/fetchCart";
 import { useQuery } from "react-query";
-import { useLocation, useParams } from "react-router-dom";
 
 export default function CartModal({ openCart }: { openCart: boolean }) {
   const user = useUser();

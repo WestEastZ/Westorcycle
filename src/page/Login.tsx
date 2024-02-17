@@ -58,7 +58,7 @@ export default function Login() {
     // 로그인 비밀번호 유효성 검사
 
     try {
-      const userInfo = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
     } catch (error) {
       console.error(error);

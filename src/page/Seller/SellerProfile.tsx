@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUser } from "@/contexts/userContext";
 import PageHeader from "@/components/header/PageHeader";
-import { PlusCircle } from "lucide-react";
 import { useInfiniteQuery } from "react-query";
 import fetchInfinityProduct from "@/query/product/fetchInfinityProduct";
 import { useInView } from "react-intersection-observer";
@@ -17,9 +16,13 @@ export default function SellerProfile() {
   const paramsId = params.id;
   const { ref, inView } = useInView();
 
-  const [category, setCategory] = useState<string>("");
-  const [option, setOption] = useState<string>("");
-  const [direction, setDirection] = useState<OrderByDirection>("desc");
+  // const [category, setCategory] = useState<string>("");
+  // const [option, setOption] = useState<string>("");
+  // const [direction, setDirection] = useState<OrderByDirection>("desc");
+
+  const category: string = "";
+  const option: string = "";
+  const direction: OrderByDirection = "desc";
 
   // react-query
   const { data, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery(
@@ -51,10 +54,7 @@ export default function SellerProfile() {
       <section className="flex justify-around items-center mb-10">
         {/* 상품 등록 */}
         <Link to={`/seller/${user?.id}/add-product`} className="w-1/4">
-          <Button>
-            Add Proudct
-            {/* <PlusCircle /> */}
-          </Button>
+          <Button>Add Proudct</Button>
         </Link>
 
         {/* 주문 관리 */}

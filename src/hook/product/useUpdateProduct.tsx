@@ -1,11 +1,11 @@
 import { useUser } from "@/contexts/userContext";
 import { db, storage } from "@/firebase";
-import { Product, ProductWithId, UserType } from "@/models/type";
+import { ProductWithId, UserType } from "@/models/type";
 import { validateProduct } from "@/utils/validation";
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import React from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { Params, useNavigate } from "react-router-dom";
 
 export default function useUpdateProduct(

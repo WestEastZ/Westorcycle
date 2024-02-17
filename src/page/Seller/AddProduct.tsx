@@ -11,12 +11,14 @@ import { ERROR_MESSAGES } from "@/utils/validation";
 import { serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import useDeleteImage from "@/hook/image/useDeleteImage";
-import { X } from "lucide-react";
+
+import Close from "@/assets/icon/Close.svg";
 
 export default function AddProduct() {
   const user = useUser() as UserType;
 
   const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
+  console.log(imagesToDelete);
   const [errorProduct, setErrorProduct] = useState<string>("");
 
   // 상품 상태
@@ -38,7 +40,7 @@ export default function AddProduct() {
   const { onChangeInput } = useChangeInput(user, product, setProduct);
 
   // 이미지 등록
-  const { addImageHandler } = useUploadImage(user, product, setProduct);
+  const { addImageHandler } = useUploadImage(user, setProduct);
 
   // 이미지 삭제
   const { deleteImageHandler } = useDeleteImage(setProduct, setImagesToDelete);
@@ -70,7 +72,9 @@ export default function AddProduct() {
                 onClick={() => deleteImageHandler(image)}
                 className="absolute -top-2 -right-2 bg-red-500 rounded-full"
               >
-                <X size={18} />
+                <div>
+                  <img src={Close} alt="Close" width={20} height={20} />
+                </div>
               </button>
             </div>
           ))}

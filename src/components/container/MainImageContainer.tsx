@@ -1,25 +1,13 @@
-import React from "react";
-import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
-
-import main1 from "@/assets/image/main.webp";
+import { Helmet } from "react-helmet";
+import main from "@/assets/image/mainTest.webp";
 
 export default function MainImageContainer() {
-  const imgArr = [main1];
   return (
-    <Carousel className="w-full h-full">
-      <CarouselContent>
-        {imgArr.map((data) => (
-          <CarouselItem key={data}>
-            <div className="">
-              <img
-                src={data}
-                alt="오토바이"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-    </Carousel>
+    <div className="h-[30rem] bg-[#141414]">
+      <Helmet>
+        <link rel="preload" as="image" href={main} />
+      </Helmet>
+      <img src={main} alt="오토바이" className="w-full h-full object-cover" />
+    </div>
   );
 }

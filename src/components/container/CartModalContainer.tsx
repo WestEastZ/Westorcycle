@@ -1,6 +1,4 @@
 import { CartType } from "@/models/type";
-import React from "react";
-import CartItemCard from "../card/CartModalCard";
 import CartModalCard from "../card/CartModalCard";
 
 interface CartItemContainerProps {

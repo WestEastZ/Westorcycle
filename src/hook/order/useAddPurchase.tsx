@@ -2,8 +2,8 @@ import { useUser } from "@/contexts/userContext";
 import { db } from "@/firebase";
 import { OrderEnum } from "@/models/enum";
 import { CartType } from "@/models/type";
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
-import React from "react";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
+
 import { useMutation } from "react-query";
 
 interface addPurchaseProp {

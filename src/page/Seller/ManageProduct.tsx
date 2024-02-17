@@ -13,9 +13,10 @@ import { useState } from "react";
 
 import { useParams } from "react-router-dom";
 import useDeleteImage from "@/hook/image/useDeleteImage";
-import { X } from "lucide-react";
 import { ERROR_MESSAGES } from "@/utils/validation";
 import useFetchProduct from "@/hook/product/useFetchProduct";
+
+import Close from "@/assets/icon/Close.svg";
 
 export type ParamsType = {
   productId?: string;
@@ -36,7 +37,7 @@ export default function ManageProduct() {
   const { onChangeInput } = useChangeInput(user, product, setProduct);
 
   // 이미지 파일 선택
-  const { addImageHandler } = useUploadImage(user, product, setProduct);
+  const { addImageHandler } = useUploadImage(user, setProduct);
 
   // 이미지 삭제
   const { deleteImageHandler } = useDeleteImage(setProduct, setImagesToDelete);
@@ -75,7 +76,9 @@ export default function ManageProduct() {
                 onClick={() => deleteImageHandler(image)}
                 className="absolute -top-2 -right-2 bg-red-500 rounded-full"
               >
-                <X size={18} />
+                <div>
+                  <img src={Close} alt="Close" width={20} height={20} />
+                </div>
               </button>
             </div>
           ))}

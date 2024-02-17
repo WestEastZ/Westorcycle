@@ -1,7 +1,6 @@
 import { db } from "@/firebase";
 import { UserType } from "@/models/type";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import React from "react";
 
 export default async function fetchUser({ queryKey }: { queryKey: unknown[] }) {
   const [_key, userId] = queryKey as [string, string];

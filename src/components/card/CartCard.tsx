@@ -2,10 +2,13 @@ import useDeleteCart from "@/hook/cart/useDeleteCart";
 import useUpdateCart from "@/hook/cart/useUpdateCart";
 import { CartType } from "@/models/type";
 import fetchProduct from "@/query/product/fetchProduct";
-import { ChevronDownCircle, ChevronUpCircle, X } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
+import ArrowCircleUp from "@/assets/icon/ArrowCircleUp.svg";
+import ArrowCircleDown from "@/assets/icon/ArrowCircleDown.svg";
+import Close from "@/assets/icon/Close.svg";
 
 export default function CartCard({
   item,
@@ -95,7 +98,9 @@ export default function CartCard({
                     }
                   }}
                 >
-                  <ChevronUpCircle size={18} />
+                  <div>
+                    <img src={ArrowCircleUp} alt="ArrowCircleUp" />
+                  </div>
                 </button>
                 <button
                   onClick={(e) => {
@@ -106,7 +111,9 @@ export default function CartCard({
                     }
                   }}
                 >
-                  <ChevronDownCircle size={18} />
+                  <div>
+                    <img src={ArrowCircleDown} alt="ArrowCircleDown" />
+                  </div>
                 </button>
               </>
             )}
@@ -122,7 +129,9 @@ export default function CartCard({
           }}
           className="absolute -top-2 -right-3 rounded-full bg-red-500"
         >
-          <X size={24} />
+          <div>
+            <img src={Close} alt="Close" width="24" height="24" />
+          </div>
         </button>
       )}
     </div>

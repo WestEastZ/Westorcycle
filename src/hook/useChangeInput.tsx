@@ -1,4 +1,4 @@
-import { Product, ProductWithId, UserType } from "@/models/type";
+import { ProductWithId, UserType } from "@/models/type";
 import React from "react";
 
 export default function useChangeInput(
