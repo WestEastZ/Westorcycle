@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useUser } from "@/contexts/userContext";
 import useSelectCart from "@/hook/cart/useSelectCart";
 import fetchCart from "@/query/cart/fetchCart";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
 import Payment from "./Payment";
 
 export default function Cart() {

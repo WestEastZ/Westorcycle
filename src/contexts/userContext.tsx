@@ -43,7 +43,7 @@ export function UserProvider({ children }: UserProviderProps) {
   }, []);
 
   // 로딩처리
-  if (loading) return <div>...</div>;
+  if (loading) return null;
   //
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 }

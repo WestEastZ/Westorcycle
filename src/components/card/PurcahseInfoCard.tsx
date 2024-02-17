@@ -1,7 +1,6 @@
 import { useUser } from "@/contexts/userContext";
 import useCancleOrder from "@/hook/order/useCancleOrder";
-import { OrderGroup, OrderType } from "@/models/type";
-import React from "react";
+import { OrderType } from "@/models/type";
 import { Button } from "../ui/button";
 import { useQuery } from "react-query";
 import fetchUser from "@/query/user/fetchUser";

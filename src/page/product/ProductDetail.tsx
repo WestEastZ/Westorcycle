@@ -7,16 +7,16 @@ import { Link, useParams } from "react-router-dom";
 import fetchProduct from "@/query/product/fetchProduct";
 import fetchCart from "@/query/cart/fetchCart";
 import { Button } from "@/components/ui/button";
-import { ChevronDownCircle, ChevronUpCircle } from "lucide-react";
 import DetailImageContainer from "@/components/container/DetailImageContainer";
 import RecommendContainer from "@/components/container/RecommendContainer";
+
+import ArrowCircleUp from "@/assets/icon/ArrowCircleUp.svg";
+import ArrowCircleDown from "@/assets/icon/ArrowCircleDown.svg";
 
 export default function ProductDetail() {
   const user = useUser();
   const params = useParams();
   const { productId } = params;
-
-  console.log(user);
 
   // 디테일 페이지에서 장바구니 등록되면 수량 업다운 지우기
 
@@ -71,13 +71,17 @@ export default function ProductDetail() {
                     }
                     disabled={isInCart}
                   >
-                    <ChevronUpCircle size={20} />
+                    <div>
+                      <img src={ArrowCircleUp} alt="ArrowCircleUp" />
+                    </div>
                   </button>
                   <button
                     onClick={() => quantity > 1 && setQuantity(quantity - 1)}
                     disabled={isInCart}
                   >
-                    <ChevronDownCircle size={20} />
+                    <div>
+                      <img src={ArrowCircleDown} alt="ArrowCircleDown" />
+                    </div>
                   </button>
                 </div>
               </section>

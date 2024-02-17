@@ -1,23 +1,33 @@
+import React from "react";
+import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoutes";
-
-import Home from "@/page/Home";
-import Login from "@/page/Login";
-import SignUp from "@/page/SignUp";
 import { useUser } from "@/contexts/userContext";
-import SellerProfile from "@/page/seller/SellerProfile";
-import ConsumerProfile from "@/page/consumer/ConsumerProfile";
-import AddProduct from "@/page/seller/AddProduct";
-import ManageProduct from "@/page/seller/ManageProduct";
-import ProductDetail from "@/page/product/ProductDetail";
-import Category from "@/page/product/Category";
-import Product from "@/page/product/Product";
-import NavBar from "@/components/nav/NavBar";
-import Cart from "@/page/consumer/Cart";
-import OpenCartButton from "@/components/button/OpenCartButton";
-import Payment from "@/page/consumer/Payment";
-import PurchaseHistory from "@/page/consumer/PurchaseHistory";
-import Order from "@/page/seller/Order";
+
+// 동적 import
+
+const Home = React.lazy(() => import("@/page/Home"));
+const Login = React.lazy(() => import("@/page/Login"));
+const SignUp = React.lazy(() => import("@/page/SignUp"));
+const SellerProfile = React.lazy(() => import("@/page/seller/SellerProfile"));
+const ConsumerProfile = React.lazy(
+  () => import("@/page/consumer/ConsumerProfile")
+);
+const AddProduct = React.lazy(() => import("@/page/seller/AddProduct"));
+const ManageProduct = React.lazy(() => import("@/page/seller/ManageProduct"));
+const ProductDetail = React.lazy(() => import("@/page/product/ProductDetail"));
+const Category = React.lazy(() => import("@/page/product/Category"));
+const Product = React.lazy(() => import("@/page/product/Product"));
+const NavBar = React.lazy(() => import("@/components/nav/NavBar"));
+const Cart = React.lazy(() => import("@/page/consumer/Cart"));
+const OpenCartButton = React.lazy(
+  () => import("@/components/button/OpenCartButton")
+);
+
+const PurchaseHistory = React.lazy(
+  () => import("@/page/consumer/PurchaseHistory")
+);
+const Order = React.lazy(() => import("@/page/consumer/PurchaseHistory"));
 
 export default function AppRoute() {
   const user = useUser();
@@ -28,29 +38,75 @@ export default function AppRoute() {
         <NavBar />
         <Routes>
           {/* 모든 사용자 방문 가능 */}
-          <Route path="/" element={<Home />} />
-          <Route path="/product/:productId" element={<ProductDetail />} />
-          <Route path="/category" element={<Category />} />
-          <Route path="/category/:category" element={<Product />} />
-          <Route path="/cart/:id" element={<Cart />} />
-          <Route path="/payment/:id" element={<Payment />} />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Home />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/product/:productId"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProductDetail />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/category"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Category />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/category/:category"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Product />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/cart/:id"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Cart />
+              </Suspense>
+            }
+          />
+          {/* <Route
+            path="/payment/:id"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Payment />
+              </Suspense>
+            }
+          /> */}
 
           {/* 로그인 유무 */}
           <Route
             path="/login"
             element={
-              <ProtectedRoute condition={!user}>
-                <Login />
-              </ProtectedRoute>
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProtectedRoute condition={!user}>
+                  <Login />
+                </ProtectedRoute>
+              </Suspense>
             }
           />
 
           <Route
             path="/signup"
             element={
-              <ProtectedRoute condition={!user}>
-                <SignUp />
-              </ProtectedRoute>
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProtectedRoute condition={!user}>
+                  <SignUp />
+                </ProtectedRoute>
+              </Suspense>
             }
           />
 
@@ -58,33 +114,41 @@ export default function AppRoute() {
           <Route
             path="/seller/:id"
             element={
-              <ProtectedRoute condition={user && user.isSeller}>
-                <SellerProfile />
-              </ProtectedRoute>
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProtectedRoute condition={user && user.isSeller}>
+                  <SellerProfile />
+                </ProtectedRoute>
+              </Suspense>
             }
           />
           <Route
             path="/seller/:id/add-product"
             element={
-              <ProtectedRoute condition={user && user.isSeller}>
-                <AddProduct />
-              </ProtectedRoute>
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProtectedRoute condition={user && user.isSeller}>
+                  <AddProduct />
+                </ProtectedRoute>
+              </Suspense>
             }
           />
           <Route
             path="/seller/:id/manage-product/:productId"
             element={
-              <ProtectedRoute condition={user && user.isSeller}>
-                <ManageProduct />
-              </ProtectedRoute>
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProtectedRoute condition={user && user.isSeller}>
+                  <ManageProduct />
+                </ProtectedRoute>
+              </Suspense>
             }
           />
           <Route
             path="/seller/order/:id"
             element={
-              <ProtectedRoute condition={user && user.isSeller}>
-                <Order />
-              </ProtectedRoute>
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProtectedRoute condition={user && user.isSeller}>
+                  <Order />
+                </ProtectedRoute>
+              </Suspense>
             }
           />
 
@@ -92,22 +156,33 @@ export default function AppRoute() {
           <Route
             path="/consumer/:id"
             element={
-              <ProtectedRoute condition={user && !user.isSeller}>
-                <ConsumerProfile />
-              </ProtectedRoute>
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProtectedRoute condition={user && !user.isSeller}>
+                  <ConsumerProfile />
+                </ProtectedRoute>
+              </Suspense>
             }
           />
           <Route
             path="/purchase/:id"
             element={
-              <ProtectedRoute condition={user && !user.isSeller}>
-                <PurchaseHistory />
-              </ProtectedRoute>
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProtectedRoute condition={user && !user.isSeller}>
+                  <PurchaseHistory />
+                </ProtectedRoute>
+              </Suspense>
             }
           />
 
           {/* 접근 불가 */}
-          <Route path="/*" element={<Home />} />
+          <Route
+            path="/*"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Home />
+              </Suspense>
+            }
+          />
         </Routes>
 
         {/* 장바구니 */}

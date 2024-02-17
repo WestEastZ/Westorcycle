@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import { useUser } from "@/contexts/userContext";
-
 import useDecreaseStock from "@/hook/order/useDecreaseStock";
 import usePayment from "@/hook/order/usePayment";
 import useRecoverStock from "@/hook/order/useRecoverStock";
@@ -21,7 +19,6 @@ export default function Payment({
   totalPrice: number;
   openModalHandler: () => void;
 }) {
-  const user = useUser();
   const { DecreaseStockMutation } = useDecreaseStock();
   const { RecoverStockMutation } = useRecoverStock();
   const { addPurchaseMutation } = useAddPurchase();

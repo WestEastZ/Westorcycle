@@ -1,4 +1,3 @@
-import { OrderType } from "@/models/type";
 import fetchProduct from "@/query/product/fetchProduct";
 import { useQuery } from "react-query";
 

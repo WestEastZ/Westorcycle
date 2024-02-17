@@ -1,6 +1,5 @@
 import useDeleteCart from "@/hook/cart/useDeleteCart";
 import useUpdateCart from "@/hook/cart/useUpdateCart";
-import useFetchProduct from "@/query/product/fetchProduct";
 import { CartType } from "@/models/type";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";

@@ -1,8 +1,4 @@
-import React from "react";
-import { auth } from "@/firebase";
-import { signOut } from "firebase/auth";
-import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PageHeader from "@/components/header/PageHeader";
 import { useUser } from "@/contexts/userContext";
 

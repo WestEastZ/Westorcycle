@@ -1,8 +1,4 @@
-import { storage } from "@/firebase";
 import { ProductWithId } from "@/models/type";
-import { deleteObject, ref } from "firebase/storage";
-import { useState } from "react";
-import { useMutation } from "react-query";
 
 export default function useDeleteImage(
   setProduct: (

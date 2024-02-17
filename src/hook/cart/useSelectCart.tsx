@@ -1,5 +1,5 @@
 import { CartType } from "@/models/type";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function useSelectCart() {
   const [selectedItems, setSelectedItems] = useState<CartType[]>([]);

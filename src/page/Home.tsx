@@ -1,18 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "@/contexts/userContext";
+import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import fetchProducts from "@/query/product/fetchProducts";
-import { ChevronRight } from "lucide-react";
-import ProductContanierHome from "@/components/container/HomeProductContainer";
-import CaroselMain from "@/components/container/MainImageContainer";
+import ArrowRight from "@/assets/icon/ArrowRight.svg";
 import MainImageContainer from "@/components/container/MainImageContainer";
-import HomeProductContanier from "@/components/container/HomeProductContainer";
 import HomeProductContainer from "@/components/container/HomeProductContainer";
 
 export default function Home() {
-  const user = useUser();
-  const navigate = useNavigate();
-
   const Motorcycle = useQuery(
     ["product", "productCategory", "Motorcycle", 8],
     fetchProducts
@@ -30,11 +23,9 @@ export default function Home() {
     fetchProducts
   );
 
-  console.log(Motorcycle.data);
-
   return (
     <>
-      <section className="relative w-full h-96 mb-40">
+      <section className="relative w-full h-[30rem] mb-16">
         <div className="absolute flex flex-col gap-5 text-left w-1/2 h-1/4 top-32 left-20 text-4xl z-10">
           <div>Men will fight</div>
           <div>long and hard for</div>
@@ -50,8 +41,10 @@ export default function Home() {
             to={"/category/Motorcycle"}
             className="w-fit flex text-left mb-2 ml-2"
           >
-            <div>Motorcycle</div>
-            <ChevronRight />
+            <div className="flex items-center">
+              <div>Motorcycle</div>
+              <img src={ArrowRight} alt="ArrowRight" />
+            </div>
           </Link>
 
           <HomeProductContainer products={Motorcycle.data} />
@@ -62,8 +55,10 @@ export default function Home() {
             to={"/category/Helmet"}
             className="w-fit flex text-left mb-2 ml-2"
           >
-            <div>Helmet</div>
-            <ChevronRight />
+            <div className="flex items-center">
+              <div>Helmet</div>
+              <img src={ArrowRight} alt="ArrowRight" />
+            </div>
           </Link>
 
           <HomeProductContainer products={Helmet.data} />
@@ -73,8 +68,10 @@ export default function Home() {
             to={"/category/Clothes"}
             className="w-fit flex text-left mb-2 ml-2"
           >
-            <div>Clothes</div>
-            <ChevronRight />
+            <div className="flex items-center">
+              <div>Clothes</div>
+              <img src={ArrowRight} alt="ArrowRight" />
+            </div>
           </Link>
 
           <HomeProductContainer products={Clothes.data} />
@@ -85,8 +82,10 @@ export default function Home() {
             to={"/category/Gloves"}
             className="w-fit flex text-left mb-2 ml-2"
           >
-            <div>Gloves</div>
-            <ChevronRight />
+            <div className="flex items-center">
+              <div>Gloves</div>
+              <img src={ArrowRight} alt="ArrowRight" />
+            </div>
           </Link>
 
           <HomeProductContainer products={Gloves.data} />

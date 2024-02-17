@@ -1,6 +1,6 @@
 import { db } from "@/firebase";
 import { CartType } from "@/models/type";
-import { doc, getDoc, increment, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useMutation, useQueryClient } from "react-query";
 
 export default function useDecreaseStock() {

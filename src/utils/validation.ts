@@ -1,13 +1,5 @@
-import { db } from "@/firebase";
 import { Product } from "@/models/type";
-import {
-  DocumentData,
-  QueryDocumentSnapshot,
-  collection,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 // 에러메세지 타입
 export type ErrorCode = {

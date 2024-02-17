@@ -1,17 +1,12 @@
+import React from "react";
 import { useMutation } from "react-query";
 import { storage } from "@/firebase";
+import imageCompression from "browser-image-compression";
 import { ProductWithId, UserType } from "@/models/type";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  deleteObject,
-} from "firebase/storage";
-import React from "react";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export default function useUploadImage(
   user: UserType,
-  initialProduct: ProductWithId,
   setProduct: (
     value: ProductWithId | ((prevState: ProductWithId) => ProductWithId)
   ) => void
@@ -25,13 +20,22 @@ export default function useUploadImage(
       for (let i = 0; i < fileList.length; i++) {
         const timestamp = Date.now();
         const selectImgFile = fileList[i];
+
+        // 이미지 압축
+        const options = {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 1092,
+          useWebWorker: true,
+        };
+        const compressedFile = await imageCompression(selectImgFile, options);
+
         const imgRef = ref(
           storage,
-          `${user?.id}/${selectImgFile.name}/${timestamp}`
+          `${user?.id}/${compressedFile.name}/${timestamp}`
         );
 
         // 이미지 파일을 Firebase Storage에 업로드하고 다운로드 URL을 얻는 프로미스 생성
-        const uploadPromise = uploadBytes(imgRef, selectImgFile).then(() =>
+        const uploadPromise = uploadBytes(imgRef, compressedFile).then(() =>
           getDownloadURL(imgRef)
         );
         promises.push(uploadPromise);

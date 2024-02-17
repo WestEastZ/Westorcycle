@@ -1,8 +1,9 @@
 import CartModal from "@/page/consumer/CartModal";
-import CartMini from "@/page/consumer/CartModal";
-import { ShoppingBag, ShoppingCart, X, XCircle } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
+
+import ShoppingCart from "@/assets/icon/ShoppingCart.svg";
+import Close from "@/assets/icon/Close.svg";
 
 export default function OpenCartButton() {
   const location = useLocation();
@@ -21,9 +22,13 @@ export default function OpenCartButton() {
             className="fixed flex justify-center items-center bottom-8 right-8 w-12 h-12 z-50 rounded-full bg-zinc-800"
           >
             {openCart ? (
-              <X color={"#ffffff"} size={32} />
+              <div>
+                <img src={Close} alt="Close" />
+              </div>
             ) : (
-              <ShoppingBag color={"#ffffff"} size={28} />
+              <div>
+                <img src={ShoppingCart} alt="ShoppingCart" />
+              </div>
             )}
           </button>
         </>
