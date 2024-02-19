@@ -17,6 +17,7 @@ import { ERROR_MESSAGES } from "@/utils/validation";
 import useFetchProduct from "@/hook/product/useFetchProduct";
 
 import Close from "@/assets/icon/Close.svg";
+import SEOHelmet from "@/utils/SEOHelmet";
 
 export type ParamsType = {
   productId?: string;
@@ -54,11 +55,13 @@ export default function ManageProduct() {
   // 상품 삭제
   const { deleteProductHandler } = useDeleteProduct(user, params, product);
 
-  console.log(product);
-
   return (
     <>
-      <div className="w-full flex flex-col justify-center items-center pt-10">
+      {/* header */}
+      <SEOHelmet title={`Update Product`} description="Update your product." />
+
+      {/* body  */}
+      <main className="w-full flex flex-col justify-center items-center pt-10">
         <PageHeader title={"Product Deatail"} description={"description"} />
 
         {/* 사진 첨부 */}
@@ -99,7 +102,7 @@ export default function ManageProduct() {
           editProductHandler={editProductHandler}
           errorCode={errorProduct}
         />
-      </div>
+      </main>
     </>
   );
 }

@@ -12,6 +12,7 @@ import RecommendContainer from "@/components/container/RecommendContainer";
 
 import ArrowCircleUp from "@/assets/icon/ArrowCircleUp.svg";
 import ArrowCircleDown from "@/assets/icon/ArrowCircleDown.svg";
+import SEOHelmet from "@/utils/SEOHelmet";
 
 export default function ProductDetail() {
   const user = useUser();
@@ -45,67 +46,76 @@ export default function ProductDetail() {
     return <div>Loading...</div>;
   }
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center gap-20">
-      <div className="flex w-full justify-center gap-20">
-        <section className="h-full">
-          <DetailImageContainer product={product} />
-        </section>
+    <>
+      {/* header */}
+      <SEOHelmet
+        title={`Product Detail`}
+        description="Check the pictures and detailed description of the product."
+      />
 
-        <section className="h-full flex flex-col justify-between items-start">
-          {/* 상품 정보 */}
-          <section className="flex flex-col text-left gap-5">
-            <div className="text-4xl">{product.productName}</div>
-            <div className="text-base">{product.productDescription}</div>
-            <div>Price : KRW {product.productPrice}</div>
-            <div>Remain Quantity : {product.productQuantity}</div>
-            <div>Category : {product.productCategory}</div>
-            {/* 수량  */}
-            {isInCart ? null : (
-              <section className="flex gap-10">
-                <div>Quantitiy : {quantity}</div>
-                <div className="flex gap-4">
-                  <button
-                    onClick={() =>
-                      product.productQuantity > quantity &&
-                      setQuantity(quantity + 1)
-                    }
-                    disabled={isInCart}
-                  >
-                    <div>
-                      <img src={ArrowCircleUp} alt="ArrowCircleUp" />
-                    </div>
-                  </button>
-                  <button
-                    onClick={() => quantity > 1 && setQuantity(quantity - 1)}
-                    disabled={isInCart}
-                  >
-                    <div>
-                      <img src={ArrowCircleDown} alt="ArrowCircleDown" />
-                    </div>
-                  </button>
-                </div>
-              </section>
-            )}
+      {/* body  */}
+      <main className="w-full h-full flex flex-col justify-center items-center gap-20">
+        <section className="flex w-full justify-center gap-20">
+          <section className="h-full">
+            <DetailImageContainer product={product} />
           </section>
 
-          {/* 장바구니 */}
-          <section className="flex w-full justify-center ">
-            {isInCart ? (
-              <Link to={`/cart/${user?.id}`} className="w-full">
-                <Button>See the Cart</Button>
-              </Link>
-            ) : (
-              <Button onClick={addCartMutation.mutate}>Add to Cart</Button>
-            )}
+          <section className="h-full flex flex-col justify-between items-start">
+            {/* 상품 정보 */}
+            <section className="flex flex-col text-left gap-5">
+              <div className="text-4xl">{product.productName}</div>
+              <div className="text-base">{product.productDescription}</div>
+              <div>Price : KRW {product.productPrice}</div>
+              <div>Remain Quantity : {product.productQuantity}</div>
+              <div>Category : {product.productCategory}</div>
+              {/* 수량  */}
+              {isInCart ? null : (
+                <section className="flex gap-10">
+                  <div>Quantitiy : {quantity}</div>
+                  <div className="flex gap-4">
+                    <button
+                      onClick={() =>
+                        product.productQuantity > quantity &&
+                        setQuantity(quantity + 1)
+                      }
+                      disabled={isInCart}
+                    >
+                      <div>
+                        <img src={ArrowCircleUp} alt="ArrowCircleUp" />
+                      </div>
+                    </button>
+                    <button
+                      onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+                      disabled={isInCart}
+                    >
+                      <div>
+                        <img src={ArrowCircleDown} alt="ArrowCircleDown" />
+                      </div>
+                    </button>
+                  </div>
+                </section>
+              )}
+            </section>
+
+            {/* 장바구니 */}
+            <section className="flex w-full justify-center ">
+              {isInCart ? (
+                <Link to={`/cart/${user?.id}`} className="w-full">
+                  <Button>See the Cart</Button>
+                </Link>
+              ) : (
+                <Button onClick={addCartMutation.mutate}>Add to Cart</Button>
+              )}
+            </section>
           </section>
         </section>
-      </div>
 
-      {/* 추천 상품 */}
-      <section>
-        <div className="text-left text-xl ml-3">Recommend</div>
-        <RecommendContainer products={recommend} />
-      </section>
-    </div>
+        {/* 추천 상품 */}
+        <section>
+          <div className="text-left text-xl ml-3">Recommend</div>
+          <RecommendContainer products={recommend} />
+        </section>
+      </main>
+    </>
   );
 }

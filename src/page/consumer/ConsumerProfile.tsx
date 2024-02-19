@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 import PageHeader from "@/components/header/PageHeader";
 import { useUser } from "@/contexts/userContext";
+import SEOHelmet from "@/utils/SEOHelmet";
 
 export default function ConsumerProfile() {
   const user = useUser();
   return (
     <>
+      {/* header */}
+      <SEOHelmet title="Profile" description="Manage your information" />
+
+      {/* body  */}
       <PageHeader
         title={`${user?.nickname}`}
         description={`구매자 전용 페이지`}

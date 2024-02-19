@@ -13,6 +13,7 @@ import { useState } from "react";
 import useDeleteImage from "@/hook/image/useDeleteImage";
 
 import Close from "@/assets/icon/Close.svg";
+import SEOHelmet from "@/utils/SEOHelmet";
 
 export default function AddProduct() {
   const user = useUser() as UserType;
@@ -50,6 +51,10 @@ export default function AddProduct() {
 
   return (
     <>
+      {/* header */}
+      <SEOHelmet title={`Add Product`} description="Add your product." />
+
+      {/* body  */}
       <div className="w-full flex flex-col justify-center items-center">
         {/* 안내문구 */}
         <PageHeader
@@ -58,9 +63,9 @@ export default function AddProduct() {
         />
 
         {/* 사진 첨부 */}
-        <section className="w-4/5 h-52 grid grid-cols-4 items-center gap-3 px-5 relative border mb-10">
+        <main className="w-4/5 h-52 grid grid-cols-4 items-center gap-3 px-5 relative border mb-10">
           {product.productImage.map((image) => (
-            <div key={image} className="w-full h-4/5 max-h-52 relative ">
+            <section key={image} className="w-full h-4/5 max-h-52 relative ">
               <div className="w-full h-full overflow-hidden">
                 <img
                   src={image}
@@ -76,7 +81,7 @@ export default function AddProduct() {
                   <img src={Close} alt="Close" width={20} height={20} />
                 </div>
               </button>
-            </div>
+            </section>
           ))}
           <AddImageButton />
           {errorProduct == "errorProductImage" ? (
@@ -84,7 +89,7 @@ export default function AddProduct() {
               {ERROR_MESSAGES[errorProduct]}
             </div>
           ) : null}
-        </section>
+        </main>
 
         {/* 입력 */}
         <FormProduct

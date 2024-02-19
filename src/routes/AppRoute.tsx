@@ -27,7 +27,7 @@ const OpenCartButton = React.lazy(
 const PurchaseHistory = React.lazy(
   () => import("@/page/consumer/PurchaseHistory")
 );
-const Order = React.lazy(() => import("@/page/consumer/PurchaseHistory"));
+const Order = React.lazy(() => import("@/page/seller/Order"));
 
 export default function AppRoute() {
   const user = useUser();
