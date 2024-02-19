@@ -1,4 +1,4 @@
-User-agent:*
+User-agent: *
 Disallow:/seller/
 Disallow: /consumer/
 Disallow: /purchase/
