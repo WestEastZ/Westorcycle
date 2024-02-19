@@ -29,6 +29,7 @@
     "react-intersection-observer": "^9.5.3",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.21.3",
+    "sitemap": "^7.1.1",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "vite-bundle-visualizer": "^1.0.1"
