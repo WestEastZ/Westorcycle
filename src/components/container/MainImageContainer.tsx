@@ -1,5 +1,5 @@
-import { Helmet } from "react-helmet";
 import main from "@/assets/image/mainTest.webp";
+import { Helmet } from "react-helmet";
 
 export default function MainImageContainer() {
   return (

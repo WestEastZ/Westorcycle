@@ -4,6 +4,7 @@ import fetchProducts from "@/query/product/fetchProducts";
 import ArrowRight from "@/assets/icon/ArrowRight.svg";
 import MainImageContainer from "@/components/container/MainImageContainer";
 import HomeProductContainer from "@/components/container/HomeProductContainer";
+import SEOHelmet from "@/utils/SEOHelmet";
 
 export default function Home() {
   const Motorcycle = useQuery(
@@ -25,7 +26,14 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative w-full h-[30rem] mb-16">
+      {/* header */}
+      <SEOHelmet
+        title="Home"
+        description="We sell motorcycle-related products at reasonable prices."
+      />
+
+      {/* body */}
+      <header className="relative w-full h-[30rem] mb-16">
         <div className="absolute flex flex-col gap-5 text-left w-1/2 h-1/4 top-32 left-20 text-4xl z-10">
           <div>Men will fight</div>
           <div>long and hard for</div>
@@ -33,9 +41,9 @@ export default function Home() {
         </div>
 
         <MainImageContainer />
-      </section>
+      </header>
 
-      <section className="flex flex-col gap-10">
+      <main className="flex flex-col gap-10">
         <section>
           <Link
             to={"/category/Motorcycle"}
@@ -90,7 +98,7 @@ export default function Home() {
 
           <HomeProductContainer products={Gloves.data} />
         </section>
-      </section>
+      </main>
     </>
   );
 }

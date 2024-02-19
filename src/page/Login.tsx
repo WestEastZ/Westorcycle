@@ -14,6 +14,7 @@ import SocialLogin from "@/utils/SocialLogin";
 // import loginBg from "@/assets/image/login.webp";
 import { ERROR_MESSAGES, validateLoginEmail } from "@/utils/validation";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import SEOHelmet from "@/utils/SEOHelmet";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -67,15 +68,22 @@ export default function Login() {
 
   return (
     <>
-      <div className="relative w-1/2 mt-20 m-auto bg-[url('./assets/image/login.webp')] bg-cover bg-center bg-no-repeat">
+      {/* header */}
+      <SEOHelmet
+        title="Login"
+        description="This is the WESTORRYCLE login page."
+      />
+
+      {/* body */}
+      <main className="relative w-1/2 mt-20 m-auto bg-[url('./assets/image/login.webp')] bg-cover bg-center bg-no-repeat">
         <div className="inset-0 w-full h-full z-20 bg-black bg-opacity-50"></div>
         <div className="w-full h-full m-auto flex justify-center z-30">
           <div className="w-full h-fit p-20 flex flex-col bg-black bg-opacity-80">
             {/* 안내 문구 */}
-            <section className="mb-10">
+            <div className="mb-10">
               <h1 className="text-5xl mb-4">Login</h1>
               <h1 className="text-sm">You're the man who's so confident</h1>
-            </section>
+            </div>
 
             {/* 입력 */}
             <section className="">
@@ -120,7 +128,7 @@ export default function Login() {
             </section>
           </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

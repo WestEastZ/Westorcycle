@@ -9,16 +9,13 @@ import { ProductWithId } from "@/models/type";
 import ProductCard from "../../components/card/ProductCard";
 import { OrderByDirection } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
+import SEOHelmet from "@/utils/SEOHelmet";
 
 export default function SellerProfile() {
   const user = useUser();
   const params = useParams();
   const paramsId = params.id;
   const { ref, inView } = useInView();
-
-  // const [category, setCategory] = useState<string>("");
-  // const [option, setOption] = useState<string>("");
-  // const [direction, setDirection] = useState<OrderByDirection>("desc");
 
   const category: string = "";
   const option: string = "";
@@ -42,7 +39,10 @@ export default function SellerProfile() {
 
   return (
     <>
-      {/* 헤더  */}
+      {/* header */}
+      <SEOHelmet title={`Profile`} description="Manage your information" />
+
+      {/* body  */}
       <PageHeader
         title={`${user?.nickname}`}
         description={`Take care of your products`}
@@ -64,9 +64,9 @@ export default function SellerProfile() {
       </section>
 
       {/* 상품 리스트 */}
-
       <div className="text-left text-2xl px-10">Product List</div>
-      <div className="grid grid-cols-2 gap-5 py-8 px-10 mb-30">
+
+      <section className="grid grid-cols-2 gap-5 py-8 px-10 mb-30">
         {data?.pages
           .flatMap((page) => page?.data)
           .filter(
@@ -76,7 +76,7 @@ export default function SellerProfile() {
           .map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-      </div>
+      </section>
       <div ref={ref}></div>
     </>
   );

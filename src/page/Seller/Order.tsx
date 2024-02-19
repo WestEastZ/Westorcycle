@@ -5,6 +5,7 @@ import fetchOrder from "@/query/order/fetchOrder";
 import { Link } from "react-router-dom";
 import PurcahseCard from "@/components/card/PurcahseCard";
 import PurcahseInfoCard from "@/components/card/PurcahseInfoCard";
+import SEOHelmet from "@/utils/SEOHelmet";
 export default function Order() {
   const user = useUser();
   // 주문 현황
@@ -17,15 +18,22 @@ export default function Order() {
 
   return (
     <>
+      {/* header */}
+      <SEOHelmet
+        title={`Order`}
+        description="Manage the order of your product."
+      />
+
+      {/* body  */}
       <PageHeader title="Order" description="당신의 상품의 주문 현황입니다." />
       <div className="w-full h-px bg-slate-300"></div>
 
       {/* 구매 내역 */}
-      <section className="flex flex-col gap-10 p-10 mb-30 ">
+      <main className="flex flex-col gap-10 p-10 mb-30 ">
         {/* 구매 그룹화 */}
         {orderGroups &&
           orderGroups.map((group) => (
-            <div
+            <section
               key={group.orderGroup}
               className="flex flex-col gap-6 border-b p-8 pb-20"
             >
@@ -42,7 +50,10 @@ export default function Order() {
                 );
 
                 return (
-                  <div className="w-full flex justify-evenly" key={productId}>
+                  <section
+                    className="w-full flex justify-evenly"
+                    key={productId}
+                  >
                     {/* 상품 카드 */}
                     <Link
                       to={`/product/${productId}`}
@@ -57,12 +68,12 @@ export default function Order() {
                       productId={productId}
                       group={group}
                     />
-                  </div>
+                  </section>
                 );
               })}
-            </div>
+            </section>
           ))}
-      </section>
+      </main>
     </>
   );
 }

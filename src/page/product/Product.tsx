@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
+import SEOHelmet from "@/utils/SEOHelmet";
 
 export default function Product() {
   const user = useUser();
@@ -54,6 +55,13 @@ export default function Product() {
 
   return (
     <>
+      {/* header */}
+      <SEOHelmet
+        title={`${params.category}`}
+        description={`Check out the ${params.category} products.`}
+      />
+
+      {/* body  */}
       <div className="flex justify-center gap-10">
         <button onClick={() => sortOption("price", "asc")}>
           가격 오름정렬
@@ -72,7 +80,7 @@ export default function Product() {
         </button>
       </div>
 
-      <div className="w-1/3 h-1/3">
+      <main className="w-1/3 h-1/3">
         {data?.pages
           .flatMap((page) => page?.data)
           .filter(
@@ -82,7 +90,7 @@ export default function Product() {
           .map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-      </div>
+      </main>
       <div ref={ref}></div>
     </>
   );

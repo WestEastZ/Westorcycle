@@ -18,6 +18,7 @@ import {
 import { UserType } from "@/models/type";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import SEOHelmet from "@/utils/SEOHelmet";
 
 export default function SignUp() {
   const navigte = useNavigate();
@@ -105,7 +106,14 @@ export default function SignUp() {
 
   return (
     <>
-      <div className="relative w-1/2 mt-20 m-auto bg-[url('./assets/image/signup.webp')] bg-cover bg-center bg-no-repeat">
+      {/* header */}
+      <SEOHelmet
+        title="SignUp"
+        description="This is the WESTORRYCLE Sign up page."
+      />
+
+      {/* body */}
+      <main className="relative w-1/2 mt-20 m-auto bg-[url('./assets/image/signup.webp')] bg-cover bg-center bg-no-repeat">
         <div className="inset-0 w-full h-full z-20 bg-black bg-opacity-50"></div>
         <div className="w-full h-full m-auto flex justify-center z-30">
           <div className="w-full h-fit p-20 flex flex-col bg-black bg-opacity-80">
@@ -172,7 +180,7 @@ export default function SignUp() {
             </section>
           </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

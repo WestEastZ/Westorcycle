@@ -3,6 +3,7 @@ import PurcahseInfoCard from "@/components/card/PurcahseInfoCard";
 import PageHeader from "@/components/header/PageHeader";
 import { useUser } from "@/contexts/userContext";
 import fetchPurchase from "@/query/order/fetchPurchase";
+import SEOHelmet from "@/utils/SEOHelmet";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 
@@ -17,11 +18,12 @@ export default function PurchaseHistory() {
   // 그룹화
   const orderGroups = data?.orderGroups;
 
-  // console.log(orderItems);
-  // console.log(orderGroups);
-
   return (
     <>
+      {/* header */}
+      <SEOHelmet title="Purchase" description="Check the order list" />
+
+      {/* body  */}
       <PageHeader
         title="Purchase History"
         description="당신의 구매내역입니다."
@@ -29,11 +31,11 @@ export default function PurchaseHistory() {
       <div className="w-full h-px bg-slate-300"></div>
 
       {/* 구매 내역 */}
-      <section className="flex flex-col gap-10 p-10 mb-30 ">
+      <main className="flex flex-col gap-10 p-10 mb-30 ">
         {/* 구매 그룹화 */}
         {orderGroups &&
           orderGroups.map((group) => (
-            <div
+            <section
               key={group.orderGroup}
               className="flex flex-col gap-6 border-b p-8 pb-20"
             >
@@ -50,7 +52,10 @@ export default function PurchaseHistory() {
                 );
 
                 return (
-                  <div className="w-full flex justify-around" key={productId}>
+                  <section
+                    className="w-full flex justify-around"
+                    key={productId}
+                  >
                     {/* 상품 카드 */}
                     <Link
                       to={`/product/${productId}`}
@@ -64,12 +69,12 @@ export default function PurchaseHistory() {
                       productId={productId}
                       group={group}
                     />
-                  </div>
+                  </section>
                 );
               })}
-            </div>
+            </section>
           ))}
-      </section>
+      </main>
     </>
   );
 }
