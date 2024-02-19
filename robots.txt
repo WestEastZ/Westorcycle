@@ -3,3 +3,5 @@ Disallow:/seller/
 Disallow: /consumer/
 Disallow: /purchase/
 Disallow: /cart/
+
+Sitemap: https://d33ycy02npbsmv.cloudfront.net/sitemap.xml
