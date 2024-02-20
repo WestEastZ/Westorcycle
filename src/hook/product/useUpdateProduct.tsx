@@ -40,7 +40,6 @@ export default function useUpdateProduct(
       onSuccess: () => {
         queryClient.invalidateQueries(["cart", userContext?.id]);
         queryClient.invalidateQueries(["product", initialProduct.id]);
-        console.log("Sds");
         navigate(`/seller/${user?.id}`);
       },
       onError: (error) => {
@@ -57,7 +56,6 @@ export default function useUpdateProduct(
 
     if (checkProduct) {
       setErrorProduct(checkProduct);
-      console.log(checkProduct);
       return;
     }
 
