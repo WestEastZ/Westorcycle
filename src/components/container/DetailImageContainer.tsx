@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { ProductWithId } from "@/models/type";
 
@@ -17,12 +17,15 @@ export default function DetailImageContainer({ product }: CaroselImageProps) {
     setOtherImage(product.productImage.slice(1));
   }, [product]);
 
-  function imageChangeHandler(index: number) {
-    setMainImage(otherImage[index]);
-    const newOtherImage = [...otherImage];
-    newOtherImage[index] = mainImage;
-    setOtherImage(newOtherImage);
-  }
+  const imageChangeHandler = useCallback(
+    (index: number) => {
+      setMainImage(otherImage[index]);
+      const newOtherImage = [...otherImage];
+      newOtherImage[index] = mainImage;
+      setOtherImage(newOtherImage);
+    },
+    [mainImage, otherImage]
+  );
 
   return (
     <div className="h-full flex flex-col gap-5">

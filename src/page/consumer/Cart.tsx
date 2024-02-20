@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useUser } from "@/contexts/userContext";
 import useSelectCart from "@/hook/cart/useSelectCart";
 import fetchCart from "@/query/cart/fetchCart";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import Payment from "./Payment";
 import SEOHelmet from "@/utils/SEOHelmet";
@@ -20,15 +20,11 @@ export default function Cart() {
     useSelectCart();
 
   // 장바구니 가격 조회
-  const [totalPrice, setTotalPrice] = useState<number>(0);
-
-  useEffect(() => {
-    let total = 0;
-    selectedItems?.forEach((item) => {
-      total += item.productPrice * item.productQuantity;
-    });
-
-    setTotalPrice(total);
+  const totalPrice = useMemo(() => {
+    return selectedItems.reduce(
+      (total, item) => total + item.productPrice * item.productQuantity,
+      0
+    );
   }, [selectedItems]);
 
   // 결제 정보 입력 모달 활성화

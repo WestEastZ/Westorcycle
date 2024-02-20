@@ -26,6 +26,7 @@ export default function CartModalCard({ item }: { item: CartType }) {
 
   // 장바구니 수량 수정
   const [quantity, setQuantity] = useState<number>(item.productQuantity);
+
   useEffect(() => {
     updateCartMutation.mutate({
       productId: item.productId,

@@ -1,5 +1,5 @@
 // React
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // firebase
@@ -101,8 +101,6 @@ export default function SignUp() {
         }
     }
   };
-
-  useEffect(() => {}, [errorEmail, errorPassword]);
 
   return (
     <>

@@ -4,6 +4,7 @@ import { ParamsType } from "@/page/seller/ManageProduct";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 import React from "react";
+import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 export default function useDeleteProduct(
@@ -12,20 +13,27 @@ export default function useDeleteProduct(
   product: Product
 ) {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const deleteProductHandler = async (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
+
     try {
       const storage = getStorage();
 
       if (params && params.productId) {
         const docRef = doc(db, "product", params.productId);
-        const imageRef = ref(storage, product?.productImage[0]);
+
+        // 이미지
+        const deleteImages = product.productImage.map(async (imgUrl) => {
+          const imageRef = ref(storage, imgUrl);
+          await deleteObject(imageRef);
+        });
 
         // 삭제
-        await deleteDoc(docRef);
-        await deleteObject(imageRef);
+        await Promise.all([deleteDoc(docRef), ...deleteImages]);
 
         navigate(`/seller/${user?.id}`);
       } else {
@@ -35,5 +43,7 @@ export default function useDeleteProduct(
       console.log(error);
     }
   };
-  return { deleteProductHandler };
+
+  const deleteProductMutation = useMutation(deleteProductHandler, {});
+  return { deleteProductMutation };
 }

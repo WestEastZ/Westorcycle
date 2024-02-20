@@ -2,7 +2,6 @@ import AddImageButton from "@/components/button/AddImageButton";
 import FormProduct from "@/components/form/FormProduct";
 import PageHeader from "@/components/header/PageHeader";
 
-// import { Input } from "@/components/ui/input";
 import { useUser } from "@/contexts/userContext";
 import useChangeInput from "@/hook/useChangeInput";
 import useDeleteProduct from "@/hook/product/useDeleteProduct";
@@ -31,19 +30,19 @@ export default function ManageProduct() {
   const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
   const [errorProduct, setErrorProduct] = useState<string>("");
 
-  // 상품 조회
+  // 상품 조회 -> client
   const { product, setProduct } = useFetchProduct(productId as string);
 
-  // 상품 상태 변경
+  // 상품 상태 변경 -> client
   const { onChangeInput } = useChangeInput(user, product, setProduct);
 
-  // 이미지 파일 선택
+  // 이미지 업로드 -> client
   const { addImageHandler } = useUploadImage(user, setProduct);
 
-  // 이미지 삭제
+  // 이미지 삭제 -> client
   const { deleteImageHandler } = useDeleteImage(setProduct, setImagesToDelete);
 
-  // 상품 수정
+  // 상품 수정 -> query
   const { editProductHandler } = useUpdateProduct(
     user,
     params,
@@ -53,7 +52,7 @@ export default function ManageProduct() {
   );
 
   // 상품 삭제
-  const { deleteProductHandler } = useDeleteProduct(user, params, product);
+  const { deleteProductMutation } = useDeleteProduct(user, params, product);
 
   return (
     <>
@@ -98,7 +97,7 @@ export default function ManageProduct() {
           addImageHandler={addImageHandler}
           product={product}
           setProduct={setProduct}
-          deleteProductHandler={deleteProductHandler}
+          deleteProductHandler={deleteProductMutation.mutate}
           editProductHandler={editProductHandler}
           errorCode={errorProduct}
         />

@@ -7,7 +7,12 @@ export default function MainImageContainer() {
       <Helmet>
         <link rel="preload" as="image" href={main} />
       </Helmet>
-      <img src={main} alt="오토바이" className="w-full h-full object-cover" />
+      <img
+        src={main}
+        alt="오토바이"
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
     </div>
   );
 }
