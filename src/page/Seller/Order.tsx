@@ -2,12 +2,20 @@ import PageHeader from "@/components/header/PageHeader";
 import { useUser } from "@/contexts/userContext";
 import { useQuery } from "react-query";
 import fetchOrder from "@/query/order/fetchOrder";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import PurcahseCard from "@/components/card/PurcahseCard";
 import PurcahseInfoCard from "@/components/card/PurcahseInfoCard";
 import SEOHelmet from "@/utils/SEOHelmet";
+import { checkAuth } from "@/utils/checkAuth";
 export default function Order() {
   const user = useUser();
+  const params = useParams();
+  const paramsId = params.id;
+  const navigate = useNavigate();
+
+  // 본인 확인
+  if (!checkAuth({ user, paramsId, navigate })) return null;
+
   // 주문 현황
   const { data } = useQuery(["order", user?.id], fetchOrder);
 

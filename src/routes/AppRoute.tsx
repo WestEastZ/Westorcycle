@@ -70,22 +70,6 @@ export default function AppRoute() {
               </Suspense>
             }
           />
-          <Route
-            path="/cart/:id"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Cart />
-              </Suspense>
-            }
-          />
-          {/* <Route
-            path="/payment/:id"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Payment />
-              </Suspense>
-            }
-          /> */}
 
           {/* 로그인 유무 */}
           <Route
@@ -173,6 +157,16 @@ export default function AppRoute() {
               </Suspense>
             }
           />
+          <Route
+            path="/cart/:id"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProtectedRoute condition={user && !user.isSeller}>
+                  <Cart />
+                </ProtectedRoute>
+              </Suspense>
+            }
+          />
 
           {/* 접근 불가 */}
           <Route
@@ -186,7 +180,7 @@ export default function AppRoute() {
         </Routes>
 
         {/* 장바구니 */}
-        <OpenCartButton />
+        {user?.isSeller ? null : <OpenCartButton />}
       </BrowserRouter>
     </>
   );
