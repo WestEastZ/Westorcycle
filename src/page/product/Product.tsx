@@ -1,4 +1,4 @@
-import ProductCard from "@/components/card/ProductCard";
+import ProductCard from "@/components/card/ProductCart";
 import { useUser } from "@/contexts/userContext";
 import fetchInfinityProduct from "@/query/product/fetchInfinityProduct";
 import { ProductWithId } from "@/models/type";
@@ -8,6 +8,7 @@ import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import SEOHelmet from "@/utils/SEOHelmet";
+import SortButton from "@/components/button/SortButton";
 
 export default function Product() {
   const user = useUser();
@@ -62,25 +63,9 @@ export default function Product() {
       />
 
       {/* body  */}
-      <div className="flex justify-center gap-10">
-        <button onClick={() => sortOption("price", "asc")}>
-          가격 오름정렬
-        </button>
-        <button onClick={() => sortOption("price", "desc")}>
-          가격 내림정렬
-        </button>
-      </div>
+      <SortButton sortOption={sortOption} />
 
-      <div className="flex justify-center gap-10">
-        <button onClick={() => sortOption("updatedAt", "asc")}>
-          최신 오름정렬
-        </button>
-        <button onClick={() => sortOption("updatedAt", "desc")}>
-          최신 내림정렬
-        </button>
-      </div>
-
-      <main className="w-1/3 h-1/3">
+      <main className="w-full grid grid-cols-3 gap-5 place-items-center">
         {data?.pages
           .flatMap((page) => page?.data)
           .filter(

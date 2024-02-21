@@ -75,7 +75,7 @@ export default function CartCard({
           <div className="text-left text-lg font-bold review">
             {product?.productName}
           </div>
-          <div className="text-left text-sm text-gray-600 review">
+          <div className="text-left text-sm text-gray-400 review">
             {product?.productDescription}
           </div>
         </div>
@@ -90,6 +90,7 @@ export default function CartCard({
             {location.pathname.includes("payment") ? null : (
               <>
                 <button
+                  name="productQuantityUp"
                   onClick={(e) => {
                     e.stopPropagation();
                     if (product && product.productQuantity > quantity) {
@@ -103,6 +104,7 @@ export default function CartCard({
                   </div>
                 </button>
                 <button
+                  name="productQuantityDown"
                   onClick={(e) => {
                     e.stopPropagation();
                     if (quantity > 1) {

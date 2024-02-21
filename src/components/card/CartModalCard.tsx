@@ -57,6 +57,7 @@ export default function CartModalCard({ item }: { item: CartType }) {
             <div className="text-xs">{quantity}</div>
             <div className="text-xs">
               <button
+                name="productQuantityUp"
                 onClick={() =>
                   product &&
                   product.productQuantity > quantity &&
@@ -65,7 +66,10 @@ export default function CartModalCard({ item }: { item: CartType }) {
               >
                 증가
               </button>
-              <button onClick={() => quantity > 1 && setQuantity(quantity - 1)}>
+              <button
+                name="productQuantityDown"
+                onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+              >
                 감소
               </button>
             </div>

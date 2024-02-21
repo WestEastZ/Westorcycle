@@ -138,10 +138,10 @@ export default function FormProduct({
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Category</SelectLabel>
-              <SelectItem value="Motorcycle">Motorcycle</SelectItem>
-              <SelectItem value="Helmet">Helmet</SelectItem>
-              <SelectItem value="Clothes">Clothes</SelectItem>
-              <SelectItem value="Gloves">Gloves</SelectItem>
+              <SelectItem value="Classic">Classic</SelectItem>
+              <SelectItem value="Sports">Sports</SelectItem>
+              <SelectItem value="Adventure">Adventure</SelectItem>
+              <SelectItem value="Scooter">Scooter</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>

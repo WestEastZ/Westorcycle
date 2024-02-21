@@ -76,6 +76,7 @@ module.exports = {
         opacity: "opacity",
       },
       transitionDuration: {
+        200: "200ms",
         500: "500ms",
       },
       transitionTimingFunction: {
@@ -83,6 +84,7 @@ module.exports = {
       },
       transform: ["responsive"],
       opacity: ["responsive", "hover", "focus", "active", "group-hover"],
+      backgroundColor: ["group-hover"],
     },
   },
   plugins: [require("tailwindcss-animate")],

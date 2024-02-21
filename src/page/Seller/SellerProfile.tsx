@@ -6,7 +6,7 @@ import { useInfiniteQuery } from "react-query";
 import fetchInfinityProduct from "@/query/product/fetchInfinityProduct";
 import { useInView } from "react-intersection-observer";
 import { ProductWithId } from "@/models/type";
-import ProductCard from "../../components/card/ProductCard";
+import SellerProductCard from "../../components/card/SellerProductCard";
 import { OrderByDirection } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
 import SEOHelmet from "@/utils/SEOHelmet";
@@ -74,7 +74,7 @@ export default function SellerProfile() {
               productWithId !== undefined
           )
           .map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <SellerProductCard key={product.id} product={product} />
           ))}
       </section>
       <div ref={ref}></div>
