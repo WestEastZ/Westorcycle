@@ -7,20 +7,20 @@ import HomeProductContainer from "@/components/container/HomeProductContainer";
 import SEOHelmet from "@/utils/SEOHelmet";
 
 export default function Home() {
-  const Motorcycle = useQuery(
-    ["product", "productCategory", "Motorcycle", 8],
+  const Classic = useQuery(
+    ["product", "productCategory", "Classic", 8],
     fetchProducts
   );
-  const Helmet = useQuery(
-    ["product", "productCategory", "Helmet", 8],
+  const Sports = useQuery(
+    ["product", "productCategory", "Sports", 8],
     fetchProducts
   );
-  const Clothes = useQuery(
-    ["product", "productCategory", "Clothes", 8],
+  const Adventure = useQuery(
+    ["product", "productCategory", "Adventure", 8],
     fetchProducts
   );
-  const Gloves = useQuery(
-    ["product", "productCategory", "Gloves", 8],
+  const Scooter = useQuery(
+    ["product", "productCategory", "Scooter", 8],
     fetchProducts
   );
 
@@ -46,57 +46,57 @@ export default function Home() {
       <main className="flex flex-col gap-10">
         <section>
           <Link
-            to={"/category/Motorcycle"}
+            to={"/category/Classic"}
             className="w-fit flex text-left mb-2 ml-2"
           >
             <div className="flex items-center">
-              <div>Motorcycle</div>
+              <div>Classic</div>
               <img src={ArrowRight} alt="ArrowRight" />
             </div>
           </Link>
 
-          <HomeProductContainer products={Motorcycle.data} />
+          <HomeProductContainer products={Classic.data} />
         </section>
 
         <section>
           <Link
-            to={"/category/Helmet"}
+            to={"/category/Sports"}
             className="w-fit flex text-left mb-2 ml-2"
           >
             <div className="flex items-center">
-              <div>Helmet</div>
+              <div>Sports</div>
               <img src={ArrowRight} alt="ArrowRight" />
             </div>
           </Link>
 
-          <HomeProductContainer products={Helmet.data} />
+          <HomeProductContainer products={Sports.data} />
         </section>
         <section>
           <Link
-            to={"/category/Clothes"}
+            to={"/category/Adventure"}
             className="w-fit flex text-left mb-2 ml-2"
           >
             <div className="flex items-center">
-              <div>Clothes</div>
+              <div>Adventure</div>
               <img src={ArrowRight} alt="ArrowRight" />
             </div>
           </Link>
 
-          <HomeProductContainer products={Clothes.data} />
+          <HomeProductContainer products={Adventure.data} />
         </section>
 
         <section>
           <Link
-            to={"/category/Gloves"}
+            to={"/category/Scooter"}
             className="w-fit flex text-left mb-2 ml-2"
           >
             <div className="flex items-center">
-              <div>Gloves</div>
+              <div>Scooter</div>
               <img src={ArrowRight} alt="ArrowRight" />
             </div>
           </Link>
 
-          <HomeProductContainer products={Gloves.data} />
+          <HomeProductContainer products={Scooter.data} />
         </section>
       </main>
     </>

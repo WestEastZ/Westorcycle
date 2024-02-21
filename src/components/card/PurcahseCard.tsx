@@ -19,7 +19,7 @@ export default function PurcahseCard({ productId }: { productId: string }) {
         <div className="text-left text-lg font-bold review">
           {product?.productName}
         </div>
-        <div className="text-left text-sm text-gray-600 review">
+        <div className="text-left text-sm text-gray-400 review">
           {product?.productDescription}
         </div>
       </section>

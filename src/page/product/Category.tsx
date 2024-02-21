@@ -1,9 +1,10 @@
 import SEOHelmet from "@/utils/SEOHelmet";
-import { Link } from "react-router-dom";
+
+import CategoryContainer from "@/components/container/CategoryContainer";
 
 export default function Category() {
   return (
-    <>
+    <div className="h-full w-full flex justify-center items-center">
       {/* header */}
       <SEOHelmet
         title={`Product Category`}
@@ -11,12 +12,12 @@ export default function Category() {
       />
 
       {/* body  */}
-      <main>
-        <Link to={`/category/Motorcycle`}>Motorcycle</Link>
-        <Link to={`/category/Helmet`}>Helmet</Link>
-        <Link to={`/category/Clothes`}>Clothes</Link>
-        <Link to={`/category/Gloves`}>Gloves</Link>
+      <main className="w-full h-[50rem] grid grid-cols-2 gap-10">
+        <CategoryContainer category="Classic" />
+        <CategoryContainer category="Sports" />
+        <CategoryContainer category="Adventure" />
+        <CategoryContainer category="Scooter" />
       </main>
-    </>
+    </div>
   );
 }

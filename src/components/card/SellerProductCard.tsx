@@ -6,7 +6,7 @@ interface ProductCardProps {
   product: ProductWithId;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function SellerProductCard({ product }: ProductCardProps) {
   const user = useUser();
   return (
     <Link
@@ -27,7 +27,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="text-left text-lg font-bold review">
             {product.productName}
           </div>
-          <div className="text-left text-sm text-gray-600 review">
+          <div className="text-left text-sm text-gray-400 review">
             {product.productDescription}
           </div>
         </div>

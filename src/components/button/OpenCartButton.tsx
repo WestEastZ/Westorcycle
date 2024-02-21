@@ -18,6 +18,7 @@ export default function OpenCartButton() {
         <>
           <CartModal openCart={openCart} />
           <button
+            name="OpenCartButton"
             onClick={openModal}
             className="fixed flex justify-center items-center bottom-8 right-8 w-12 h-12 z-50 rounded-full bg-zinc-800"
           >
