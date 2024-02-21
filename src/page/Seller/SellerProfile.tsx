@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUser } from "@/contexts/userContext";
 import PageHeader from "@/components/header/PageHeader";
 import { useInfiniteQuery } from "react-query";
@@ -10,12 +10,17 @@ import SellerProductCard from "../../components/card/SellerProductCard";
 import { OrderByDirection } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
 import SEOHelmet from "@/utils/SEOHelmet";
+import { checkAuth } from "@/utils/checkAuth";
 
 export default function SellerProfile() {
   const user = useUser();
   const params = useParams();
   const paramsId = params.id;
+  const navigate = useNavigate();
   const { ref, inView } = useInView();
+
+  // 본인 확인
+  if (!checkAuth({ user, paramsId, navigate })) return null;
 
   const category: string = "";
   const option: string = "";

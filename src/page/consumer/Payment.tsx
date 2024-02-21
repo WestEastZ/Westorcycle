@@ -9,6 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CartType } from "@/models/type";
 import useDeletePaymentItem from "@/hook/cart/useDeletePaymentItem";
+import { useUser } from "@/contexts/userContext";
+import { useNavigate, useParams } from "react-router";
+import { checkAuth } from "@/utils/checkAuth";
 
 export default function Payment({
   selectedItems,
@@ -19,6 +22,14 @@ export default function Payment({
   totalPrice: number;
   openModalHandler: () => void;
 }) {
+  const user = useUser();
+  const params = useParams();
+  const paramsId = params.id;
+  const navigate = useNavigate();
+
+  // 본인 확인
+  if (!checkAuth({ user, paramsId, navigate })) return null;
+
   const { DecreaseStockMutation } = useDecreaseStock();
   const { RecoverStockMutation } = useRecoverStock();
   const { addPurchaseMutation } = useAddPurchase();

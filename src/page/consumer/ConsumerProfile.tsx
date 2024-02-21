@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import PageHeader from "@/components/header/PageHeader";
 import { useUser } from "@/contexts/userContext";
 import SEOHelmet from "@/utils/SEOHelmet";
+import { checkAuth } from "@/utils/checkAuth";
 
 export default function ConsumerProfile() {
   const user = useUser();
+  const params = useParams();
+  const paramsId = params.id;
+  const navigate = useNavigate();
+
+  // 본인 확인
+  if (!checkAuth({ user, paramsId, navigate })) return null;
   return (
     <>
       {/* header */}

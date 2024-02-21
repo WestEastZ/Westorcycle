@@ -10,13 +10,14 @@ import useUpdateProduct from "@/hook/product/useUpdateProduct";
 import { UserType } from "@/models/type";
 import { useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useDeleteImage from "@/hook/image/useDeleteImage";
 import { ERROR_MESSAGES } from "@/utils/validation";
 import useFetchProduct from "@/hook/product/useFetchProduct";
 
 import Close from "@/assets/icon/Close.svg";
 import SEOHelmet from "@/utils/SEOHelmet";
+import { checkAuth } from "@/utils/checkAuth";
 
 export type ParamsType = {
   productId?: string;
@@ -25,7 +26,12 @@ export type ParamsType = {
 export default function ManageProduct() {
   const user = useUser() as UserType;
   const params = useParams();
+  const paramsId = params.id;
   const { productId } = params;
+  const navigate = useNavigate();
+
+  // 본인 확인
+  if (!checkAuth({ user, paramsId, navigate })) return null;
 
   const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
   const [errorProduct, setErrorProduct] = useState<string>("");

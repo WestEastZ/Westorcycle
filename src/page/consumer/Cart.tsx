@@ -8,9 +8,17 @@ import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import Payment from "./Payment";
 import SEOHelmet from "@/utils/SEOHelmet";
+import { useNavigate, useParams } from "react-router";
+import { checkAuth } from "@/utils/checkAuth";
 
 export default function Cart() {
   const user = useUser();
+  const params = useParams();
+  const paramsId = params.id;
+  const navigate = useNavigate();
+
+  // 본인 확인
+  if (!checkAuth({ user, paramsId, navigate })) return null;
 
   // 장바구니 전체 조회
   const { data: cartItems } = useQuery(["cart", user?.id], fetchCart);

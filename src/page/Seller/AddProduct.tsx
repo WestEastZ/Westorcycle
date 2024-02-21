@@ -14,9 +14,17 @@ import useDeleteImage from "@/hook/image/useDeleteImage";
 
 import Close from "@/assets/icon/Close.svg";
 import SEOHelmet from "@/utils/SEOHelmet";
+import { useNavigate, useParams } from "react-router";
+import { checkAuth } from "@/utils/checkAuth";
 
 export default function AddProduct() {
   const user = useUser() as UserType;
+  const params = useParams();
+  const paramsId = params.id;
+  const navigate = useNavigate();
+
+  // 본인 확인
+  if (!checkAuth({ user, paramsId, navigate })) return null;
 
   const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
   console.log(imagesToDelete);
