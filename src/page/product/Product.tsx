@@ -11,7 +11,7 @@ import SEOHelmet from "@/utils/SEOHelmet";
 import SortButton from "@/components/button/SortButton";
 
 export default function Product() {
-  const user = useUser();
+  const { user } = useUser() || {};
   const params = useParams();
   const queryClient = useQueryClient();
   const { ref, inView } = useInView();

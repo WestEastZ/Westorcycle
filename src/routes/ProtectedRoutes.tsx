@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  condition: boolean | null;
+  condition: boolean | null | undefined;
 }
 
 export const ProtectedRoute = ({

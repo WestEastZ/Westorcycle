@@ -31,7 +31,7 @@ export default function PurcahseInfoCard({
   productId,
   group,
 }: PurcahseCardProps) {
-  const userContext = useUser();
+  const { user } = useUser() || {};
 
   // 구매 취소
   const { cancleOrderMutation } = useCancleOrder();
@@ -50,7 +50,7 @@ export default function PurcahseInfoCard({
 
   return (
     <div className="w-1/3">
-      {userContext?.isSeller ? (
+      {user?.isSeller ? (
         // 판매자
         <div className="h-full flex flex-col justify-center gap-10 text-center text-sm">
           <section className="flex justify-evenly items-center">

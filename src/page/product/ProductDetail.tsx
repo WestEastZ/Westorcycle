@@ -15,7 +15,7 @@ import ArrowCircleDown from "@/assets/icon/ArrowCircleDown.svg";
 import SEOHelmet from "@/utils/SEOHelmet";
 
 export default function ProductDetail() {
-  const user = useUser();
+  const { user } = useUser() || {};
   const params = useParams();
   const { productId } = params;
 

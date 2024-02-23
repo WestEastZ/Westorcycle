@@ -9,13 +9,15 @@ import { useQuery } from "react-query";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function PurchaseHistory() {
-  const user = useUser();
+  const { user } = useUser() || {};
   const params = useParams();
   const paramsId = params.id;
   const navigate = useNavigate();
 
   // 본인 확인
-  if (!checkAuth({ user, paramsId, navigate })) return null;
+  if (user) {
+    if (!checkAuth({ user, paramsId, navigate })) return null;
+  }
 
   // 구매내역 조회 및 그룹화
   const { data } = useQuery(["order", user?.id], fetchPurchase);

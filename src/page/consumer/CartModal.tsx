@@ -4,7 +4,7 @@ import fetchCart from "@/query/cart/fetchCart";
 import { useQuery } from "react-query";
 
 export default function CartModal({ openCart }: { openCart: boolean }) {
-  const user = useUser();
+  const { user } = useUser() || {};
 
   // react-query
   const cartItems = useQuery(["cart", user?.id], fetchCart);

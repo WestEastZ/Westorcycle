@@ -8,13 +8,15 @@ import PurcahseInfoCard from "@/components/card/PurcahseInfoCard";
 import SEOHelmet from "@/utils/SEOHelmet";
 import { checkAuth } from "@/utils/checkAuth";
 export default function Order() {
-  const user = useUser();
+  const { user } = useUser() || {};
   const params = useParams();
   const paramsId = params.id;
   const navigate = useNavigate();
 
   // 본인 확인
-  if (!checkAuth({ user, paramsId, navigate })) return null;
+  if (user) {
+    if (!checkAuth({ user, paramsId, navigate })) return null;
+  }
 
   // 주문 현황
   const { data } = useQuery(["order", user?.id], fetchOrder);

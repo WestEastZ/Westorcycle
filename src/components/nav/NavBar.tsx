@@ -4,15 +4,15 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 
 export default function NavBar() {
-  const user = useUser();
+  const { user, logout } = useUser() || {};
   const navigate = useNavigate();
 
-  const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
-    event.preventDefault();
-    await signOut(auth);
+  // const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
+  //   event.preventDefault();
+  //   await signOut(auth);
 
-    navigate("/");
-  };
+  //   navigate("/");
+  // };
 
   return (
     <>
@@ -39,7 +39,7 @@ export default function NavBar() {
                 Profile
               </Link>
               <button
-                onClick={Logout}
+                onClick={logout}
                 className="under-line text-custom text-sm"
               >
                 Logout

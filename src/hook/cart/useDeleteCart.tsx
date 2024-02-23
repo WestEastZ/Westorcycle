@@ -1,6 +1,5 @@
 import { useUser } from "@/contexts/userContext";
 import { db } from "@/firebase";
-import { UserType } from "@/models/type";
 import {
   collection,
   deleteDoc,
@@ -12,7 +11,7 @@ import {
 import { useMutation, useQueryClient } from "react-query";
 
 export default function useDeleteCart() {
-  const user = useUser() as UserType;
+  const { user } = useUser() || {};
   const queryClient = useQueryClient();
 
   const deleteCartHandler = async (productId: string) => {
@@ -20,7 +19,7 @@ export default function useDeleteCart() {
       let q = query(
         collection(db, "cart"),
         where("productId", "==", productId),
-        where("userId", "==", user.id)
+        where("userId", "==", user?.id)
       );
 
       const qSnapshot = await getDocs(q);
