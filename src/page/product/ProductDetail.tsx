@@ -46,7 +46,7 @@ export default function ProductDetail() {
     return <div>Loading...</div>;
   }
   return (
-    <>
+    <div className="w-full flex justify-center items-center mt-10">
       {/* header */}
       <SEOHelmet
         title={`Product Detail`}
@@ -54,13 +54,13 @@ export default function ProductDetail() {
       />
 
       {/* body  */}
-      <main className="w-full h-full flex flex-col justify-center items-center mt-28 gap-20">
+      <main className="w-full flex flex-col justify-center items-center gap-20">
         <section className="flex w-full justify-center gap-20">
           <section className="h-full">
             <DetailImageContainer product={product} />
           </section>
 
-          <section className="h-full flex flex-col justify-between items-start">
+          <section className="flex flex-col justify-between">
             {/* 상품 정보 */}
             <section className="flex flex-col text-left gap-5">
               <div className="text-4xl">{product.productName}</div>
@@ -98,13 +98,25 @@ export default function ProductDetail() {
             </section>
 
             {/* 장바구니 */}
-            <section className="flex w-full justify-center ">
-              {isInCart ? (
+            <section className="w-full">
+              {user?.isSeller && product.sellerId === user?.id ? (
+                <Link
+                  to={`/seller/${user?.id}/manage-product/${product.id}`}
+                  className="w-full"
+                >
+                  <Button>See the Product</Button>
+                </Link>
+              ) : isInCart ? (
                 <Link to={`/cart/${user?.id}`} className="w-full">
                   <Button>See the Cart</Button>
                 </Link>
               ) : (
-                <Button onClick={addCartMutation.mutate}>Add to Cart</Button>
+                <Button
+                  onClick={addCartMutation.mutate}
+                  disabled={product.sellerId !== user?.id}
+                >
+                  Add to Cart
+                </Button>
               )}
             </section>
           </section>
@@ -116,6 +128,6 @@ export default function ProductDetail() {
           <RecommendContainer products={recommend} />
         </section>
       </main>
-    </>
+    </div>
   );
 }
