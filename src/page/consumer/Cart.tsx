@@ -6,7 +6,7 @@ import useSelectCart from "@/hook/cart/useSelectCart";
 import fetchCart from "@/query/cart/fetchCart";
 import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
-import Payment from "./Payment";
+import Payment from "../../components/modal/Payment";
 import SEOHelmet from "@/utils/SEOHelmet";
 import { useNavigate, useParams } from "react-router";
 import { checkAuth } from "@/utils/checkAuth";

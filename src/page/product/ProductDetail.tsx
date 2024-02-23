@@ -54,7 +54,7 @@ export default function ProductDetail() {
       />
 
       {/* body  */}
-      <main className="w-full h-full flex flex-col justify-center items-center gap-20">
+      <main className="w-full h-full flex flex-col justify-center items-center mt-28 gap-20">
         <section className="flex w-full justify-center gap-20">
           <section className="h-full">
             <DetailImageContainer product={product} />
