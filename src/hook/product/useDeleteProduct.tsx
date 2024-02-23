@@ -4,7 +4,7 @@ import { ParamsType } from "@/page/seller/ManageProduct";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 import React from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 export default function useDeleteProduct(

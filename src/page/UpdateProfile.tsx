@@ -30,6 +30,9 @@ export default function UpdateProfile() {
 
   // 비밀번호 재설정
   const [openPasswordModal, setOpenPasswordModal] = useState<boolean>(false);
+  const modalHandler = () => {
+    setOpenPasswordModal(!openPasswordModal);
+  };
 
   const { updatePasswordMutation } = useUpdatePassword();
 
@@ -48,7 +51,7 @@ export default function UpdateProfile() {
       <div className="w-full h-px bg-slate-300 mb-8"></div>
 
       <main className="flex flex-col items-center gap-10">
-        <form className="w-2/3 h-full flex flex-col gap-16 m-auto mt-52">
+        <form className="w-2/3 h-full flex flex-col gap-16 m-auto mt-28">
           {/* email */}
           <section>
             <label htmlFor="email" className="text-left hidden">
@@ -74,16 +77,15 @@ export default function UpdateProfile() {
           <Button onClick={() => UpdateUserMutation.mutate({ newNickname })}>
             Edit
           </Button>
-          <Button onClick={() => setOpenPasswordModal(true)}>
-            Edit Password
-          </Button>
+          <Button onClick={modalHandler}>Edit Password</Button>
         </section>
 
-        <ModalPassword
-          isOpen={openPasswordModal}
-          onClose={() => setOpenPasswordModal(false)}
-          onChangePassword={handlePasswordChange}
-        />
+        {openPasswordModal ? (
+          <ModalPassword
+            onClose={modalHandler}
+            onChangePassword={handlePasswordChange}
+          />
+        ) : null}
       </main>
     </div>
   );

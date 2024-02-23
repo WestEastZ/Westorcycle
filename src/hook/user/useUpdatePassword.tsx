@@ -45,7 +45,11 @@ export default function useUpdatePassword() {
 
   const updatePasswordMutation = useMutation(updatePasswordHandler, {
     onSuccess: () => {
+      console.log("sss");
       navigate(`/${user?.isSeller ? "seller" : "consumer"}/${user?.id}`);
+    },
+    onError: (error) => {
+      console.log(error);
     },
   });
   return { updatePasswordMutation };

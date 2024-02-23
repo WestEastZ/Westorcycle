@@ -3,15 +3,13 @@ import PageHeader from "@/components/header/PageHeader";
 import { useUser } from "@/contexts/userContext";
 import SEOHelmet from "@/utils/SEOHelmet";
 import { checkAuth } from "@/utils/checkAuth";
-import ConsumerProfileContainer from "@/components/container/ConsumerProfileContainer";
+import ProfileLinkContainer from "@/components/container/ProfileLinkContainer";
 
 export default function ConsumerProfile() {
   const { user } = useUser() || {};
   const params = useParams();
   const paramsId = params.id;
   const navigate = useNavigate();
-
-  console.log(user?.id === paramsId);
 
   // 본인 확인
   if (user) {
@@ -31,17 +29,17 @@ export default function ConsumerProfile() {
       <div className="w-full h-px bg-slate-300 mb-8"></div>
 
       <main className="flex flex-col justify-start items-start gap-24 mt-20 ml-10">
-        <ConsumerProfileContainer
+        <ProfileLinkContainer
           path={`/editprofile/${user?.id}`}
           title={"Edit Profile"}
           discription={"Edit your Profile"}
         />
-        <ConsumerProfileContainer
+        <ProfileLinkContainer
           path={`/cart/${user?.id}`}
           title={"My Cart"}
           discription={"Manage your Cart"}
         />
-        <ConsumerProfileContainer
+        <ProfileLinkContainer
           path={`/purchase/${user?.id}`}
           title={"My Order"}
           discription={"Manage your Order"}

@@ -99,7 +99,7 @@ export default function Payment({
     >
       {/* 구매자 정보 입력 */}
       <section
-        className="absolute w-2/3 h-2/3 z-50 bg-[#141414] rounded-3xl flex flex-col justify-evenly px-40"
+        className="absolute w-[40rem] h-[40rem] z-50 bg-[#141414] rounded-3xl flex flex-col justify-evenly px-40"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="text-2xl">Buyer Infomation</div>

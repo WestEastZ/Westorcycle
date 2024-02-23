@@ -1,18 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useUser } from "@/contexts/userContext";
-import { signOut } from "firebase/auth";
-import { auth } from "@/firebase";
 
 export default function NavBar() {
   const { user, logout } = useUser() || {};
-  const navigate = useNavigate();
-
-  // const Logout: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
-  //   event.preventDefault();
-  //   await signOut(auth);
-
-  //   navigate("/");
-  // };
 
   return (
     <>
