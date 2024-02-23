@@ -36,7 +36,7 @@ export default function usePayment(
     }
 
     const { IMP } = window;
-    IMP?.init("imp86872540");
+    IMP?.init(import.meta.env.VITE_APP_IMP);
 
     /* 2. 결제 데이터 정의하기 */
     const data: RequestPayParams = {

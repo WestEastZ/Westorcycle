@@ -12,6 +12,7 @@ import useDeletePaymentItem from "@/hook/cart/useDeletePaymentItem";
 import { useUser } from "@/contexts/userContext";
 import { useNavigate, useParams } from "react-router";
 import { checkAuth } from "@/utils/checkAuth";
+import Close from "../../assets/icon/Close.svg";
 
 export default function Payment({
   selectedItems,
@@ -144,6 +145,9 @@ export default function Payment({
             Payment
           </Button>
         </form>
+        <button onClick={openModalHandler} className="absolute top-6 right-6">
+          <img src={Close} alt="Close" />
+        </button>
       </section>
     </div>
   );
