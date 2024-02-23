@@ -12,7 +12,7 @@ interface addPurchaseProp {
 }
 
 export default function useAddPurchase() {
-  const user = useUser();
+  const { user } = useUser() || {};
 
   const addPurchaseMutation = useMutation(
     async ({ cartItems, merchant_uid }: addPurchaseProp) => {

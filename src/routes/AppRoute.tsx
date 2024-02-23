@@ -5,10 +5,10 @@ import { ProtectedRoute } from "./ProtectedRoutes";
 import { useUser } from "@/contexts/userContext";
 
 // 동적 import
-
 const Home = React.lazy(() => import("@/page/Home"));
 const Login = React.lazy(() => import("@/page/Login"));
 const SignUp = React.lazy(() => import("@/page/SignUp"));
+const UpdateProfile = React.lazy(() => import("@/page/UpdateProfile"));
 const SellerProfile = React.lazy(() => import("@/page/seller/SellerProfile"));
 const ConsumerProfile = React.lazy(
   () => import("@/page/consumer/ConsumerProfile")
@@ -30,7 +30,7 @@ const PurchaseHistory = React.lazy(
 const Order = React.lazy(() => import("@/page/seller/Order"));
 
 export default function AppRoute() {
-  const user = useUser();
+  const { user } = useUser() || {};
 
   return (
     <>
@@ -89,6 +89,16 @@ export default function AppRoute() {
               <Suspense fallback={<div>Loading...</div>}>
                 <ProtectedRoute condition={!user}>
                   <SignUp />
+                </ProtectedRoute>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/editprofile/:id"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProtectedRoute condition={user ? true : false}>
+                  <UpdateProfile />
                 </ProtectedRoute>
               </Suspense>
             }

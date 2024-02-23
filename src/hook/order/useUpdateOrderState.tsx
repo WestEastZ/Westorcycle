@@ -11,7 +11,7 @@ import {
 import { useMutation, useQueryClient } from "react-query";
 
 export default function useUpdateOrderState() {
-  const user = useUser();
+  const { user } = useUser() || {};
   const queryClient = useQueryClient();
 
   const updateOrderStateHandler = async ({

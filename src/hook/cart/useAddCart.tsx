@@ -1,6 +1,6 @@
 import { useUser } from "@/contexts/userContext";
 import { db } from "@/firebase";
-import { ProductWithId, UserType } from "@/models/type";
+import { ProductWithId } from "@/models/type";
 import {
   collection,
   doc,
@@ -15,9 +15,8 @@ import { useMutation, useQueryClient } from "react-query";
 export default function useAddCart(
   product: ProductWithId | undefined,
   quantity: number
-  // setIsAdded: (value: boolean) => void
 ) {
-  const user = useUser() as UserType;
+  const { user } = useUser() || {};
   const queryClient = useQueryClient();
 
   const addCartHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,7 +25,7 @@ export default function useAddCart(
       let q = query(
         collection(db, "cart"),
         where("productId", "==", product?.id),
-        where("userId", "==", user.id)
+        where("userId", "==", user?.id)
       );
 
       const qSnapshot = await getDocs(q);
@@ -37,7 +36,7 @@ export default function useAddCart(
         // 장바구니에 추가
         const cartRef = doc(collection(db, "cart"));
         await setDoc(cartRef, {
-          userId: user.id,
+          userId: user?.id,
           productId: product?.id,
           productQuantity: quantity,
           productPrice: product?.productPrice,

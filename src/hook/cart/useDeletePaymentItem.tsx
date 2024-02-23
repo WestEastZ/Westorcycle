@@ -12,7 +12,7 @@ import {
 import { useMutation, useQueryClient } from "react-query";
 
 export default function useDeletePaymentItem() {
-  const user = useUser();
+  const { user } = useUser() || {};
   const queryClient = useQueryClient();
 
   const deletePaymentItemHandler = async ({

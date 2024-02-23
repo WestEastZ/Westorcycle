@@ -5,9 +5,9 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, description }: PageHeaderProps) {
   return (
-    <header className="mb-20 pt-10">
+    <header className="mb-10 pt-10">
       <h1 className="text-4xl mb-4">{title}</h1>
-      <h2 className="text-s">{description}</h2>
+      <h2 className="text-sm">{description}</h2>
     </header>
   );
 }

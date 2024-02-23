@@ -18,13 +18,15 @@ import { useNavigate, useParams } from "react-router";
 import { checkAuth } from "@/utils/checkAuth";
 
 export default function AddProduct() {
-  const user = useUser() as UserType;
+  const { user } = useUser() || {};
   const params = useParams();
   const paramsId = params.id;
   const navigate = useNavigate();
 
   // 본인 확인
-  if (!checkAuth({ user, paramsId, navigate })) return null;
+  if (user) {
+    if (!checkAuth({ user, paramsId, navigate })) return null;
+  }
 
   const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
   console.log(imagesToDelete);
@@ -46,16 +48,24 @@ export default function AddProduct() {
   });
 
   // 상품 상태 변경
-  const { onChangeInput } = useChangeInput(user, product, setProduct);
+  const { onChangeInput } = useChangeInput(
+    user as UserType,
+    product,
+    setProduct
+  );
 
   // 이미지 등록
-  const { addImageHandler } = useUploadImage(user, setProduct);
+  const { addImageHandler } = useUploadImage(user as UserType, setProduct);
 
   // 이미지 삭제
   const { deleteImageHandler } = useDeleteImage(setProduct, setImagesToDelete);
 
   // 상품 등록
-  const { addProductHandler } = useAddProduct(user, product, setErrorProduct);
+  const { addProductHandler } = useAddProduct(
+    user as UserType,
+    product,
+    setErrorProduct
+  );
 
   return (
     <>

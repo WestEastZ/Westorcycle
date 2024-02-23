@@ -13,7 +13,6 @@ export default function useDeleteProduct(
   product: Product
 ) {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const deleteProductHandler = async (
     event: React.MouseEvent<HTMLButtonElement>
@@ -34,8 +33,6 @@ export default function useDeleteProduct(
 
         // 삭제
         await Promise.all([deleteDoc(docRef), ...deleteImages]);
-
-        navigate(`/seller/${user?.id}`);
       } else {
         return;
       }
@@ -44,6 +41,10 @@ export default function useDeleteProduct(
     }
   };
 
-  const deleteProductMutation = useMutation(deleteProductHandler, {});
+  const deleteProductMutation = useMutation(deleteProductHandler, {
+    onSuccess: () => {
+      navigate(`/seller/${user?.id}`);
+    },
+  });
   return { deleteProductMutation };
 }

@@ -7,7 +7,7 @@ interface ProductCardProps {
 }
 
 export default function SellerProductCard({ product }: ProductCardProps) {
-  const user = useUser();
+  const { user } = useUser() || {};
   return (
     <Link
       to={`/seller/${user?.id}/manage-product/${product.docId}`}

@@ -25,7 +25,7 @@ export default function usePayment(
   buyer_email: string,
   buyer_addr: string
 ) {
-  const user = useUser();
+  const { user } = useUser() || {};
   const navigate = useNavigate();
 
   // 결제

@@ -37,7 +37,7 @@ export function validateEmail(email: string): string | null {
 // 회원가입 비밀번호 유효성 검사
 export function validatePassword(
   password: string,
-  nickname: string
+  nickname?: string
 ): string | null {
   // 10자리 미만
   if (password.length < 10) return "errorPassowordLength";
@@ -52,7 +52,9 @@ export function validatePassword(
   if (count < 2) return "errorPasswordComplexity";
 
   // 닉네임 포함
-  if (password.includes(nickname)) return "errorPasswordInclude";
+  if (nickname) {
+    if (password.includes(nickname)) return "errorPasswordInclude";
+  }
 
   return null;
 }

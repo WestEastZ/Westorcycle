@@ -22,13 +22,15 @@ export default function Payment({
   totalPrice: number;
   openModalHandler: () => void;
 }) {
-  const user = useUser();
+  const { user } = useUser() || {};
   const params = useParams();
   const paramsId = params.id;
   const navigate = useNavigate();
 
   // 본인 확인
-  if (!checkAuth({ user, paramsId, navigate })) return null;
+  if (user) {
+    if (!checkAuth({ user, paramsId, navigate })) return null;
+  }
 
   const { DecreaseStockMutation } = useDecreaseStock();
   const { RecoverStockMutation } = useRecoverStock();

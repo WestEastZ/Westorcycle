@@ -9,13 +9,13 @@ import { useMutation, useQueryClient } from "react-query";
 import { Params, useNavigate } from "react-router-dom";
 
 export default function useUpdateProduct(
-  user: UserType,
+  userProps: UserType,
   params: Readonly<Params<string>>,
   initialProduct: ProductWithId,
   imagesToDelete: string[],
   setErrorProduct: (value: string) => void
 ) {
-  const userContext = useUser();
+  const { user } = useUser() || {};
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -38,9 +38,9 @@ export default function useUpdateProduct(
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["cart", userContext?.id]);
+        queryClient.invalidateQueries(["cart", user?.id]);
         queryClient.invalidateQueries(["product", initialProduct.id]);
-        navigate(`/seller/${user?.id}`);
+        navigate(`/seller/${userProps?.id}`);
       },
       onError: (error) => {
         console.log(error);

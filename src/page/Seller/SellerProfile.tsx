@@ -13,14 +13,16 @@ import SEOHelmet from "@/utils/SEOHelmet";
 import { checkAuth } from "@/utils/checkAuth";
 
 export default function SellerProfile() {
-  const user = useUser();
+  const { user } = useUser() || {};
   const params = useParams();
   const paramsId = params.id;
   const navigate = useNavigate();
   const { ref, inView } = useInView();
 
   // 본인 확인
-  if (!checkAuth({ user, paramsId, navigate })) return null;
+  if (user) {
+    if (!checkAuth({ user, paramsId, navigate })) return null;
+  }
 
   const category: string = "";
   const option: string = "";
@@ -50,7 +52,7 @@ export default function SellerProfile() {
       {/* body  */}
       <PageHeader
         title={`${user?.nickname}`}
-        description={`Take care of your products`}
+        description={`Manage your account information`}
       />
 
       <div className="w-full h-px bg-slate-300 mb-8"></div>

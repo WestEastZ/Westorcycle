@@ -24,14 +24,16 @@ export type ParamsType = {
 };
 
 export default function ManageProduct() {
-  const user = useUser() as UserType;
+  const { user } = useUser() || {};
   const params = useParams();
   const paramsId = params.id;
   const { productId } = params;
   const navigate = useNavigate();
 
   // 본인 확인
-  if (!checkAuth({ user, paramsId, navigate })) return null;
+  if (user) {
+    if (!checkAuth({ user, paramsId, navigate })) return null;
+  }
 
   const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
   const [errorProduct, setErrorProduct] = useState<string>("");
@@ -40,17 +42,21 @@ export default function ManageProduct() {
   const { product, setProduct } = useFetchProduct(productId as string);
 
   // 상품 상태 변경 -> client
-  const { onChangeInput } = useChangeInput(user, product, setProduct);
+  const { onChangeInput } = useChangeInput(
+    user as UserType,
+    product,
+    setProduct
+  );
 
   // 이미지 업로드 -> client
-  const { addImageHandler } = useUploadImage(user, setProduct);
+  const { addImageHandler } = useUploadImage(user as UserType, setProduct);
 
   // 이미지 삭제 -> client
   const { deleteImageHandler } = useDeleteImage(setProduct, setImagesToDelete);
 
   // 상품 수정 -> query
   const { editProductHandler } = useUpdateProduct(
-    user,
+    user as UserType,
     params,
     product,
     imagesToDelete,
@@ -58,7 +64,11 @@ export default function ManageProduct() {
   );
 
   // 상품 삭제
-  const { deleteProductMutation } = useDeleteProduct(user, params, product);
+  const { deleteProductMutation } = useDeleteProduct(
+    user as UserType,
+    params,
+    product
+  );
 
   return (
     <>
