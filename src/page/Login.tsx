@@ -1,23 +1,15 @@
 // React
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-// firebase
-import { auth, db } from "@/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 // ui
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import SocialLogin from "@/utils/SocialLogin";
 
-// import loginBg from "@/assets/image/login.webp";
-import { ERROR_MESSAGES, validateLoginEmail } from "@/utils/validation";
-import { collection, getDocs, query, where } from "firebase/firestore";
 import SEOHelmet from "@/utils/SEOHelmet";
+import useLogin from "@/hook/user/useLogin";
+import FormLogin from "@/components/form/FormLogin";
 
 export default function Login() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errorEmail, setErrorEmail] = useState<string | null>(null);
@@ -36,35 +28,7 @@ export default function Login() {
   };
 
   // 로그인
-  const login: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
-    event.preventDefault();
-
-    setErrorEmail(null);
-
-    // 로그인 아이디 유효성 검사
-    let q = query(
-      collection(db, "user"),
-      where("email", "==", email),
-      where("password", "==", password)
-    );
-    const qSnapshot = await getDocs(q);
-
-    const checkLogin = validateLoginEmail(qSnapshot.docs);
-    if (checkLogin) {
-      setErrorEmail(ERROR_MESSAGES[checkLogin]);
-      console.log(errorEmail);
-      return;
-    }
-
-    // 로그인 비밀번호 유효성 검사
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const login = useLogin({ setErrorEmail, email, password, errorEmail });
 
   return (
     <>
@@ -77,7 +41,7 @@ export default function Login() {
       {/* body */}
       <main className="relative w-1/2 mt-20 m-auto bg-[url('./assets/image/login.webp')] bg-cover bg-center bg-no-repeat">
         <div className="inset-0 w-full h-full z-20 bg-black bg-opacity-50"></div>
-        <div className="w-full h-full m-auto flex justify-center z-30">
+        <section className="w-full h-full m-auto flex justify-center z-30">
           <div className="w-full h-fit p-20 flex flex-col bg-black bg-opacity-80">
             {/* 안내 문구 */}
             <div className="mb-10">
@@ -86,48 +50,27 @@ export default function Login() {
             </div>
 
             {/* 입력 */}
-            <section className="">
-              <form className="flex flex-col gap-5 mb-8">
-                <div>
-                  <Input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    name="email"
-                    onChange={onChange}
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    name="password"
-                    onChange={onChange}
-                  />
-                  {errorEmail === null ? null : (
-                    <div className="text-left mt-1 ml-2 text-xs text-red-500">
-                      {errorEmail}
-                    </div>
-                  )}
-                </div>
-
-                <Button onClick={login}>Login</Button>
-              </form>
-            </section>
+            <FormLogin
+              email={email}
+              onChange={onChange}
+              password={password}
+              errorEmail={errorEmail}
+              login={login}
+            />
             <div className="h-px mb-8 line-main"></div>
-            <section>
-              <SocialLogin />
-            </section>
+
+            {/* 소셜 로그인ㄴ */}
+            <SocialLogin />
+
             {/* 회원가입 이동 */}
             <section className="">
-              <p className="text-sm mb-2">Don't have an account?</p>
+              <p className="text-sm mb-1">Don't have an account?</p>
               <Link className="text-sm under-line" to={"/signup"}>
                 Sign Up
               </Link>
             </section>
           </div>
-        </div>
+        </section>
       </main>
     </>
   );

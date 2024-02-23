@@ -8,7 +8,7 @@ import { useUser } from "@/contexts/userContext";
 const Home = React.lazy(() => import("@/page/Home"));
 const Login = React.lazy(() => import("@/page/Login"));
 const SignUp = React.lazy(() => import("@/page/SignUp"));
-const UpdateProfile = React.lazy(() => import("@/page/UpdateProfile"));
+const UpdateProfile = React.lazy(() => import("@/page/user/UpdateProfile"));
 const SellerProfile = React.lazy(() => import("@/page/seller/SellerProfile"));
 const ConsumerProfile = React.lazy(
   () => import("@/page/consumer/ConsumerProfile")
