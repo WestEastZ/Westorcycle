@@ -10,10 +10,12 @@ import {
   where,
 } from "firebase/firestore";
 import { useMutation, useQueryClient } from "react-query";
+import useRecoverStock from "./useRecoverStock";
 
 export default function useCancleOrder() {
   const { user } = useUser() || {};
   const queryClient = useQueryClient();
+  const { RecoverStockMutation } = useRecoverStock();
 
   const cancleOrderHandler = async ({
     orderGroup,
@@ -22,6 +24,8 @@ export default function useCancleOrder() {
     orderGroup: string;
     productId: string;
   }) => {
+    let docId: string | undefined;
+
     try {
       let q = query(
         collection(db, "order"),
@@ -33,6 +37,7 @@ export default function useCancleOrder() {
 
       qSnapshot.forEach(async (docs) => {
         const docRef = doc(db, "order", docs.id);
+        docId = docs.id;
         await updateDoc(docRef, {
           orderState: OrderEnum.Cancle,
         });
@@ -40,11 +45,15 @@ export default function useCancleOrder() {
     } catch (error) {
       console.log(error);
     }
+    return { productId, docId };
   };
 
   const cancleOrderMutation = useMutation(cancleOrderHandler, {
-    onSuccess: () => {
+    onSuccess: ({ productId, docId }) => {
       queryClient.invalidateQueries(["order", user?.id]);
+      if (docId) {
+        RecoverStockMutation.mutate({ productId, docId });
+      }
     },
   });
   return { cancleOrderMutation };

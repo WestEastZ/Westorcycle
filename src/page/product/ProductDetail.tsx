@@ -99,24 +99,23 @@ export default function ProductDetail() {
 
             {/* 장바구니 */}
             <section className="w-full">
-              {user?.isSeller && product.sellerId === user?.id ? (
-                <Link
-                  to={`/seller/${user?.id}/manage-product/${product.id}`}
-                  className="w-full"
-                >
-                  <Button>See the Product</Button>
-                </Link>
+              {user?.isSeller ? (
+                product.sellerId === user?.id ? (
+                  <Link
+                    to={`/seller/${user?.id}/manage-product/${product.id}`}
+                    className="w-full"
+                  >
+                    <Button>See the Product</Button>
+                  </Link>
+                ) : (
+                  <Button disabled>Add to Cart</Button>
+                )
               ) : isInCart ? (
                 <Link to={`/cart/${user?.id}`} className="w-full">
                   <Button>See the Cart</Button>
                 </Link>
               ) : (
-                <Button
-                  onClick={addCartMutation.mutate}
-                  disabled={product.sellerId !== user?.id}
-                >
-                  Add to Cart
-                </Button>
+                <Button onClick={addCartMutation.mutate}>Add to Cart</Button>
               )}
             </section>
           </section>

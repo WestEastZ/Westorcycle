@@ -30,12 +30,16 @@ export default function useUpdateCart() {
 
       const qSnapshot = await getDocs(q);
 
-      qSnapshot.forEach(async (docs) => {
-        const docRef = doc(db, "cart", docs.id);
-        await updateDoc(docRef, {
-          productQuantity: newQuantity,
+      if (!qSnapshot.empty) {
+        qSnapshot.forEach(async (docs) => {
+          const docRef = doc(db, "cart", docs.id);
+          await updateDoc(docRef, {
+            productQuantity: newQuantity,
+          });
         });
-      });
+      } else {
+        console.log("No doc");
+      }
     } catch (error) {
       console.log(error);
     }
