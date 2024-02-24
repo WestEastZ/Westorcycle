@@ -1,4 +1,4 @@
-import CartModal from "@/page/consumer/CartModal";
+import ModalCart from "@/components/modal/ModalCart";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export default function OpenCartButton() {
     <>
       {location.pathname.startsWith("/cart") ? null : (
         <>
-          <CartModal openCart={openCart} />
+          <ModalCart openCart={openCart} />
           <button
             name="OpenCartButton"
             onClick={openModal}
