@@ -68,7 +68,7 @@ export default function PurcahseInfoCard({
             </div>
           </section>
 
-          <form action="">
+          <form>
             <Select
               value={orderItem?.orderState}
               onValueChange={(value) =>
@@ -109,22 +109,22 @@ export default function PurcahseInfoCard({
         // 구매자
         <div className="h-full flex flex-col justify-center gap-10 text-center text-sm">
           <section className="flex justify-evenly items-center">
-            <div>
+            <section>
               <div>KRW</div>
               <div>{orderItem?.productPrice}</div>
-            </div>
-            <div>
+            </section>
+            <section>
               <div>Quantity</div>
               <div>{orderItem?.productQuantity}</div>
-            </div>
-            <div>
+            </section>
+            <section>
               <div>seller</div>
               <div>{userSeller?.nickname}</div>
-            </div>
-            <div>
+            </section>
+            <section>
               <div>order State</div>
               <div>{orderItem?.orderState}</div>
-            </div>
+            </section>
           </section>
           {/* 취소 */}
           <Button
