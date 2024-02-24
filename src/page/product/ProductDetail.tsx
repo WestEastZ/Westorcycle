@@ -114,6 +114,8 @@ export default function ProductDetail() {
                 <Link to={`/cart/${user?.id}`} className="w-full">
                   <Button>See the Cart</Button>
                 </Link>
+              ) : product.productQuantity == 0 ? (
+                <div className="text-3xl text-red-400">Sold out</div>
               ) : (
                 <Button onClick={addCartMutation.mutate}>Add to Cart</Button>
               )}
