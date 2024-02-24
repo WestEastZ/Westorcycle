@@ -3,7 +3,7 @@ import { useUser } from "@/contexts/userContext";
 import fetchCart from "@/query/cart/fetchCart";
 import { useQuery } from "react-query";
 
-export default function CartModal({ openCart }: { openCart: boolean }) {
+export default function ModalCart({ openCart }: { openCart: boolean }) {
   const { user } = useUser() || {};
 
   // react-query
@@ -17,7 +17,7 @@ export default function CartModal({ openCart }: { openCart: boolean }) {
             : "translate-x-0 opacity-0"
         } `}
       >
-        <div className="text-2xl mb-10">{`${user?.nickname}'s Cart`}</div>
+        <div className="text-2xl mb-3">{`${user?.nickname}'s Cart`}</div>
         <CartModalContainer cartItems={cartItems.data} />
       </div>
     </>
