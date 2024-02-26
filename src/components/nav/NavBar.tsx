@@ -13,7 +13,7 @@ export default function NavBar() {
           </Link>
 
           <Link to={"/category"} className="under-line text-custom text-sm">
-            Cartegory
+            Category
           </Link>
 
           {user ? (
