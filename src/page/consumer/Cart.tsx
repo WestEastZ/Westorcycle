@@ -43,7 +43,6 @@ export default function Cart() {
     setOpenModal(!openModal);
   };
 
-  console.log("sdsd");
   return (
     <>
       {/* header */}
