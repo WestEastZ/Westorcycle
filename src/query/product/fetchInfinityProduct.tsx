@@ -26,7 +26,7 @@ export default async function fetchInfinityProduct({
 
   // 실행
   try {
-    let q = query(collection(db, _key), limit(6));
+    let q = query(collection(db, _key), limit(4));
 
     // 판매자 본인 확인
     if (user == params) {
