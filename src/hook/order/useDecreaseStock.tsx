@@ -12,14 +12,15 @@ export default function useDecreaseStock() {
 
       if (productSanpshot.exists()) {
         const productData = productSanpshot.data();
-        if (productData.productQuantity > product.productQuantity) {
+        // 재고의 개수 >= 카트의 개수
+        if (productData.productQuantity >= product.productQuantity) {
           await updateDoc(productRef, {
             ...product,
             productQuantity:
               productData.productQuantity - product.productQuantity,
           });
-          queryClient.invalidateQueries(["product", productData.id]);
         }
+        queryClient.invalidateQueries(["product", productData.id]);
       }
     });
 
