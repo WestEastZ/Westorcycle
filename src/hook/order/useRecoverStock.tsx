@@ -16,14 +16,13 @@ export default function useRecoverStock() {
 
           if (productSanpshot.exists()) {
             const productData = productSanpshot.data();
-            if (productData.productQuantity > product.productQuantity) {
-              await updateDoc(productRef, {
-                ...product,
-                productQuantity:
-                  productData.productQuantity + product.productQuantity,
-              });
-              queryClient.invalidateQueries(["product", productData.id]);
-            }
+
+            await updateDoc(productRef, {
+              ...product,
+              productQuantity:
+                productData.productQuantity + product.productQuantity,
+            });
+            queryClient.invalidateQueries(["product", productData.id]);
           }
         });
         return Promise.all(promises);
