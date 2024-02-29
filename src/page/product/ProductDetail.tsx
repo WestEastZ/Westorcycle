@@ -13,6 +13,7 @@ import RecommendContainer from "@/components/container/RecommendContainer";
 import ArrowCircleUp from "@/assets/icon/ArrowCircleUp.svg";
 import ArrowCircleDown from "@/assets/icon/ArrowCircleDown.svg";
 import SEOHelmet from "@/utils/SEOHelmet";
+import ProductDetailButton from "@/components/button/\bProductDetailButton";
 
 export default function ProductDetail() {
   const { user } = useUser() || {};
@@ -32,9 +33,6 @@ export default function ProductDetail() {
 
   // 상품이 장바구니에 있는지 확인
   const isInCart = cartItems?.some((item) => item.productId === productId);
-
-  // 장바구니 추가
-  const { addCartMutation } = useAddCart(product, quantity);
 
   // 추천 상품
   const recommend = useQuery(
@@ -97,35 +95,13 @@ export default function ProductDetail() {
               )}
             </section>
 
-            {/* 장바구니 */}
-            <section className="w-full">
-              {user?.isSeller ? (
-                product.sellerId === user?.id ? (
-                  <Link
-                    to={`/seller/${user?.id}/manage-product/${product.id}`}
-                    className="w-full"
-                  >
-                    <Button>See the Product</Button>
-                  </Link>
-                ) : (
-                  <Button disabled>Add to Cart</Button>
-                )
-              ) : user ? (
-                isInCart ? (
-                  <Link to={`/cart/${user?.id}`} className="w-full">
-                    <Button>See the Cart</Button>
-                  </Link>
-                ) : product.productQuantity == 0 ? (
-                  <div className="text-3xl text-red-400">Sold out</div>
-                ) : (
-                  <Button onClick={addCartMutation.mutate}>Add to Cart</Button>
-                )
-              ) : (
-                <Link to="/signup" className="w-full">
-                  <Button>Add to Cart</Button>
-                </Link>
-              )}
-            </section>
+            {/* 버튼 */}
+            <ProductDetailButton
+              user={user}
+              product={product}
+              isInCart={isInCart}
+              quantity={quantity}
+            />
           </section>
         </section>
 
