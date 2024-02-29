@@ -37,7 +37,10 @@ export default function SocialLogin() {
   };
 
   // google
-  const googleLoginhandler = async () => {
+  const googleLoginhandler = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
     try {
       const { user: firebaseUser } = await signInWithGoogle();
       socialLoginHandler(firebaseUser);
@@ -47,7 +50,10 @@ export default function SocialLogin() {
   };
 
   // github
-  const githubLoginhandler = async () => {
+  const githubLoginhandler = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
     try {
       const { user: firebaseUser } = await signInWithGithub();
       socialLoginHandler(firebaseUser);
