@@ -1,5 +1,4 @@
 import { ProductWithId, UserType } from "@/models/type";
-import { UseMutationResult } from "react-query";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import useAddCart from "@/hook/cart/useAddCart";
