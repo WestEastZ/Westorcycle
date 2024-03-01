@@ -1,12 +1,10 @@
 import { useUser } from "@/contexts/userContext";
 import fetchProducts from "@/query/product/fetchProducts";
-import useAddCart from "@/hook/cart/useAddCart";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import fetchProduct from "@/query/product/fetchProduct";
 import fetchCart from "@/query/cart/fetchCart";
-import { Button } from "@/components/ui/button";
 import DetailImageContainer from "@/components/container/DetailImageContainer";
 import RecommendContainer from "@/components/container/RecommendContainer";
 
