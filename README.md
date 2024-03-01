@@ -26,7 +26,7 @@ ID : east2@test.com (구매자)
 PW : Rhkdans97!
 ```
 
-## 2. ⛳️ 기술 스택
+## 2. ⛳️ 기술
 
 ![](https://img.shields.io/badge/react-61DAFB?style=for-the-badge\&logo=react\&logoColor=black) ![](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge\&logo=typescript\&logoColor=white) ![](https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge\&logo=reactquery\&logoColor=white) ![](https://github.com/img.shields.io/badge/tailwind%20css-06B6D4?style=for-the-badge\&logo=tailwindcss\&logoColor=white) ![](https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge\&logo=firebase\&logoColor=black) ![](https://img.shields.io/badge/vite-646CFF?style=for-the-badge\&logo=vite\&logoColor=white) ![](https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge\&logo=amazonaws\&logoColor=white) ![](https://img.shields.io/badge/amazons3-569A31?style=for-the-badge\&logo=amazons3\&logoColor=white)
 
