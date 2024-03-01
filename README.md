@@ -18,20 +18,20 @@ ID : east2@test.com (구매자)
 PW : Rhkdans97!
 ```
 
-## 2. 📜 [요구사항 명세](readme/details.md)
+## 2. 📜 요구사항 명세
 
-## 3. ⛳️ [기술적 의사결정](readme/skill-stack.md)
+## 3. ⛳️ 기술적 의사결정
 
 ![](https://img.shields.io/badge/react-61DAFB?style=for-the-badge\&logo=react\&logoColor=black) ![](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge\&logo=typescript\&logoColor=white) ![](https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge\&logo=reactquery\&logoColor=white) ![](https://github.com/img.shields.io/badge/tailwind%20css-06B6D4?style=for-the-badge\&logo=tailwindcss\&logoColor=white) ![](https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge\&logo=firebase\&logoColor=black) ![](https://img.shields.io/badge/vite-646CFF?style=for-the-badge\&logo=vite\&logoColor=white) ![](https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge\&logo=amazonaws\&logoColor=white) ![](https://img.shields.io/badge/amazons3-569A31?style=for-the-badge\&logo=amazons3\&logoColor=white)
 
-## 3. ✨ [주요 기능](readme/feature.md)
+## 3. ✨ 주요 기능
 
 * 회원가입 로그인
 * 상품 CRUD
 * 장바구니 CRUD
 * 상품 구매
 
-## 4. 💥 [트러블 슈팅](readme/trouble-shooting.md)
+## 4. 💥 트러블 슈팅
 
 ## 5. 📦 폴더 구조
 
