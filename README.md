@@ -48,4 +48,12 @@ PW : Rhkdans97!
 - 비동기 함수 반복문
 - Authentication 최신화
 
-## 6. ♻️ 리팩토링
+## 6. ♻️ 리팩토링 / 기능 추가
+
+1. 리팩토링
+   - 대규모 데이터셋 렌더링 최적화 (예정)
+     - [React-Window](https://github.com/bvaughn/react-window) 라이브러리 가상 리스트 구현
+   - 커스텀 훅 재사용 (예정)
+2. 기능추가
+   - E2E 테스트 - 유저 플로우 및 서비스 로직 테스트 (예정)
+     - Cypress 라이브러리 E2E 테스트 적용
