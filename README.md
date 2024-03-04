@@ -9,7 +9,7 @@
 배포 URL : https://westorcycle.shop/ <br>
 Gitbook URL : https://app.gitbook.com/o/a8YZRr8hpc1IVsoLP7d5/s/0xSizUwPmzkEHBf4w0gB/ <br>
 
-**⭐️ 프로젝트의 자세한 내용은 Gitbook 참고 부탁드립니다.**
+**⭐️ 프로젝트의 자세한 내용은 Gitbook 참고 부탁드립니다 ⭐️ .**
 
 ```
 ✋ Westorcycle 테스트 계정
@@ -22,6 +22,14 @@ PW : Rhkdans97!
 
 ## 2. 📜 요구사항 명세
 
+| **1주차**                 | **2주차**     | **3주차**                       | **4주차**          |
+| ------------------------- | ------------- | ------------------------------- | ------------------ |
+| 페이지 라우팅 설계        | 상품 CRUD     | 상품 구매                       | SEO 개선           |
+| 로그인 / 회원가입         | 장바구니 CRUD | 구매 내역 페이지                | 번들 사이즈 줄이기 |
+| 판매자 페이지 - 상품 CRUD | 이미지 최적화 | 상품 구매 취소                  | 렌더링 최적화      |
+| 소셜 로그인 구현          |               | 주문정보 확인 및 주문 상태 변경 | 테스트 코드        |
+| Lazy Loading              |               | Compound component              |                    |
+
 ## 3. 🔧 기술적 의사결정
 
 ![](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black) ![](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![](https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white) ![](https://github.com/img.shields.io/badge/tailwind%20css-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white) ![](https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black) ![](https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![](https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white) ![](https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=white) ![](https://img.shields.io/badge/cloudfront-764ABC?style=for-the-badge&logoColor=white)
@@ -32,6 +40,7 @@ PW : Rhkdans97!
 - 상품 CRUD
 - 장바구니 CRUD
 - 상품 구매
+- SEO / 성능 개선
 
 ## 5. 💥 트러블 슈팅
 
@@ -40,7 +49,3 @@ PW : Rhkdans97!
 - Authentication 최신화
 
 ## 6. ♻️ 리팩토링
-
-### 개발 모드에서 어플리케이션 실행
-
-`npm run dev`
