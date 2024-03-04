@@ -1,19 +1,18 @@
 import { db } from "@/firebase";
 import { Product, UserType } from "@/models/type";
-import { ParamsType } from "@/page/seller/ManageProduct";
+import { AlertInfoType, ParamsType } from "@/page/seller/ManageProduct";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, getStorage, ref } from "firebase/storage";
-import React from "react";
+import React, { useState } from "react";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 
 export default function useDeleteProduct(
   user: UserType,
   params: ParamsType,
-  product: Product
+  product: Product,
+  setOpenAlert: (value: boolean) => void,
+  setAlertInfo: (value: AlertInfoType) => void
 ) {
-  const navigate = useNavigate();
-
   const deleteProductHandler = async (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -43,7 +42,12 @@ export default function useDeleteProduct(
 
   const deleteProductMutation = useMutation(deleteProductHandler, {
     onSuccess: () => {
-      navigate(`/seller/${user?.id}`);
+      setOpenAlert(true);
+      setAlertInfo({
+        header: "Delete Product",
+        bodyText: "The product has been deleted",
+        pathUrl: `/seller/${user?.id}`,
+      });
     },
   });
   return { deleteProductMutation };

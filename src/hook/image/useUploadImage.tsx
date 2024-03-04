@@ -4,7 +4,6 @@ import { storage } from "@/firebase";
 import imageCompression from "browser-image-compression";
 import { ProductWithId, UserType } from "@/models/type";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { validateProduct } from "@/utils/validation";
 
 export default function useUploadImage(
   user: UserType,
