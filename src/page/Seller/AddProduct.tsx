@@ -23,6 +23,8 @@ export default function AddProduct() {
   const paramsId = params.id;
   const navigate = useNavigate();
 
+  const [openAlert, setOpenAlert] = useState<boolean>(false);
+
   // 본인 확인
   if (user) {
     if (!checkAuth({ user, paramsId, navigate })) return null;
@@ -30,6 +32,7 @@ export default function AddProduct() {
 
   const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
   console.log(imagesToDelete);
+
   const [errorProduct, setErrorProduct] = useState<string>("");
 
   // 상품 상태
