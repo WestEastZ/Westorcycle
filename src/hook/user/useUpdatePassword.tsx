@@ -1,5 +1,6 @@
 import { useUser } from "@/contexts/userContext";
 import { db } from "@/firebase";
+import { AlertInfoType } from "@/page/seller/ManageProduct";
 import { getAuth, updatePassword } from "firebase/auth";
 import {
   collection,
@@ -10,13 +11,15 @@ import {
   where,
 } from "firebase/firestore";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 
-export default function useUpdatePassword() {
+export default function useUpdatePassword(
+  modalHandler: (value: boolean) => void,
+  setOpenAlert: (value: boolean) => void,
+  setAlertInfo: (value: AlertInfoType) => void
+) {
   const { user } = useUser() || {};
   const auth = getAuth();
   const currentUser = auth.currentUser;
-  const navigate = useNavigate();
 
   const updatePasswordHandler = async ({
     newPassword,
@@ -45,8 +48,13 @@ export default function useUpdatePassword() {
 
   const updatePasswordMutation = useMutation(updatePasswordHandler, {
     onSuccess: () => {
-      console.log("sss");
-      navigate(`/${user?.isSeller ? "seller" : "consumer"}/${user?.id}`);
+      modalHandler(false);
+      setOpenAlert(true);
+      setAlertInfo({
+        header: "Updated Password",
+        bodyText: "The password has been updated",
+        pathUrl: `/${user?.isSeller ? "seller" : "consumer"}/${user?.id}`,
+      });
     },
     onError: (error) => {
       console.log(error);

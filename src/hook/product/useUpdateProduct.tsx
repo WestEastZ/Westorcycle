@@ -1,22 +1,23 @@
 import { useUser } from "@/contexts/userContext";
 import { db, storage } from "@/firebase";
-import { ProductWithId, UserType } from "@/models/type";
+import { ProductWithId } from "@/models/type";
+import { AlertInfoType } from "@/page/seller/ManageProduct";
 import { validateProduct } from "@/utils/validation";
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { Params, useNavigate } from "react-router-dom";
+import { Params } from "react-router-dom";
 
 export default function useUpdateProduct(
-  userProps: UserType,
   params: Readonly<Params<string>>,
   initialProduct: ProductWithId,
   imagesToDelete: string[],
-  setErrorProduct: (value: string) => void
+  setErrorProduct: (value: string) => void,
+  setOpenAlert: (value: boolean) => void,
+  setAlertInfo: (value: AlertInfoType) => void
 ) {
   const { user } = useUser() || {};
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   // 상품 수정
@@ -40,7 +41,12 @@ export default function useUpdateProduct(
       onSuccess: () => {
         queryClient.invalidateQueries(["cart", user?.id]);
         queryClient.invalidateQueries(["product", initialProduct.id]);
-        navigate(`/seller/${userProps?.id}`);
+        setOpenAlert(true);
+        setAlertInfo({
+          header: "Update Product",
+          bodyText: "The product has been Updated",
+          pathUrl: `/seller/${user?.id}`,
+        });
       },
       onError: (error) => {
         console.log(error);
@@ -56,7 +62,7 @@ export default function useUpdateProduct(
 
     if (checkProduct) {
       setErrorProduct(checkProduct);
-      return;
+      throw new Error(checkProduct);
     }
 
     editProductMutation.mutate();

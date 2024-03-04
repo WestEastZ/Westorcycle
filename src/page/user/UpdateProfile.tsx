@@ -9,12 +9,21 @@ import SEOHelmet from "@/utils/SEOHelmet";
 import { checkAuth } from "@/utils/checkAuth";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { AlertInfoType } from "../seller/ManageProduct";
+import Alert from "@/components/modal/Alert";
 
 export default function UpdateProfile() {
   const { user } = useUser() || {};
   const params = useParams();
   const paramsId = params.id;
   const navigate = useNavigate();
+
+  const [openAlert, setOpenAlert] = useState<boolean>(false);
+  const [alertInfo, setAlertInfo] = useState<AlertInfoType>({
+    header: "",
+    bodyText: "",
+    pathUrl: "",
+  });
 
   // 본인 확인
   if (user) {
@@ -26,15 +35,20 @@ export default function UpdateProfile() {
   );
 
   // 프로필 편집
-  const { UpdateUserMutation } = useUpdateProfile();
+  const { UpdateUserMutation } = useUpdateProfile(setOpenAlert, setAlertInfo);
 
   // 비밀번호 재설정
   const [openPasswordModal, setOpenPasswordModal] = useState<boolean>(false);
+
   const modalHandler = () => {
     setOpenPasswordModal(!openPasswordModal);
   };
 
-  const { updatePasswordMutation } = useUpdatePassword();
+  const { updatePasswordMutation } = useUpdatePassword(
+    modalHandler,
+    setOpenAlert,
+    setAlertInfo
+  );
 
   const handlePasswordChange = (newPassword: string) => {
     updatePasswordMutation.mutate({ newPassword });
@@ -86,6 +100,16 @@ export default function UpdateProfile() {
             onChangePassword={handlePasswordChange}
           />
         ) : null}
+
+        {openAlert && (
+          <Alert>
+            <Alert.Content>
+              <Alert.Header header="Add Product" />
+              <Alert.Body bodyText={alertInfo.bodyText} />
+              <Alert.Footer pathUrl={alertInfo.pathUrl} />
+            </Alert.Content>
+          </Alert>
+        )}
       </main>
     </div>
   );

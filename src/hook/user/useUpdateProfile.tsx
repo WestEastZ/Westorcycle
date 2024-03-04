@@ -1,12 +1,14 @@
 import { useUser } from "@/contexts/userContext";
 import { db } from "@/firebase";
+import { AlertInfoType } from "@/page/seller/ManageProduct";
 import { doc, updateDoc } from "firebase/firestore";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 
-export default function useUpdateProfile() {
+export default function useUpdateProfile(
+  setOpenAlert: (value: boolean) => void,
+  setAlertInfo: (value: AlertInfoType) => void
+) {
   const { user } = useUser() || {};
-  const navigate = useNavigate();
 
   const UpdateUserHandler = async ({
     newNickname,
@@ -32,7 +34,12 @@ export default function useUpdateProfile() {
 
   const UpdateUserMutation = useMutation(UpdateUserHandler, {
     onSuccess: () => {
-      navigate(`/${user?.isSeller ? "seller" : "consumer"}/${user?.id}`);
+      setOpenAlert(true);
+      setAlertInfo({
+        header: "Update Nickname",
+        bodyText: "The nickname has been updated",
+        pathUrl: `/${user?.isSeller ? "seller" : "consumer"}/${user?.id}`,
+      });
     },
   });
   return { UpdateUserMutation };

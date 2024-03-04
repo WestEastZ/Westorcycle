@@ -18,9 +18,16 @@ import useFetchProduct from "@/hook/product/useFetchProduct";
 import Close from "@/assets/icon/Close.svg";
 import SEOHelmet from "@/utils/SEOHelmet";
 import { checkAuth } from "@/utils/checkAuth";
+import Alert from "@/components/modal/Alert";
 
 export type ParamsType = {
   productId?: string;
+};
+
+export type AlertInfoType = {
+  header: string;
+  bodyText: string;
+  pathUrl: string;
 };
 
 export default function ManageProduct() {
@@ -30,13 +37,20 @@ export default function ManageProduct() {
   const { productId } = params;
   const navigate = useNavigate();
 
+  const [openAlert, setOpenAlert] = useState<boolean>(false);
+  const [alertInfo, setAlertInfo] = useState<AlertInfoType>({
+    header: "",
+    bodyText: "",
+    pathUrl: "",
+  });
+
   // 본인 확인
   if (user) {
     if (!checkAuth({ user, paramsId, navigate })) return null;
   }
 
   const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
-  const [errorProduct, setErrorProduct] = useState<string>("");
+  const [errorProduct, setErrorProduct] = useState<string | null>("");
 
   // 상품 조회 -> client
   const { product, setProduct } = useFetchProduct(productId as string);
@@ -49,25 +63,32 @@ export default function ManageProduct() {
   );
 
   // 이미지 업로드 -> client
-  const { addImageHandler } = useUploadImage(user as UserType, setProduct);
+  const { addImageHandler } = useUploadImage(
+    user as UserType,
+    setProduct,
+    setErrorProduct
+  );
 
   // 이미지 삭제 -> client
   const { deleteImageHandler } = useDeleteImage(setProduct, setImagesToDelete);
 
   // 상품 수정 -> query
   const { editProductHandler } = useUpdateProduct(
-    user as UserType,
     params,
     product,
     imagesToDelete,
-    setErrorProduct
+    setErrorProduct,
+    setOpenAlert,
+    setAlertInfo
   );
 
   // 상품 삭제
   const { deleteProductMutation } = useDeleteProduct(
     user as UserType,
     params,
-    product
+    product,
+    setOpenAlert,
+    setAlertInfo
   );
 
   return (
@@ -117,6 +138,16 @@ export default function ManageProduct() {
           editProductHandler={editProductHandler}
           errorCode={errorProduct}
         />
+
+        {openAlert && (
+          <Alert>
+            <Alert.Content>
+              <Alert.Header header="Add Product" />
+              <Alert.Body bodyText={alertInfo.bodyText} />
+              <Alert.Footer pathUrl={alertInfo.pathUrl} />
+            </Alert.Content>
+          </Alert>
+        )}
       </main>
     </>
   );

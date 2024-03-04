@@ -16,12 +16,15 @@ import Close from "@/assets/icon/Close.svg";
 import SEOHelmet from "@/utils/SEOHelmet";
 import { useNavigate, useParams } from "react-router";
 import { checkAuth } from "@/utils/checkAuth";
+import Alert from "@/components/modal/Alert";
 
 export default function AddProduct() {
   const { user } = useUser() || {};
   const params = useParams();
   const paramsId = params.id;
   const navigate = useNavigate();
+
+  const [openAlert, setOpenAlert] = useState<boolean>(false);
 
   // 본인 확인
   if (user) {
@@ -30,7 +33,8 @@ export default function AddProduct() {
 
   const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
   console.log(imagesToDelete);
-  const [errorProduct, setErrorProduct] = useState<string>("");
+
+  const [errorProduct, setErrorProduct] = useState<string | null>("");
 
   // 상품 상태
   const [product, setProduct] = useState<ProductWithId>({
@@ -55,16 +59,21 @@ export default function AddProduct() {
   );
 
   // 이미지 등록
-  const { addImageHandler } = useUploadImage(user as UserType, setProduct);
+  const { addImageHandler } = useUploadImage(
+    user as UserType,
+    setProduct,
+    setErrorProduct
+  );
 
   // 이미지 삭제
   const { deleteImageHandler } = useDeleteImage(setProduct, setImagesToDelete);
 
   // 상품 등록
-  const { addProductHandler } = useAddProduct(
+  const { addProductHandler, pathUrl, bodyText } = useAddProduct(
     user as UserType,
     product,
-    setErrorProduct
+    setErrorProduct,
+    setOpenAlert
   );
 
   return (
@@ -118,6 +127,16 @@ export default function AddProduct() {
           addProductHandler={addProductHandler}
           errorCode={errorProduct}
         />
+
+        {openAlert && (
+          <Alert>
+            <Alert.Content>
+              <Alert.Header header="Add Product" />
+              <Alert.Body bodyText={bodyText} />
+              <Alert.Footer pathUrl={pathUrl} />
+            </Alert.Content>
+          </Alert>
+        )}
       </div>
     </>
   );

@@ -70,7 +70,10 @@ export function validateLoginEmail(
 }
 
 // 상품 등록 유효성 검사
-export function validateProduct(product: Product): string | null {
+export function validateProduct(product: Product | null): string | null {
+  // product가 null인 경우 즉시 함수를 종료
+  if (!product) return "";
+
   if (product.productImage.length < 1) return "errorProductImage";
   if (product.productName === "") return "errorProductName";
   if (product.productPrice === 0) return "errorProdcutPrice";
