@@ -74,7 +74,6 @@ export default function ManageProduct() {
 
   // 상품 수정 -> query
   const { editProductHandler } = useUpdateProduct(
-    user as UserType,
     params,
     product,
     imagesToDelete,

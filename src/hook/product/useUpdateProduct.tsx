@@ -1,16 +1,15 @@
 import { useUser } from "@/contexts/userContext";
 import { db, storage } from "@/firebase";
-import { ProductWithId, UserType } from "@/models/type";
+import { ProductWithId } from "@/models/type";
 import { AlertInfoType } from "@/page/seller/ManageProduct";
 import { validateProduct } from "@/utils/validation";
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
-import React, { useState } from "react";
+import React from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { Params, useNavigate } from "react-router-dom";
+import { Params } from "react-router-dom";
 
 export default function useUpdateProduct(
-  userProps: UserType,
   params: Readonly<Params<string>>,
   initialProduct: ProductWithId,
   imagesToDelete: string[],
@@ -19,7 +18,6 @@ export default function useUpdateProduct(
   setAlertInfo: (value: AlertInfoType) => void
 ) {
   const { user } = useUser() || {};
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   // 상품 수정

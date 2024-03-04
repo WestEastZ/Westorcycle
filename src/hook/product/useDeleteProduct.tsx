@@ -3,7 +3,7 @@ import { Product, UserType } from "@/models/type";
 import { AlertInfoType, ParamsType } from "@/page/seller/ManageProduct";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, getStorage, ref } from "firebase/storage";
-import React, { useState } from "react";
+import React from "react";
 import { useMutation } from "react-query";
 
 export default function useDeleteProduct(
