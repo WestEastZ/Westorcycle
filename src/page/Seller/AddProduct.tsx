@@ -17,7 +17,6 @@ import SEOHelmet from "@/utils/SEOHelmet";
 import { useNavigate, useParams } from "react-router";
 import { checkAuth } from "@/utils/checkAuth";
 import Alert from "@/components/modal/Alert";
-import path from "path";
 
 export default function AddProduct() {
   const { user } = useUser() || {};
@@ -33,6 +32,7 @@ export default function AddProduct() {
   }
 
   const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
+  console.log(imagesToDelete);
 
   const [errorProduct, setErrorProduct] = useState<string | null>("");
 

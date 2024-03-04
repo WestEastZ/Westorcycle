@@ -22,7 +22,6 @@ export default function useAddProduct(
       if (checkProduct) {
         setErrorProduct(checkProduct);
         console.log(checkProduct);
-        // return;
         throw new Error(checkProduct);
       }
 
