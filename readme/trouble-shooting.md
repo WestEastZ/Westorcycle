@@ -1,10 +1,10 @@
-# 💥 트러블 슈팅
+# 트러블 슈팅
 
 ## 0. 목차
 
-1. [장바구니 선택 상품 수량 증감](#1-장바구니-선택-상품-수량-증감)
-2. [비동기 함수 반복문](#2-비동기-함수-반복문)
-3. [Authentication](#3-authentication)
+1. [장바구니 선택 상품 수량 증감](trouble-shooting.md#id-1)
+2. [비동기 함수 반복문](trouble-shooting.md#id-2-2)
+3. [Authentication](trouble-shooting.md#id-3.-authentication)
 
 ## 1. 장바구니 선택 상품 수량 증감
 
@@ -12,20 +12,18 @@
 
 #### 문제 상황 1
 
-- 장바구니 상품 수량 변경 시 상품이 선택되고 즉시 해제가 되는 문제
+* 장바구니 상품 수량 변경 시 상품이 선택되고 즉시 해제가 되는 문제
 
 #### 문제 상황 2
 
-- 장바구니 선택 상품의 수량 변경 시 선택이 해제되는 문제
+* 장바구니 선택 상품의 수량 변경 시 선택이 해제되는 문제
 
 ### (2) 원인
 
-- `Cart` 컴포넌트[부모] - Select 이벤트
+* `Cart` 컴포넌트\[부모] - Select 이벤트
+* `CartCard` 컴포넌트\[자식] - Quantity 이벤트
 
-- `CartCard` 컴포넌트[자식] - Quantity 이벤트
-
-> 이벤트 버블링과 캡처링이 원인이라고 판단!
-> `stopPropagation()`을 통해 이벤트 버블링을 해제하여 해결
+> 이벤트 버블링과 캡처링이 원인이라고 판단! `stopPropagation()`을 통해 이벤트 버블링을 해제하여 해결
 
 ```tsx
 <button
@@ -116,19 +114,20 @@ onMutate의 경우는 서버에 요청을 보내기 전 임시적으로 로컬 �
 
 리팩토링을 진행하며 적용해볼 것이다.
 
-<br>
+\
+
 
 ## 2. 비동기 함수 반복문
 
 ### (1) 문제 상황
 
-- 상품 등록 시 다수의 이미지를 업로드 하지 못하는 상황
+* 상품 등록 시 다수의 이미지를 업로드 하지 못하는 상황
 
 ### (2) 원인
 
-- forEach 함수는 Promise 작업을 기다려주지 않는다.
-  > forEach() expects a synchronous function — it does not wait for promises. Make sure you are aware of the implications while using promises (or async functions) as forEach callbacks.
-  > [MDN 링크](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+*   forEach 함수는 Promise 작업을 기다려주지 않는다.
+
+    > forEach() expects a synchronous function — it does not wait for promises. Make sure you are aware of the implications while using promises (or async functions) as forEach callbacks. [MDN 링크](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global\_Objects/Array/forEach)
 
 ### (3) 해결
 
@@ -203,16 +202,16 @@ async (fileList: FileList) => {
 
 ### (1) 문제 상황
 
-- 프로필 편집 및 로그아웃 시 즉각적으로 `context` 업데이트가 되지 않는 상황
-- 임시 방안으로 `reload()` 메서드 사용 중
-- 자동으로 `context`를 수정할 수 있는 방법이 필요한 상황
-- 비밀번호 수정은 `await currentUser.reload();`를 통해 정상적으로 변경
+* 프로필 편집 및 로그아웃 시 즉각적으로 `context` 업데이트가 되지 않는 상황
+* 임시 방안으로 `reload()` 메서드 사용 중
+* 자동으로 `context`를 수정할 수 있는 방법이 필요한 상황
+* 비밀번호 수정은 `await currentUser.reload();`를 통해 정상적으로 변경
 
 ### (2) 원인
 
-- `onAuthStateChanged`로 인해 사용자를 감지
-- `getDoc`을 통해 로그인한 사용자의 정보를 `state`에 저장하는 방식
-- 사용자 정보가 변경되는 당시에는 `useEffect`가 실행되지 않음
+* `onAuthStateChanged`로 인해 사용자를 감지
+* `getDoc`을 통해 로그인한 사용자의 정보를 `state`에 저장하는 방식
+* 사용자 정보가 변경되는 당시에는 `useEffect`가 실행되지 않음
 
 ```tsx
 // userContext
@@ -275,9 +274,9 @@ useEffect(() => {
 }, []);
 ```
 
-- `onSnapshot` 메서드를 사용하여 로그인 사용자의 컬렉션 변경을 감지
-- 변경된 데이터를 `userContext`에 저장
-- 로그아웃 시 `null`이 저장
+* `onSnapshot` 메서드를 사용하여 로그인 사용자의 컬렉션 변경을 감지
+* 변경된 데이터를 `userContext`에 저장
+* 로그아웃 시 `null`이 저장
 
 2. logout
 
@@ -296,7 +295,7 @@ return (
 );
 ```
 
-- `UserProvider`에 logout 메서드를 추가
+* `UserProvider`에 logout 메서드를 추가
 
 ### (4) 결론
 
@@ -304,5 +303,4 @@ return (
 
 하지만 현재 코드에서는 로그아웃 시 Firestore의 호출량이 기존 보다 평균 20회 정도 증가하는 현상이 나타나고 있다.
 
-원인을 파악하여 호출을 최소화할 수 있도록 구현하는 것이 필요하다.
-이후 리팩토링을 하여 개선해보자.
+원인을 파악하여 호출을 최소화할 수 있도록 구현하는 것이 필요하다. 이후 리팩토링을 하여 개선해보자.
