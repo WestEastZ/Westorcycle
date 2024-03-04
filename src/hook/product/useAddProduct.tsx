@@ -3,14 +3,16 @@ import { db } from "@/firebase";
 import { ProductWithId, UserType } from "@/models/type";
 import { validateProduct } from "@/utils/validation";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function useAddProduct(
   user: UserType,
   product: ProductWithId,
-  setErrorProduct: (value: string) => void
+  setErrorProduct: (value: string) => void,
+  setOpenAlert: (value: boolean) => void
 ) {
-  const navigate = useNavigate();
+  const [pathUrl, setPathurl] = useState<string>("");
+  const [bodyText, setBodyText] = useState<string>("");
 
   const addProductMutation = useMutation(
     async (product: ProductWithId) => {
@@ -20,7 +22,8 @@ export default function useAddProduct(
       if (checkProduct) {
         setErrorProduct(checkProduct);
         console.log(checkProduct);
-        return;
+        // return;
+        throw new Error(checkProduct);
       }
 
       const productRef = doc(collection(db, "product"));
@@ -32,7 +35,9 @@ export default function useAddProduct(
     },
     {
       onSuccess: () => {
-        navigate(`/seller/${user?.id}`);
+        setOpenAlert(true);
+        setPathurl(`/seller/${user?.id}`);
+        setBodyText("The product has been added");
       },
       onError: (error) => {
         console.log(error);
@@ -48,5 +53,5 @@ export default function useAddProduct(
     addProductMutation.mutate(product);
   };
 
-  return { addProductHandler };
+  return { addProductHandler, pathUrl, bodyText };
 }

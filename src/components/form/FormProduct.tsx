@@ -28,7 +28,7 @@ interface FormProductProps {
   addProductHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   deleteProductHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   editProductHandler?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  errorCode: string;
+  errorCode: string | null;
 }
 
 export default function FormProduct({

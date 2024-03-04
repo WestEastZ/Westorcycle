@@ -4,12 +4,14 @@ import { storage } from "@/firebase";
 import imageCompression from "browser-image-compression";
 import { ProductWithId, UserType } from "@/models/type";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { validateProduct } from "@/utils/validation";
 
 export default function useUploadImage(
   user: UserType,
   setProduct: (
     value: ProductWithId | ((prevState: ProductWithId) => ProductWithId)
-  ) => void
+  ) => void,
+  setErrorProduct: (value: string | null) => void
 ) {
   // 이미지 업로드 mutation
   const addImageMutation = useMutation(
@@ -51,6 +53,7 @@ export default function useUploadImage(
           ...prev,
           productImage: [...prev.productImage, ...downloadImgURL],
         }));
+        setErrorProduct(null);
       },
       // 업로드가 실패하면 오류 출력
       onError: (error) => {
