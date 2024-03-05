@@ -32,7 +32,7 @@ PW : Rhkdans97!
 
 ## 3. 🛠️ 서비스 아키텍처
 
-<figure><img src="https://github.com/WestEastZ/Westorcycle/assets/85664676/734a0c11-15d8-4290-8847-7273a7017f00" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://github.com/WestEastZ/Westorcycle/assets/85664676/29aafbca-61b6-4fba-9d5a-e745646ffedb" alt=""><figcaption></figcaption></figure>
 
 ## 4. 🔧 기술적 의사결정
 
