@@ -12,8 +12,8 @@
 
 ### (1) 회원가입 / 로그인
 
-![login-ezgif com-video-to-gif-converter (1)](https://github.com/WestEastZ/Westorcycle/assets/85664676/015e6ba8-986b-4dee-beb4-e7a294c209fe)
-![2024-03-052 01 21-ezgif com-video-to-gif-converter (1)](https://github.com/WestEastZ/Westorcycle/assets/85664676/544be637-8abf-438d-8a53-6884ddbc5dc1)
+![로그인](https://github.com/WestEastZ/Westorcycle/assets/85664676/015e6ba8-986b-4dee-beb4-e7a294c209fe)
+![회원가입](https://github.com/WestEastZ/Westorcycle/assets/85664676/544be637-8abf-438d-8a53-6884ddbc5dc1)
 
 - `Firebase Authentication`을 통한 사용자 인증 및 회원가입 / 로그인 기능 구현
 - `isSeller` 필드 값을 통한 판매자/구매자 분리
@@ -21,13 +21,13 @@
 
 ### (2) 소셜 로그인
 
-![2024-03-052 23 11-ezgif com-video-to-gif-converter](https://github.com/WestEastZ/Westorcycle/assets/85664676/0e72b51c-7a77-4d20-895b-4f39c6a76878)
+![소셜 로그인](https://github.com/WestEastZ/Westorcycle/assets/85664676/0e72b51c-7a77-4d20-895b-4f39c6a76878)
 
 - `signInWithPopup`을 활용한 구글 / 깃허브 소셜 로그인 기능 구현
 
 ### (3) 프로필 편집
 
-![2024-03-052 25 04-ezgif com-video-to-gif-converter](https://github.com/WestEastZ/Westorcycle/assets/85664676/3a5552d5-dce8-4941-b2b5-bab0e0a22b26)
+![프로필 편집](https://github.com/WestEastZ/Westorcycle/assets/85664676/3a5552d5-dce8-4941-b2b5-bab0e0a22b26)
 
 - `onSnapshot`으로 로그인한 사용자의 최신 정보를 `context API`에 반영
 - `updatePassword()`, `currentUser.reload()`메서드로 `currentUser` 비밀번호 변경 및 최신화
@@ -36,27 +36,39 @@
 
 ### (1) 상품 최신 데이터 조회
 
+![상품 등록 및 최신 데이터 조회](https://github.com/WestEastZ/Westorcycle/assets/85664676/d7fcf6eb-2b81-47b2-b4ec-af266766c862)
+
+- `useQuery`로 상품 데이터 자동 업데이트 및 캐싱으로 최신 정보 제공
+
 ### (2) 상품 무한 스크롤
 
 ### (3) Firebase Cloud Storage 최적화
 
+![Storage 최적화](https://github.com/WestEastZ/Westorcycle/assets/85664676/2af34cac-dc50-41ae-90d8-546a2cebf8dc)
+
 ### (4) 상품 이미지 위치 변경
+
+![이미지 위치 변경](https://github.com/WestEastZ/Westorcycle/assets/85664676/233551c1-5dbe-428b-9220-9b1afa0d91ba)
 
 ### (5) 상품 가격 / 최신순 필터
 
-\
+![필터](https://github.com/WestEastZ/Westorcycle/assets/85664676/b51b20b7-cfc8-493f-9365-25e145a78275)
 
 ## 3. 장바구니 CRUD
 
 ### (1) 장바구니 추가 및 수량 증감
 
+![장바구니 추가 및 수량](https://github.com/WestEastZ/Westorcycle/assets/85664676/bdeab522-b475-4d94-8adb-92e6938aa745)
+
 ### (2) 장바구니 최신 데이터 조회
+
+![장바구니 최신 데이터](https://github.com/WestEastZ/Westorcycle/assets/85664676/a29e7128-da3b-4e3c-a8c3-f943a0eac927)
 
 ### (3) 장바구니 모달
 
 ### (4) 장바구니 상품 선택 및 수량 증감
 
-\
+![장바구니 상품 선택 및 수량 증감](https://github.com/WestEastZ/Westorcycle/assets/85664676/60007dc4-3800-4313-803b-5b8cd1ec5aeb)
 
 ## 4. 상품 구매
 
@@ -67,8 +79,6 @@
 ### (3) 판매자 페이지 주문 상세 내역 및 주문 상태
 
 ### (4) 구매자 페이지 주문 상세 내역
-
-\
 
 ## 5. SEO / 성능
 
