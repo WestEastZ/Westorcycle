@@ -30,11 +30,15 @@ PW : Rhkdans97!
 | 소셜 로그인 구현          |               | 주문정보 확인 및 주문 상태 변경 | 테스트 코드        |
 | Lazy Loading              |               | Compound component              |                    |
 
-## 3. 🔧 기술적 의사결정
+## 3. 🛠️ 서비스 아키텍처
+
+<figure><img src="https://github.com/WestEastZ/Westorcycle/assets/85664676/734a0c11-15d8-4290-8847-7273a7017f00" alt=""><figcaption></figcaption></figure>
+
+## 4. 🔧 기술적 의사결정
 
 ![](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black) ![](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![](https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white) ![](https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black) ![](https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white) ![](https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![](https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white) ![](https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=white) ![](https://img.shields.io/badge/cloudfront-764ABC?style=for-the-badge&logoColor=white)
 
-## 4. ✨ 주요 기능
+## 5. ✨ 주요 기능
 
 - 회원가입 로그인
 - 상품 CRUD
@@ -42,16 +46,18 @@ PW : Rhkdans97!
 - 상품 구매
 - SEO / 성능 개선
 
-## 5. 💥 트러블 슈팅
+## 6. 💥 트러블 슈팅
 
 - 장바구니 선택 상품 수량 증감
 - 비동기 함수 반복문
 - Authentication 최신화
 
-## 6. ♻️ 리팩토링 / 기능 추가
+## 7. ♻️ 리팩토링 / 기능 추가
 
 1.  대규모 데이터셋 렌더링 최적화 (예정)
     - [React-Window](https://github.com/bvaughn/react-window) 라이브러리 가상 리스트 구현
 2.  E2E 테스트 - 유저 플로우 및 서비스 로직 테스트 (예정)
     - Cypress 라이브러리 E2E 테스트 적용
 3.  커스텀 훅 재사용
+
+## 8. 📦 파일구조

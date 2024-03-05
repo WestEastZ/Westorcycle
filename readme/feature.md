@@ -134,10 +134,24 @@
 
 ## 5. SEO / 성능
 
+![성능 결과](https://github.com/WestEastZ/Westorcycle/assets/85664676/9e2f7a67-9dad-4ba0-8017-28badb7d646d)
+
 ### (1) Sitemap, robot, meta tag, semantic tag
+
+- `Sitemap`, `robot`을 통한 크롤링 페이지 설정에 따른 SEO 개선
+- 크롬 개발자 도구 라이트하우스 기준 SEO 점수 82점 → 100 향상
 
 ### (2) React.lazy()와 Suspense
 
+- 동적 임포트 및 코트 스플리팅을 통한 성능 개선
+- 크롬 개발자 도구 라이트하우스 기준 성능 점수 90점 → 95 향상
+
 ### (3) AWS의 S3 및 CloudFront 사용하여 배포
 
+- `S3`을 통한 콘텐츠 저장 및 `CloudFront`으로 엣지 로케이션에서 캐싱된 데이터를 제공
+- 크롬 개발자 도구 라이트하우스 기준 성능 95점 → 100 향상
+
 ### (4) 이미지 최적화
+
+- webp 등 최신 확장자 사용으로 성능 개선
+- 이미지 압축을 통한 성능 개선
