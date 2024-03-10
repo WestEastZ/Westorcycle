@@ -44,7 +44,7 @@ PW : Rhkdans97!
 - 상품 CRUD
 - 장바구니 CRUD
 - 상품 구매
-- SEO / 성능 개선
+- E2E 테스트
 
 ## 6. 💥 트러블 슈팅
 
@@ -56,7 +56,7 @@ PW : Rhkdans97!
 
 1.  대규모 데이터셋 렌더링 최적화 (예정)
     - [React-Window](https://github.com/bvaughn/react-window) 라이브러리 가상 리스트 구현
-2.  E2E 테스트 - 유저 플로우 및 서비스 로직 테스트 (예정)
+2.  E2E 테스트 - 유저 플로우 및 서비스 로직 테스트 (완료)
     - Cypress 라이브러리 E2E 테스트 적용
 3.  커스텀 훅 재사용
 
