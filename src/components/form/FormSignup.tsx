@@ -24,6 +24,7 @@ export default function FormSignup({
       <form className="flex flex-col gap-5 mb-12">
         <div>
           <Input
+            id="email-signup"
             type="email"
             placeholder="Email"
             value={user.email}
@@ -31,13 +32,14 @@ export default function FormSignup({
             onChange={onChange}
           />
           {errorEmail === null ? null : (
-            <div className="text-left mt-1 ml-2 text-xs text-red-500">
+            <div className="text-left mt-1 ml-2 text-xs text-red-500 email-error">
               {errorEmail}
             </div>
           )}
         </div>
         <div>
           <Input
+            id="password-signup"
             type="password"
             placeholder="Password"
             value={user.password}
@@ -45,13 +47,14 @@ export default function FormSignup({
             onChange={onChange}
           />
           {errorPassword === null ? null : (
-            <div className="text-left mt-1 ml-2 text-xs text-red-500">
+            <div className="text-left mt-1 ml-2 text-xs text-red-500 password-error">
               {errorPassword}
             </div>
           )}
         </div>
         <div>
           <Input
+            id="nickname-signup"
             type="text"
             placeholder="Nickname"
             value={user.nickname}
@@ -69,7 +72,9 @@ export default function FormSignup({
           />
           <label htmlFor="checkSeller">Sales Account</label>
         </div>
-        <Button onClick={signup}>Sign Up</Button>
+        <Button id="signUpButton" onClick={signup}>
+          Sign Up
+        </Button>
       </form>
     </section>
   );

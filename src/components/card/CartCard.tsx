@@ -56,7 +56,7 @@ export default function CartCard({
   }
   return (
     <div
-      className={`relative h-44 w-full min-w-60 flex rounded-2xl transform transition-all duration-200  border ${
+      className={`cartCard relative h-44 w-full min-w-60 flex rounded-2xl transform transition-all duration-200  border ${
         isSelected ? "scale-105 border-blue-800 border-2" : "border-gray-200"
       }`}
       onClick={() => selectHandler(item)}

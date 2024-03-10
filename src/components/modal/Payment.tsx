@@ -106,6 +106,7 @@ export default function Payment({
         <div className="text-2xl">Buyer Infomation</div>
         <form className="flex flex-col gap-10">
           <Input
+            id="order-name"
             type="text"
             placeholder="Name"
             name="order_name"
@@ -113,6 +114,7 @@ export default function Payment({
             onChange={onChange}
           />
           <Input
+            id="order-tel"
             type="text"
             placeholder="Phone Number"
             name="buyer_tel"
@@ -120,6 +122,7 @@ export default function Payment({
             onChange={onChange}
           />
           <Input
+            id="order-email"
             type="email"
             placeholder="Email"
             name="buyer_email"
@@ -127,6 +130,7 @@ export default function Payment({
             onChange={onChange}
           />
           <Input
+            id="order-addr"
             type="text"
             placeholder="Address"
             name="buyer_addr"
